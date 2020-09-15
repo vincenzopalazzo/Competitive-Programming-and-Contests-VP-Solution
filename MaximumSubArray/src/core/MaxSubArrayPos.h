@@ -7,6 +7,6 @@
 #include <string>
 #include <vector>
 
-std::vector<int> find_max_sub_array_pos(const int input[9], const int &size_array, const int &k);
+std::vector<int> find_max_sub_array_pos(const int input[], const int &size_array, const int &k);
 
 #endif //SPYCBLOCK_MAXSUBARRAYPOS_H
