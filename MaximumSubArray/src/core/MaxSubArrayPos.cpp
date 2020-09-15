@@ -2,25 +2,29 @@
 // Created by vincent on 9/14/20.
 //
 #include "MaxSubArrayPos.h"
+
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-vector<int>& find_max_sub_array_pos(const int* input, const int size)
+vector<int> find_max_sub_array_pos(const int input[9], const int &size_array, const int &k)
 {
-    vector<int> max_sub_arr = vector<int>();
-    int sub_array_sum = 0;
-    int sum = 0; //tmp sum;
-    for(int i = 0; i < size; i++){
-        if(input[i] < 0){
-            sum = 0;
-            max_sub_arr.erase(max_sub_arr.end());
+    vector<int> max_values;
+    int max_val = 0;
+    int index_sub_arr = 0;
+    for(int i = 0; i < size_array; i++){
+        if(index_sub_arr < k){
+            index_sub_arr++;
+            if(max_val < input[i])
+                max_val = input[i];
+        }else{
+            //k > sub array simension
+            index_sub_arr = 0;
+            max_values.push_back(max_val);
+            max_val = 0;
         }
     }
-
-    return max_sub_arr;
+    return max_values;
 }
 
-int sizeArray(const int* array){
-    return sizeof(array) / sizeof(*array);
-}
