@@ -14,16 +14,21 @@ void print_function(const int input[], const int &size_array, const vector<int> 
         for(int j = 0; j < k; j++){
           cout << input[i + j] << "";
         }
-        cout << "\nWith max " << result.at(index_result) << endl;
+        cout << " With max " << result.at(index_result) << endl;
         index_result++;
     }
 }
 
 int main(int argc, char* argv[]){
     int input[] = {1, 2, 3, 1, 4, 5, 2, 3, 6};
-    int k = 5;
+    int k = 3;
     const int size_array = sizeof(input) / sizeof(input[0]);
-    vector<int> result = find_max_sub_array_pos(input, size_array, k);
+    cout << "----------- NAIVE SOLUTION -------------" << endl;
+    const vector<int> result = max_sub_array_naive_sol(input, size_array, k);
     print_function(input, size_array, result, k);
+    cout << "----------- B BST SOLUTION -------------" << endl;
+    cout << "TODO" << endl;
+    cout << "----------- FIFO SOLUTION -------------" << endl;
+    cout << "TODO" << endl;
     return EXIT_SUCCESS;
 }
