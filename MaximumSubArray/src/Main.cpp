@@ -17,17 +17,22 @@ void print_function(const int input[], const int &size_array, const vector<int> 
         cout << " With max " << result.at(index_result) << endl;
         index_result++;
     }
+    cout << "Size result " << result.size() << endl;
 }
 
 int main(int argc, char* argv[]){
-    int input[] = {1, 2, 3, 1, 4, 5, 2, 3, 6};
-    int k = 3;
+    //int input[] = {8, 5, 10, 7, 9, 4, 15, 12, 90, 13};
+    //int k = 4;
+    int input[] = {958, 340, 41, 958, 694, 575, 198, 943, 23, 563, 725, 645, 787, 524, 701, 398, 599, 282, 443, 419, 282, 639,
+                   918, 394, 236, 126, 218, 491, 300, 997, 409, 949, 337, 140, 906, 721, 715, 795, 353, 428, 47, 78, 72};
+    int k = 27;
     const int size_array = sizeof(input) / sizeof(input[0]);
     cout << "----------- NAIVE SOLUTION -------------" << endl;
-    const vector<int> result = max_sub_array_naive_sol(input, size_array, k);
+    vector<int> result = max_sub_array_naive_sol(input, size_array, k);
     print_function(input, size_array, result, k);
     cout << "----------- B BST SOLUTION -------------" << endl;
-    cout << "TODO" << endl;
+    result = max_sub_array_bbst_sol(input, size_array, k);
+    print_function(input, size_array, result, k);
     cout << "----------- FIFO SOLUTION -------------" << endl;
     cout << "TODO" << endl;
     return EXIT_SUCCESS;
