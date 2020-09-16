@@ -12,3 +12,19 @@ MaximumSubArray/benchmark/Benchmark_MaximumInSumArrays.cbp
 MaximumSubArray/benchmark/cmake_install.cmake
 
 MaximumSubArray/benchmark/CMakeCache.txt
+
+SlidingWindowMaximum/benchmark/CMakeFiles/
+
+SlidingWindowMaximum/benchmark/Benchmark_MaximumInSumArrays
+
+*.cbp
+
+*.cmake
+
+SlidingWindowMaximum/benchmark/CMakeCache.txt
+
+SlidingWindowMaximum/CMakeFiles/
+
+SlidingWindowMaximum/MaximumInSumArrays
+
+SlidingWindowMaximum/Makefile

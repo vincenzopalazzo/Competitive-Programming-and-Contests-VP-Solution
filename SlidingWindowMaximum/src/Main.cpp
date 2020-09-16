@@ -1,9 +1,12 @@
 //
 // Created by vincent on 9/14/20.
 //
+//Submission: https://practice.geeksforgeeks.org/viewSol.php?subId=d222beb3ec864172e96d4bfa5b7a5969&pid=451&user=vpalazzo1
+//
 #include <iostream>
 #include <cstdlib>
 #include "core/MaxSubArrayPos.h"
+#include "core/MaxSubArrayUtils.h"
 
 using namespace std;
 
@@ -23,17 +26,34 @@ void print_function(const int input[], const int &size_array, const vector<int> 
 int main(int argc, char* argv[]){
     //int input[] = {8, 5, 10, 7, 9, 4, 15, 12, 90, 13};
     //int k = 4;
-    int input[] = {958, 340, 41, 958, 694, 575, 198, 943, 23, 563, 725, 645, 787, 524, 701, 398, 599, 282, 443, 419, 282, 639,
+    /*int input[] = {958, 340, 41, 958, 694, 575, 198, 943, 23, 563, 725, 645, 787, 524, 701, 398, 599, 282, 443, 419, 282, 639,
                    918, 394, 236, 126, 218, 491, 300, 997, 409, 949, 337, 140, 906, 721, 715, 795, 353, 428, 47, 78, 72};
-    int k = 27;
+    int k = 27; */
+
+    int input[] = {765, 992, 1, 521, 220, 380, 729, 969, 184, 887, 104, 641, 909, 378, 724, 582, 387, 583, 241, 294, 159, 198, 653, 369, 418, 692, 36, 901, 516, 623, 703, 971, 304, 394, 491, 525, 464, 219, 183, 648,
+                   796, 287, 979, 395, 356, 702, 667, 743, 976, 908, 728, 134, 106, 380, 193, 214, 71, 920, 114, 587, 543, 817, 248, 537, 901, 739, 752, 364, 649, 626, 702, 444, 913, 681, 529, 959, 72, 196, 392, 738, 103, 119, 872, 900};
+    int k = 47;
     const int size_array = sizeof(input) / sizeof(input[0]);
+
+    int startTime;
+    int endTime;
     cout << "----------- NAIVE SOLUTION -------------" << endl;
+    startTime = tic();
     vector<int> result = max_sub_array_naive_sol(input, size_array, k);
+    endTime = toc(startTime);
     print_function(input, size_array, result, k);
+    cout << "NAIVE SOLUTION FINISCED IN: " << endTime << " sec" << endl;
     cout << "----------- B BST SOLUTION -------------" << endl;
+    startTime = tic();
     result = max_sub_array_bbst_sol(input, size_array, k);
+    endTime = toc(startTime);
     print_function(input, size_array, result, k);
+    cout << "B BST SOLUTION FINISCED IN: " << endTime << " sec" << endl;
     cout << "----------- FIFO SOLUTION -------------" << endl;
-    cout << "TODO" << endl;
+    startTime = tic();
+    result = max_sub_array_deck_sol(input, size_array, k);
+    endTime = toc(startTime);
+    print_function(input, size_array, result, k);
+    cout << "FIFO SOLUTION FINISCED IN: " << endTime << " sec" << endl;
     return EXIT_SUCCESS;
 }

@@ -1,0 +1,23 @@
+2020-09-16T23:50:43+02:00
+Running ./Benchmark_MaximumInSumArrays
+Run on (4 X 3000 MHz CPU s)
+CPU Caches:
+  L1 Data 32 KiB (x2)
+  L1 Instruction 32 KiB (x2)
+  L2 Unified 256 KiB (x2)
+  L3 Unified 3072 KiB (x1)
+Load Average: 1.93, 1.52, 1.27
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
+name,iterations,real_time,cpu_time,time_unit,bytes_per_second,items_per_second,label,error_occurred,error_message
+"BM_NAIVE_SOL_K3/1024",24043,28486.4,28489.1,ns,,,,,
+"BM_NAIVE_SOL_K3/4096",6282,110366,110384,ns,,,,,
+"BM_NAIVE_SOL_K3/32768",785,890760,890741,ns,,,,,
+"BM_NAIVE_SOL_K3/262144",95,7.11032e+06,7.10974e+06,ns,,,,,
+"BM_Balance_Tree_SOL_K3/1024",1384,475849,475778,ns,,,,,
+"BM_Balance_Tree_SOL_K3/4096",367,1.95732e+06,1.95732e+06,ns,,,,,
+"BM_Balance_Tree_SOL_K3/32768",46,1.51634e+07,1.51625e+07,ns,,,,,
+"BM_Balance_Tree_SOL_K3/262144",5,1.2034e+08,1.20335e+08,ns,,,,,
+"BM_FIFO_QUEUE_SOL_K3/1024",4671,146891,146889,ns,,,,,
+"BM_FIFO_QUEUE_SOL_K3/4096",1111,595669,595797,ns,,,,,
+"BM_FIFO_QUEUE_SOL_K3/32768",140,4.83522e+06,4.83451e+06,ns,,,,,
+"BM_FIFO_QUEUE_SOL_K3/262144",17,3.93029e+07,3.92969e+07,ns,,,,,

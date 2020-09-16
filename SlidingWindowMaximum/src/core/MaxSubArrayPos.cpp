@@ -3,7 +3,9 @@
 //
 #include <set>
 #include <iostream>
+#include <deque>
 #include "MaxSubArrayPos.h"
+#include "MaxSubArrayUtils.h"
 
 using namespace std;
 
@@ -44,7 +46,7 @@ const std::vector<int> max_sub_array_bbst_sol(const int input[], const int &size
         //std::cout << "Insert " << input[i] << std::endl;
         balaced_tree.insert(input[i]);
         if (i >= size_sub_array - 1) {
-            if(i - size_sub_array >= 0) {
+            if (i - size_sub_array >= 0) {
                 //std::cout <<  "Removing " << input[i - size_sub_array] << std::endl;
                 balaced_tree.erase(balaced_tree.find(input[i - size_sub_array]));
             }
@@ -52,6 +54,26 @@ const std::vector<int> max_sub_array_bbst_sol(const int input[], const int &size
             //std::cout <<  "Max " << max_el << std::endl;
             result.push_back(max_el);
         }
+    }
+    return result;
+}
+
+const std::vector<int> max_sub_array_deck_sol(const int input[], const int &size_array, const int &size_sub_array)
+{
+    std::vector<int> result;
+    result.reserve(size_array - size_sub_array + 1);
+    std::deque<int> priority_queue;
+    for (int i = 0; i < size_array; i++) {
+        //std::cout << "Insert: " << input[i] << std::endl;
+        remove_minors_element(input, priority_queue, input[i]);
+        priority_queue.push_back(i);
+        remove_element_out_sub_array( priority_queue, i, size_array, size_sub_array);
+        if (i - (size_sub_array - 1) >= 0) {
+            int max = input[priority_queue.front()];
+            //std::cout << "****** Max " << max << " ****** " << std::endl;
+            result.push_back(max);
+        }
+        //std::cout << "Queue size: " << priority_queue.size() << std::endl;
     }
     return result;
 }

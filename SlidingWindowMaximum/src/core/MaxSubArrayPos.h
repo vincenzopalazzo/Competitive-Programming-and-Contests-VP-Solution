@@ -10,4 +10,6 @@
 const std::vector<int> max_sub_array_naive_sol(const int inputs[], const int &size_array, const int &size_sub_array);
 
 const std::vector<int> max_sub_array_bbst_sol(const int input[], const int &size_array, const int &size_sub_array);
+
+const std::vector<int> max_sub_array_deck_sol(const int input[], const int &size_array, const int &size_sub_array);
 #endif //MAXIMUMINSUMARRAYS_MAXSUBARRAYPOS_H
