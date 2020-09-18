@@ -1,0 +1,88 @@
+{
+  "context": {
+    "date": "2020-09-18T22:43:16+02:00",
+    "host_name": "vincent",
+    "executable": "./BMLeadersInArray",
+    "num_cpus": 4,
+    "mhz_per_cpu": 3000,
+    "cpu_scaling_enabled": true,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 262144,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 3145728,
+        "num_sharing": 4
+      }
+    ],
+    "load_avg": [0.98,1.24,1.16],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "BM_Template/1024",
+      "run_name": "BM_Template/1024",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 47370,
+      "real_time": 1.4856694591607557e+04,
+      "cpu_time": 1.4803727147984970e+04,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_Template/4096",
+      "run_name": "BM_Template/4096",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 11762,
+      "real_time": 5.8258239066591625e+04,
+      "cpu_time": 5.8035173439893093e+04,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_Template/32768",
+      "run_name": "BM_Template/32768",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1646,
+      "real_time": 4.2711019678201748e+05,
+      "cpu_time": 4.2667880619684170e+05,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_Template/262144",
+      "run_name": "BM_Template/262144",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 208,
+      "real_time": 3.4206762884073560e+06,
+      "cpu_time": 3.4192198749999693e+06,
+      "time_unit": "ns"
+    }
+  ]
+}
