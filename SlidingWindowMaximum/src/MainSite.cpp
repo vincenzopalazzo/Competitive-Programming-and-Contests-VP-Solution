@@ -8,14 +8,12 @@
 #include <set>
 #include <deque>
 
-
 using namespace std;
 
 template<class T>
-inline void remove_minors_element(const int input[], std::deque<T> &priority_queue, const int &new_element)
+inline void remove_minors_element(const int input[], std::deque<T> &priority_queue, int new_element)
 {
     while (!priority_queue.empty() && input[priority_queue.back()] <= new_element) {
-        //std::cout << "Remove: " << input[priority_queue.back()] << std::endl;
         priority_queue.pop_back();
     }
 }
@@ -25,16 +23,12 @@ inline void remove_minors_element(const int input[], std::deque<T> &priority_que
  * is out the ranch! if I store the value inside the queue i can not make this check easy! (maybe, I can say sometings wrong)
  */
 template<class T>
-inline void remove_element_out_sub_array(std::deque<T> &priority_queue, const int &actual_pos, const int &size_array,
-                                         const int &size_sub_array)
+inline void remove_element_out_sub_array(std::deque<T> &priority_queue, int actual_pos, int size_sub_array)
 {
-
     while  (!priority_queue.empty() && actual_pos - size_sub_array >= priority_queue.front()) {
-        //std::cout << "Remove auto of index: " << priority_queue.front() << std::endl;
         priority_queue.pop_front();
     }
 }
-
 //Slow
 std::vector<int> max_sub_array_naive_sol(const int inputs[], const int &size_array, const int &size_sub_array)
 {
@@ -82,7 +76,7 @@ const std::vector<int> max_sub_array_deck_sol(const int input[], const int &size
         //std::cout << "Insert: " << input[i] << std::endl;
         remove_minors_element(input, priority_queue, input[i]);
         priority_queue.push_back(i);
-        remove_element_out_sub_array( priority_queue, i, size_array, size_sub_array);
+        remove_element_out_sub_array( priority_queue, i, size_sub_array);
         if (i - (size_sub_array - 1) >= 0) {
             int max = input[priority_queue.front()];
             //std::cout << "****** Max " << max << " ****** " << std::endl;
