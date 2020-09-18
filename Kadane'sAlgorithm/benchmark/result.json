@@ -1,0 +1,88 @@
+{
+  "context": {
+    "date": "2020-09-18T23:43:45+02:00",
+    "host_name": "vincent",
+    "executable": "./Benchmark_KadaneAlgorithm",
+    "num_cpus": 4,
+    "mhz_per_cpu": 3000,
+    "cpu_scaling_enabled": true,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 262144,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 3145728,
+        "num_sharing": 4
+      }
+    ],
+    "load_avg": [0.37,0.82,0.97],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "BM_Template/1024",
+      "run_name": "BM_Template/1024",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 58291,
+      "real_time": 1.2052180337556909e+04,
+      "cpu_time": 1.2043807946339299e+04,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_Template/4096",
+      "run_name": "BM_Template/4096",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 14760,
+      "real_time": 5.0196609026158505e+04,
+      "cpu_time": 4.9899897154481463e+04,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_Template/32768",
+      "run_name": "BM_Template/32768",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1775,
+      "real_time": 3.7742593341251230e+05,
+      "cpu_time": 3.7715024450709863e+05,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_Template/262144",
+      "run_name": "BM_Template/262144",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 246,
+      "real_time": 2.8185174269310664e+06,
+      "cpu_time": 2.8171946585365483e+06,
+      "time_unit": "ns"
+    }
+  ]
+}
