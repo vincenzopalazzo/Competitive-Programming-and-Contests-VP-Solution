@@ -3,8 +3,36 @@
 //
 #include "NextLargerElement.h"
 #include <iostream>
+#include <stack>
 
 using namespace std;
+
+std::vector<pair<int, int>> calc_next_larger_elem_stack(const std::vector<int> &inputs)
+{
+    std::stack<pair<int, int>> stack;
+    std::vector<pair<int, int>> result;
+    stack.emplace(0, inputs.at(0));
+    for (int i = 1; i < inputs.size(); i++) {
+        if (stack.empty()) {
+            stack.emplace(i, inputs.at(i));
+            continue;
+        }
+        int next = inputs.at(i);
+        while (!stack.empty() && stack.top().second < next) {
+            if (stack.top().second < next) {
+                result.emplace_back(stack.top().first, next);
+                stack.pop();
+            }
+        }
+        stack.emplace(i, next);
+    }
+
+    while (!stack.empty()) {
+        result.emplace_back(stack.top().first, -1);
+        stack.pop();
+    }
+    return result;
+}
 
 std::vector<int> calc_next_larger_elem_naive(const std::vector<int> &inputs)
 {

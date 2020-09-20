@@ -6,8 +6,11 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
+#include <map>
 
 std::vector<int> calc_next_larger_elem_naive_recursive(const std::vector<int> &inputs);
+
+std::vector<std::pair<int, int>> calc_next_larger_elem_stack(const std::vector<int> &inputs);
 
 std::vector<int> calc_next_larger_elem_naive(const std::vector<int> &inputs);
 
