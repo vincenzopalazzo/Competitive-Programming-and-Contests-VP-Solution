@@ -32,16 +32,18 @@ int main(int argc, char* argv[]){
     std::vector<int> input = {765, 992, 1, 521, 220, 380, 729, 969, 184, 887, 104, 641, 909, 378, 724, 582, 387, 583, 241, 294, 159, 198, 653, 369, 418, 692, 36, 901, 516, 623, 703, 971, 304, 394, 491, 525, 464, 219, 183, 648,
                    796, 287, 979, 395, 356, 702, 667, 743, 976, 908, 728, 134, 106, 380, 193, 214, 71, 920, 114, 587, 543, 817, 248, 537, 901, 739, 752, 364, 649, 626, 702, 444, 913, 681, 529, 959, 72, 196, 392, 738, 103, 119, 872, 900};
     int k = 47;*/
-    const int size_array = input.size();
 
     cout << "----------- NAIVE SOLUTION -------------" << endl;
-    vector<int> result = max_sub_array_naive_sol(input, size_array, k);
-    print_function(input, size_array, result, k);
+    vector<int> result = max_sub_array_naive_sol(input, k);
+    print_function(input, input.size(), result, k);
     cout << "----------- B BST SOLUTION -------------" << endl;
-    result = max_sub_array_bbst_sol(input, size_array, k);
-    print_function(input, size_array, result, k);
+    result = max_sub_array_bbst_sol(input, k);
+    print_function(input, input.size(), result, k);
+    cout << "----------- RB Tree pure C++ SOLUTION -------------" << endl;
+    result = max_sub_array_pure_rbt_sol(input, k);
+    print_function(input, input.size(), result, k);
     cout << "----------- FIFO SOLUTION -------------" << endl;
-    result = max_sub_array_deck_sol(input, size_array, k);
-    print_function(input, size_array, result, k);
+    result = max_sub_array_deck_sol(input, k);
+    print_function(input, input.size(), result, k);
     return EXIT_SUCCESS;
 }

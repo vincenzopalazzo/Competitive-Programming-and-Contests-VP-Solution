@@ -6,14 +6,15 @@
 #include <deque>
 #include "MaxSubArrayPos.h"
 #include "MaxSubArrayUtils.h"
+#include "RBTree.h"
 
 using namespace std;
 
-const std::vector<int> max_sub_array_naive_sol(const std::vector<int> input, int size_array, int size_sub_array)
+std::vector<int> max_sub_array_naive_sol(const std::vector<int> &input, int size_sub_array)
 {
     vector<int> max_values;
-    max_values.reserve(size_array - size_sub_array + 1);
-    for (int i = 0; i <= size_array - size_sub_array; i++) {
+    max_values.reserve(input.size() - size_sub_array + 1);
+    for (int i = 0; i <= input.size() - size_sub_array; i++) {
         int max_value = input.at(i);
         for (int j = 1; j < size_sub_array; j++) {
             if (max_value < input.at(i + j)) {
@@ -37,20 +38,20 @@ const std::vector<int> max_sub_array_naive_sol(const std::vector<int> input, int
  * The idea here, is that the multiset is implemented by cpp standard library with a Red and Black Three, this mean that the element
  * inside the data stuctur is sorted. In sum I can access to the maximum element inside the multiset with an sed.rbegin();
  */
-const std::vector<int> max_sub_array_bbst_sol(const std::vector<int> input, int size_array, int size_sub_array)
+std::vector<int> max_sub_array_bbst_sol(const std::vector<int> &input, int size_sub_array)
 {
     std::vector<int> result;
-    result.reserve(size_array - size_sub_array + 1);
-    std::multiset<int> balaced_tree;
-    for (int i = 0; i < size_array; i++) {
+    result.reserve(input.size() - size_sub_array + 1);
+    std::multiset<int> balanced_tree;
+    for (int i = 0; i < input.size(); i++) {
         //std::cout << "Insert " << input[i] << std::endl;
-        balaced_tree.insert(input.at(i));
+        balanced_tree.insert(input.at(i));
         if (i >= size_sub_array - 1) {
             if (i - size_sub_array >= 0) {
                 //std::cout <<  "Removing " << input[i - size_sub_array] << std::endl;
-                balaced_tree.erase(balaced_tree.find(input.at(i - size_sub_array)));
+                balanced_tree.erase(balanced_tree.find(input.at(i - size_sub_array)));
             }
-            int max_el = *balaced_tree.rbegin();
+            int max_el = *balanced_tree.rbegin();
             //std::cout <<  "Max " << max_el << std::endl;
             result.push_back(max_el);
         }
@@ -58,12 +59,31 @@ const std::vector<int> max_sub_array_bbst_sol(const std::vector<int> input, int 
     return result;
 }
 
-const std::vector<int> max_sub_array_deck_sol(const std::vector<int> input, int size_array, int size_sub_array)
+
+std::vector<int> max_sub_array_pure_rbt_sol(const std::vector<int> &input, int size_sub_array)
 {
     std::vector<int> result;
-    result.reserve(size_array - size_sub_array + 1);
+    result.reserve(input.size() - size_sub_array + 1);
+    RBTree balanced_tree;
+    for (int i = 0; i < input.size(); i++) {
+        balanced_tree.insertValue(input.at(i));
+        if (i >= size_sub_array - 1) {
+            if (i - size_sub_array >= 0) {
+                balanced_tree.deleteValue(input.at(i - size_sub_array));
+            }
+            int max_el = balanced_tree.getMaxValue();
+            result.push_back(max_el);
+        }
+    }
+    return result;
+}
+
+std::vector<int> max_sub_array_deck_sol(const std::vector<int> &input, int size_sub_array)
+{
+    std::vector<int> result;
+    result.reserve(input.size() - size_sub_array + 1);
     std::deque<int> priority_queue;
-    for (int i = 0; i < size_array; i++) {
+    for (int i = 0; i < input.size(); i++) {
         //std::cout << "Insert: " << input[i] << std::endl;
         remove_minors_element(input, priority_queue, input.at(i));
         priority_queue.push_back(i);

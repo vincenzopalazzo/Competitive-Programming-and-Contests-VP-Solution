@@ -9,7 +9,7 @@
 #include <ctime>
 
 template<class T>
-inline void remove_minors_element(const std::vector<int> input, std::deque<T> &priority_queue, int new_element)
+inline void remove_minors_element(const std::vector<int> &input, std::deque<T> &priority_queue, int new_element)
 {
     while (!priority_queue.empty() && input[priority_queue.back()] <= new_element) {
         priority_queue.pop_back();
