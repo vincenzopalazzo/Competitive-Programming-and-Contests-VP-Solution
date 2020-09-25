@@ -7,9 +7,9 @@
 #include "core/NextLargerElement.h"
 
 int main(int argc, char* argv[]){
-    std::vector<int> inputs = {1, 3, 2, 4};
+    std::vector<int64_t> inputs = {1, 3, 2, 4};
     std::cout << "---------- NAIVE SOL ---------" << std::endl;
-    std::vector<int> result = calc_next_larger_elem_naive(inputs);
+    std::vector<int64_t> result = calc_next_larger_elem_naive(inputs);
     std::cout << "Input ";
     for (auto elem : inputs) {
         std::cout << elem << " ";
@@ -27,9 +27,9 @@ int main(int argc, char* argv[]){
         std::cout << elem << " ";
     }
     std::cout << "\n";
-    std::vector<std::pair<int, int>> map = calc_next_larger_elem_stack(inputs);
+    std::vector<std::pair<int, int64_t>> map = calc_next_larger_elem_stack(inputs);
     std::cout << "Result ";
-    int res[map.size()];
+    int64_t res[map.size()];
     for (auto elem : map) {
         res[elem.first] = elem.second;
     }

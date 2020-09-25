@@ -1,7 +1,6 @@
 //
 // Created by vincent on 9/20/20.
 //
-
 #include <iostream>
 #include <vector>
 #include <map>
@@ -9,17 +8,17 @@
 
 using namespace std;
 
-std::vector<pair<int, int>> calc_next_larger_elem_stack(const std::vector<int> &inputs)
+std::vector<pair<int, int64_t>> calc_next_larger_elem_stack(const std::vector<int64_t> &inputs)
 {
-    std::stack<pair<int, int>> stack;
-    std::vector<pair<int, int>> result;
+  std::stack<pair<int, int64_t>> stack;
+  std::vector<pair<int, int64_t>> result;
     stack.emplace(0, inputs.at(0));
     for (int i = 1; i < inputs.size(); i++) {
         if (stack.empty()) {
             stack.emplace(i, inputs.at(i));
             continue;
         }
-        int next = inputs.at(i);
+        int64_t next = inputs.at(i);
         while (!stack.empty() && stack.top().second < next) {
             if (stack.top().second < next) {
                 result.emplace_back(stack.top().first, next);
@@ -47,13 +46,13 @@ int main() {
         std::cin >> n;
         inputs.reserve(n);
         for (int j = 0; j < n; ++j) {
-            int x = 0;
+            int64_t x = 0;
             std::cin >> x;
             inputs.push_back(x);
         }
         std::vector<std::pair<int, int>> map = calc_next_larger_elem_stack(inputs);
 
-        int res[map.size()];
+        int64_t res[map.size()];
         for (auto elem : map) {
             res[elem.first] = elem.second;
         }

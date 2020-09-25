@@ -7,10 +7,10 @@
 
 using namespace std;
 
-std::vector<pair<int, int>> calc_next_larger_elem_stack(const std::vector<int> &inputs)
+std::vector<pair<int, int64_t>> calc_next_larger_elem_stack(const std::vector<int64_t> &inputs)
 {
-    std::stack<pair<int, int>> stack;
-    std::vector<pair<int, int>> result;
+    std::stack<pair<int, int64_t>> stack;
+    std::vector<pair<int, int64_t>> result;
     stack.emplace(0, inputs.at(0));
     for (int i = 1; i < inputs.size(); i++) {
         if (stack.empty()) {
@@ -34,9 +34,9 @@ std::vector<pair<int, int>> calc_next_larger_elem_stack(const std::vector<int> &
     return result;
 }
 
-std::vector<int> calc_next_larger_elem_naive(const std::vector<int> &inputs)
+std::vector<int64_t> calc_next_larger_elem_naive(const std::vector<int64_t> &inputs)
 {
-    std::vector<int> result;
+    std::vector<int64_t> result;
     result.reserve(inputs.size());
 
     for (int i = 0; i < inputs.size(); i++) {
@@ -54,20 +54,20 @@ std::vector<int> calc_next_larger_elem_naive(const std::vector<int> &inputs)
 }
 
 // The recursion at the moment look like a bad idea because with the big number the stack can be very large
-int get_larger_elem(const std::vector<int> &inputs, int input_pos, int gap);
+int64_t get_larger_elem(const std::vector<int64_t> &inputs, int input_pos, int gap);
 
-std::vector<int> calc_next_larger_elem_naive_recursive(const std::vector<int> &inputs)
+std::vector<int64_t> calc_next_larger_elem_naive_recursive(const std::vector<int64_t> &inputs)
 {
-    std::vector<int> result;
+    std::vector<int64_t> result;
     result.reserve(inputs.size());
     for (int i = 0; i < inputs.size(); i++) {
-        int res = get_larger_elem(inputs, i, 1);
+        int64_t res = get_larger_elem(inputs, i, 1);
         result.push_back(res);
     }
     return result;
 }
 
-int get_larger_elem(const std::vector<int> &inputs, int input_pos, int gap)
+int64_t get_larger_elem(const std::vector<int64_t> &inputs, int input_pos, int gap)
 {
     if (input_pos >= inputs.size() - 1 || input_pos + gap >= inputs.size()) {
         return -1;
