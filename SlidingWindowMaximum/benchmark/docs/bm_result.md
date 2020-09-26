@@ -8,7 +8,7 @@ Given an array A and an integer K. Find the maximum for each and every contiguou
 
 ### Simple solution (trivial?)
 
-The solution to the problem was presented at the lecture of 16/09/2020, and the solution presented are three, described below.
+The solutions to solve the problem were presented at the lecture of 16/09/2020, and the solutions presented are three, described below.
 
 The simple (trivial) solution presented at the lesson use two **for**, and a C++ implementation is reported below
 
@@ -31,7 +31,7 @@ std::vector<int> max_sub_array_naive_sol(const std::vector<int> &input, int size
 }
 ```
 
-The cost of this algorithm is `O(N^2)` of computation
+The cost of this algorithm is `O(N^2)` of computation, or a better description is `O(n*k)` because the internal for work only on sub array dimension. But in the wrost cases the algorithm cost is  `O(N^2)` when N = k.
 
 
 ### Balance Binary Tree solution (RbTree)
@@ -45,15 +45,12 @@ std::vector<int> max_sub_array_bbst_sol(const std::vector<int> &input, int size_
     result.reserve(input.size() - size_sub_array + 1);
     std::multiset<int> balanced_tree;
     for (int i = 0; i < input.size(); i++) {
-        //std::cout << "Insert " << input[i] << std::endl;
         balanced_tree.insert(input.at(i));
         if (i >= size_sub_array - 1) {
             if (i - size_sub_array >= 0) {
-                //std::cout <<  "Removing " << input[i - size_sub_array] << std::endl;
                 balanced_tree.erase(balanced_tree.find(input.at(i - size_sub_array)));
             }
             int max_el = *balanced_tree.rbegin();
-            //std::cout <<  "Max " << max_el << std::endl;
             result.push_back(max_el);
         }
     }
@@ -87,7 +84,7 @@ std::vector<int> max_sub_array_deck_sol(const std::vector<int> &input, int size_
 }
 ```
 
-Where the `remove_minors_elementv` and `remove_element_out_sub_array` are two util function reported below
+Where the `remove_minors_element` and `remove_element_out_sub_array` are two utility functions reported below
 
 ```cpp
 template<class T>
@@ -107,13 +104,13 @@ inline void remove_element_out_sub_array(std::deque<T> &priority_queue, int actu
 }
 ```
 
-At this point, an interesting test is determinant if the C++ STL makes the code a little more slowly and I try to reproduce the second solution with a pure C++ implementation of RB Tree. I used the implementation called Red-Black-Tree and it is available on Github at the following link https://github.com/anandarao/Red-Black-Tree.
+At this point, an interesting test is help to understend if the C++ STL makes the code slower that a pure C++ implementation of the structure, and a good test is to reproduce the second solution with a pure C++ implementation of RB Tree. The impelementation in analisis is called Red-Black-Tree, and it is available on Github at the following link https://github.com/anandarao/Red-Black-Tree.
 
-I choose this implementation because has 38 stars on github and I assume that is tested from the community.
+The motivation to choose this implementation is the number of star on Github (38 stars), it help to assume that the implementation could tested from open-source community.
 
-The implementation for the code is equal to the solution reported from the Solution with Balance Binary Tree.
+In additoon, the implementation of the solution is the same of the solution reported in the section about the description of "Balance Binary Tree solution".
 
-So, at this point, I start to use [google benchmark](https://github.com/google/benchmark) to test the different implementation with the two solutions of a balanced tree.
+The bechmark reported inside this document was made with [google benchmark](https://github.com/google/benchmark) to test the different implementation with the two solutions of a balanced tree implementation.
 
 
 ```python
@@ -173,9 +170,9 @@ bm_label = []
     
 
 
-The result looks like that the pure implementation is slower then the C++ multiset implementation, this result needs another proof to see if the c++ STL is faster than the pure implementation.
+The result looks like that the pure implementation is slower then the C++ multiset implementation, this result needs another proof to see if the c++ STL is faster than the pure implementation or the pure implementation need some addition analisis.
 
-For this reason, I make another test on the simple implementation of the three compared with the set from the C++ STL and I received good feedback reported below:
+To proof if the C++ STL is more perfermed than the pure c++ implementation, the additional test is to made a benchmark of binary three implementation. In fact, the result below, shows that execution time of the insert operation on the set C++ STL strucutre and a Binary thee pure C++ implementation.
 
 
 ```python
@@ -214,9 +211,9 @@ stl.plot.bar(rot=0, figsize=(20,8))
     
 
 
-The result shows that the insert on binary three is more quickly than the insert on set from C++ STL. I can assume that the open-source implementation can be optimized for balanced operation.
+The result shows that the insert on pure C++ binary tree is more quickly than the insert on set from C++ STL. I can assume that on pure Red and Black tree implementation reported above could have some performans leaks on the balance operation.
 
-Foot Note: The implementation of Tree in C++ in not available yet on Github but I will update it when it is ready.
+Foot Note: The implementation of pure C++ implementation of Binary Tree in not available on Github yet (Coming soon).
 
 ## Comparison between solutions proposed at the lesson.
 
@@ -263,7 +260,7 @@ summary.plot.bar(rot=0, figsize=(20,8))
     
 
 
-The simple solution can not be inside the chart above because the numbers are very big, I reported below the chart that includes the simple solution.
+The simple solution can not be inside the chart above because the difference about the time is very hight, and the result is reported inside the chart below.
 
 
 ```python
@@ -291,16 +288,13 @@ summary.plot.bar(rot=0, figsize=(20,8))
 
 ## Conclusion
 
-The conclusion is that the solutions give a different result for different dimensions of k and N, in addition, the solution with the FIFO is very performed and this benchmark gives us the proof. However, from the benchmark with the Red and black tree give some result that needs more to go in deep to see, if is possible do better than the C++ STL.
+A conclusion is that the solutions give a different result for different dimensions of k and N, in addition, the solution with the FIFO is very fast, and this benchmark gives us the proof. However, from the benchmark with the Red and black tree is possible noted some result that needs more analisis to see if is possible do better than the C++ STL.
 
-In conclusion, the benchmark can be optimized with the code, because each benchmark uses a different input with the same size and same value of k.
-
-To generate the dimension of K and N inside the benchmark has used two different exponential functions such as:
-
-K = 2^i, with i = [8:16]
-N = e^i, with i = [8:16] 
+Foter note 1: The benchmarks code can be optimized, because each benchmark uses a different input with the same size and same value of k but the valude generate by rand() function.
 
 
-```python
+Foter note 2: To generate the value of K and N inside the benchmark are used two different exponential functions such as:
 
-```
+- K = 2^i, with i = [8:16]
+
+- N = e^i, with i = [8:16] 
