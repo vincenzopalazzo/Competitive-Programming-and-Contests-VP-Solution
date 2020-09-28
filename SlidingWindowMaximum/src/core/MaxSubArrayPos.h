@@ -7,12 +7,16 @@
 
 #include <vector>
 
-std::vector<int> max_sub_array_naive_sol(const std::vector<int> &input, int size_sub_array);
+template<typename T>
+std::vector<T> max_sub_array_naive_sol(const std::vector<T> &input, T size_sub_array);
 
-std::vector<int> max_sub_array_bbst_sol(const std::vector<int> &input, int size_sub_array);
+template<typename T>
+std::vector<T> max_sub_array_bbst_sol(const std::vector<T> &input, T size_sub_array);
 
-std::vector<int> max_sub_array_deck_sol(const std::vector<int> &input, int size_sub_array);
+template<typename T>
+std::vector<T> max_sub_array_deck_sol(const std::vector<T> &input, T size_sub_array);
 
-std::vector<int> max_sub_array_pure_rbt_sol(const std::vector<int> &input, int size_sub_array);
+template<typename T>
+std::vector<T> max_sub_array_pure_rbt_sol(const std::vector<T> &input, T size_sub_array);
 
 #endif //MAXIMUMINSUMARRAYS_MAXSUBARRAYPOS_H
