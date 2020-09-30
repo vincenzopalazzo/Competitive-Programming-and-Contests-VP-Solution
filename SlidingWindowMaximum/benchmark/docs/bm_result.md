@@ -38,6 +38,10 @@ The cost of this algorithm is `O(N^2)` of computation, or a better description i
 
 The second solution of the problem suggest to use the balance tree, and a C++ implementation is reported below:
 
+
+>std::multiset is an associative container that contains a sorted set of objects of type Key. Unlike set, multiple keys with equivalent values are allowed. Sorting is done using the key comparison function Compare. Search, insertion, and removal operations have logarithmic complexity.
+
+
 ```cpp
 std::vector<int> max_sub_array_bbst_sol(const std::vector<int> &input, int size_sub_array)
 {
@@ -104,7 +108,7 @@ inline void remove_element_out_sub_array(std::deque<T> &priority_queue, int actu
 }
 ```
 
-At this point, an interesting test is help to understend if the C++ STL makes the code slower that a pure C++ implementation of the structure, and a good test is to reproduce the second solution with a pure C++ implementation of RB Tree. The impelementation in analisis is called Red-Black-Tree, and it is available on Github at the following link https://github.com/anandarao/Red-Black-Tree.
+At this point, an interesting test test is to understend if the C++ STL makes the code slower that a pure C++ implementation of the structure, and a good test is to reproduce the second solution with a pure C++ implementation of RB Tree. The impelementation in analisis is called Red-Black-Tree, and it is available on Github at the following link https://github.com/anandarao/Red-Black-Tree.
 
 The motivation to choose this implementation is the number of star on Github (38 stars), it help to assume that the implementation could tested from open-source community.
 
