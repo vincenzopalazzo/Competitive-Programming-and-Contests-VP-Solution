@@ -112,6 +112,8 @@ In additoon, the implementation of the solution is the same of the solution repo
 
 The bechmark reported inside this document was made with [google benchmark](https://github.com/google/benchmark) to test the different implementation with the two solutions of a balanced tree implementation.
 
+Footer Note: The RB Tree implementation report some bugs with some type of input, for this reason at the moment are reporting an old result with Rb Tree.
+
 
 ```python
 import pandas
@@ -119,17 +121,22 @@ import json
 %matplotlib inline
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from IPython.display import display_html
 
 mpl.style.use('ggplot')
 
 
 result_file = open('result.json', 'r')
 result_tree_imp = open('bt_result.json', 'r')
+result_old = open('result_old.json', 'r')
 
 result_json = json.loads(result_file.read())
 result_tree_json = json.loads(result_tree_imp.read())
+result_old_json = json.loads(result_old.read())
+
 bm_list = result_json['benchmarks']
 bm_tree_list = result_tree_json['benchmarks']
+bm_old = result_old_json['benchmarks']
 
 ```
 
@@ -143,7 +150,7 @@ bm_input = []
 bm_label = []
 bm_stl_input = []
 bm_stl_label = []
-for bm in bm_list:
+for bm in bm_old:
     if  'RB_Tree' in bm['run_name']:
         bm_rb_res.append(bm['real_time'])
         bm_input.append(bm['run_name'].split('/')[2])
@@ -157,7 +164,7 @@ stl = pandas.DataFrame({
     'RBTree': bm_rb_res
     }, index=bm_label)
 
-stl.plot.bar(rot=0, figsize=(20,8))
+stl.plot.bar(rot=0, figsize=(20,5))
 bm_rb_res = []
 bm_stl_res = []
 bm_input = []
@@ -230,7 +237,7 @@ for bm in bm_list:
     if 'Balance_Tree' in bm['run_name']:
         bm_stl_res.append(bm['real_time'])
         bm_stl_input.append(bm['run_name'].split('/')[1])
-        bm_label.append('{}/{}'.format(bm['run_name'].split('/')[2], bm['run_name'].split('/')[1]))
+        bm_label.append(bm['run_name'].split('/')[1])
     elif 'FIFO' in bm['run_name']:
         bm_fifo_res.append(bm['real_time'])
         bm_fifo_input.append(bm['run_name'].split('/')[1])
@@ -270,7 +277,7 @@ summary = pandas.DataFrame({
     'FIFO': bm_fifo_res
     }, index=bm_label)
 
-summary.plot.bar(rot=0, figsize=(20,8))
+summary.plot.bar(rot=0, figsize=(20,6))
 ```
 
 
@@ -286,6 +293,117 @@ summary.plot.bar(rot=0, figsize=(20,8))
     
 
 
+
+```python
+table = {
+    'FIFO': bm_fifo_res,
+    'SLT': bm_stl_res,
+    'Simple': bm_naive_res
+}
+
+df1 = pandas.DataFrame(data=table, index=bm_label)
+
+col = [df1]
+
+html_str=''
+for df in col:
+    html_str+=df.to_html()
+display_html(html_str.replace('table','table style="display:inline"'),raw=True)
+```
+
+
+<table style="display:inline" border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>FIFO</th>
+      <th>SLT</th>
+      <th>Simple</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>3.440008e+08</td>
+      <td>1.080195e+09</td>
+      <td>1.833814e+08</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3.505077e+08</td>
+      <td>1.218484e+09</td>
+      <td>3.276240e+08</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>3.526658e+08</td>
+      <td>1.365307e+09</td>
+      <td>5.892686e+08</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>3.546191e+08</td>
+      <td>1.485389e+09</td>
+      <td>1.055331e+09</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>3.585962e+08</td>
+      <td>1.644734e+09</td>
+      <td>1.895299e+09</td>
+    </tr>
+    <tr>
+      <th>128</th>
+      <td>3.562465e+08</td>
+      <td>1.793159e+09</td>
+      <td>3.547022e+09</td>
+    </tr>
+    <tr>
+      <th>256</th>
+      <td>3.620313e+08</td>
+      <td>1.888812e+09</td>
+      <td>6.860013e+09</td>
+    </tr>
+    <tr>
+      <th>512</th>
+      <td>3.551575e+08</td>
+      <td>2.035680e+09</td>
+      <td>1.337457e+10</td>
+    </tr>
+    <tr>
+      <th>1024</th>
+      <td>3.501699e+08</td>
+      <td>2.244666e+09</td>
+      <td>2.642430e+10</td>
+    </tr>
+    <tr>
+      <th>2048</th>
+      <td>3.524418e+08</td>
+      <td>2.376910e+09</td>
+      <td>5.259802e+10</td>
+    </tr>
+    <tr>
+      <th>4096</th>
+      <td>3.526584e+08</td>
+      <td>2.484435e+09</td>
+      <td>1.063239e+11</td>
+    </tr>
+    <tr>
+      <th>8192</th>
+      <td>3.583806e+08</td>
+      <td>2.707969e+09</td>
+      <td>2.091792e+11</td>
+    </tr>
+    <tr>
+      <th>16384</th>
+      <td>3.563275e+08</td>
+      <td>2.930081e+09</td>
+      <td>4.161109e+11</td>
+    </tr>
+  </tbody>
+</table style="display:inline">
+
+
 ## Conclusion
 
 A conclusion is that the solutions give a different result for different dimensions of k and N, in addition, the solution with the FIFO is very fast, and this benchmark gives us the proof. However, from the benchmark with the Red and black tree is possible noted some result that needs more analisis to see if is possible do better than the C++ STL.
@@ -295,6 +413,6 @@ Foter note 1: The benchmarks code can be optimized, because each benchmark uses 
 
 Foter note 2: To generate the value of K and N inside the benchmark are used two different exponential functions such as:
 
-- K = 2^i, with i = [8:16]
+- K = 2^i, with i = [1:14]
 
-- N = e^i, with i = [8:16] 
+- N = 2^21 
