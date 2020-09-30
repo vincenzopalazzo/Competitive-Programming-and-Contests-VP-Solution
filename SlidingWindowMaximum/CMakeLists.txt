@@ -8,4 +8,4 @@ add_executable(
         src/Main.cpp
         src/core/MaxSubArrayPos.cpp
         src/core/MaxSubArrayUtils.h
-        src/core/RBTree.cpp)
+)

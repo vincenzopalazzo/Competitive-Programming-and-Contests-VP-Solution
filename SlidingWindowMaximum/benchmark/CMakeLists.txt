@@ -9,6 +9,6 @@ add_executable(
         ${PROJECT_NAME}
         Main.cpp
         ../src/core/MaxSubArrayPos.cpp
-        ../src/core/RBTree.cpp)
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE benchmark::benchmark)

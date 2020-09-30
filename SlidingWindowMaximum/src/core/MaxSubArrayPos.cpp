@@ -6,7 +6,6 @@
 #include <deque>
 #include "MaxSubArrayPos.h"
 #include "MaxSubArrayUtils.h"
-#include "RBTree.h"
 
 using namespace std;
 
@@ -65,7 +64,7 @@ template<typename T>
 std::vector<T> max_sub_array_pure_rbt_sol(const std::vector<T> &input, T size_sub_array)
 {
     std::vector<T> result;
-    result.reserve(input.size() - size_sub_array + 1);
+    /*result.reserve(input.size() - size_sub_array + 1);
     RBTree balanced_tree;
     for (T i = 0; i < input.size(); i++) {
         balanced_tree.insertValue(input.at(i));
@@ -76,7 +75,7 @@ std::vector<T> max_sub_array_pure_rbt_sol(const std::vector<T> &input, T size_su
             int max_el = balanced_tree.getMaxValue();
             result.push_back(max_el);
         }
-    }
+    } */
     return result;
 }
 
