@@ -2,6 +2,8 @@
 
 [Online submission](https://practice.geeksforgeeks.org/viewSol.php?subId=d222beb3ec864172e96d4bfa5b7a5969&pid=451&user=vpalazzo1)
 
+- Status: Completed :heavy_check_mark:
+
 ### Benchmark Result
 
 ### Pie Chart
