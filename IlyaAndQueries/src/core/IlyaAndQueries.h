@@ -9,6 +9,6 @@
 #include <map>
 
 template<typename T>
-T max_sum_of_queries(std::vector<T>  &inputs, const std::vector<std::pair<T, T>> &queries);
+std::vector<T> find_num_successor_elem(const std::string &input, const std::vector<std::pair<T, T>> &queries);
 
 #endif //SPYCBLOCK_SOLTEST_H
