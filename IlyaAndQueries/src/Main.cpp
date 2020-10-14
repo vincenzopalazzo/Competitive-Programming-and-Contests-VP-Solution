@@ -21,5 +21,16 @@ int main(int argc, char* argv[]){
         printf("%d\n", elem);
     }
 
+    struct sol::pair<int> tuples[4] =  {
+            {3, 4},
+            {2, 3},
+            {1, 6},
+            {2, 6},
+    };
+    int size = sizeof(tuples) / sizeof(tuples[0]);
+    int *res = find_num_successor_elem_native(input, tuples, size);
+    for (int i = 0; i < size; i++)
+        printf("%d\n", res[i]);
+    delete res;
     return EXIT_SUCCESS;
 }

@@ -1,3 +1,3 @@
-## [IlyaAndQueries](https://codeforces.com/problemset/problem/313/B)
+## [Ilya and Queries](https://codeforces.com/problemset/problem/313/B)
 
-- Status: Working in progress :construction: 
+- Status: Completed :heavy_check_mark: 
