@@ -19,4 +19,7 @@ struct update {
 template <typename T>
 std::vector<T> update_array(std::vector<update<T>> const &updates, std::vector<int> const &queries, int size_array);
 
+template <typename T>
+std::vector<T> update_array_binary_index_tree(std::vector<update<T>> const &updates, std::vector<int> const &queries, int size_array);
+
 #endif //SPYCBLOCK_SOLTEST_H

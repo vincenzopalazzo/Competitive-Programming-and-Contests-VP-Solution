@@ -24,6 +24,15 @@ int main()
     assert(result.at(1) == 8);
     assert(result.at(2) == 6);
 
-    cout << "---------- TEST CASE PASSED ------------\n";
+    cout << "---------- TEST CASE 1 PASSED ------------\n";
+
+    result = update_array_binary_index_tree(updates, queries, size_array);
+    for (auto elem : result)
+        cout << elem << "\n";
+    assert(result.at(0) == 7);
+    assert(result.at(1) == 8);
+    assert(result.at(2) == 6);
+
+    cout << "---------- TEST CASE 2 PASSED ------------\n";
     return EXIT_SUCCESS;
 }
