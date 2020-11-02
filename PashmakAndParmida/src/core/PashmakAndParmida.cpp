@@ -17,6 +17,7 @@ int pair_indices(std::vector<T> &inputs)
     vector<T> suffix_counter = vector<T>(inputs.size());
     auto binary_index_tree = BTreeIndex<T>(inputs.size());
     remap_array(inputs);
+
     for(int i = inputs.size() - 1; i >= 0; i--) {
         counter[inputs[i]]++;
         suffix_counter[i] = counter[inputs[i]]; // number occs a[i] in a[i..n-1]
@@ -47,14 +48,18 @@ int pair_indices(std::vector<T> &inputs)
 template <typename T>
 void remap_array(std::vector<T> &inputs)
 {
-    vector<T> remap = vector<T>(inputs.size());
+    vector<T> remap(inputs.size());
     copy(inputs.begin(), inputs.end(), remap.begin());
     sort(remap.begin(), remap.end());
     size_t sz = distance(remap.begin(), unique(remap.begin(), remap.end()));
     remap.resize(sz);
 
     for(auto &x : inputs) {
-        int value = distance(remap.begin(), lower_bound(remap.begin(), remap.end(), x));
+        //What we can do inside this function.
+        //We take the distance from the first element and the element minus of "x", inside the
+        //remap element.
+        //At the end we assign this value to X
+        x = distance(remap.begin(), lower_bound(remap.begin(), remap.end(), x));
     }
 }
 
