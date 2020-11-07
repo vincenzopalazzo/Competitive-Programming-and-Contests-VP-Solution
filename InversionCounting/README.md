@@ -1,3 +1,10 @@
-## [Inversion counting problem](https://www.spoj.com/problems/INVCNT/)
+## [Inversion Counting Problem](https://www.spoj.com/problems/INVCNT/)
 
-- Status: Working in progress :construction: 
+- Status: Error submission :x:
+- Type error: `"terminate called after throwing an instance of 'std::bad_alloc'
+                   what():  std::bad_alloc"`
+                   
+ 
+Solved | Solution | Time :clock11: | 
+--- | --- | --- | 
+:x: | :x: | :x:

@@ -7,6 +7,7 @@
 #include <vector>
 
 template <typename T>
-int count_inversion_merge_sort(std::vector<T> const &inputs);
+T count_inversion_merge_sort(std::vector<T> &inputs);
+
 
 #endif //SPYCBLOCK_SOLTEST_H

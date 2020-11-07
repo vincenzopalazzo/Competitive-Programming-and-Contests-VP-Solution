@@ -17,7 +17,7 @@ namespace cpstl {
      * @param r end index, the first value should be a inputs.size() - 1
      */
     template <typename T>
-    int merge_sort(std::vector<T> const &inputs, int p, int r);
+    T merge_sort(std::vector<T> &inputs, size_t p, size_t r);
 
 }
 
