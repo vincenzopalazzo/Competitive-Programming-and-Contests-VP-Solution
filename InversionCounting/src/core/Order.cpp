@@ -5,6 +5,7 @@
 #include <cassert>
 #include <iostream>
 #include "Order.h"
+#include "../colors.h"
 
 using namespace std;
 
@@ -23,14 +24,9 @@ namespace cpstl {
      * @param q an array index < of r but >= or p
      * @param r an array index < of p and q.
      W*/
-    template<typename T>
-    T merge(vector<T> &inputs, size_t p, size_t q, size_t r)
+    template<typename T, typename R>
+    R merge(vector<T> &inputs, size_t p, size_t q, size_t r)
     {
-        assert(!inputs.empty());
-        assert(p >= 0);
-        assert(r >= 0);
-        assert(q >= 0);
-
         size_t n1 = q - p + 1;
         size_t n2 = r - q;
         vector<T> sub_arr_left;
@@ -47,13 +43,24 @@ namespace cpstl {
 
         size_t i = 0;
         size_t j = 0;
-        T inversion = 0;
+        R inversion = 0;
         int k = p;
+        //cout << YELLOW;
         while (i < n1 && j < n2) {
-            if (sub_arr_left[i] > sub_arr_right[j])
-                inversion++;
-            i++;
-            j++;
+            if (sub_arr_left[i] <= sub_arr_right[j]) {
+                inputs[k] = sub_arr_left[i];
+                i++;
+            } else {
+               /* cout << "From: " << sub_arr_left[i] << "\n";
+                cout << "Invesion with: " << sub_arr_right[j] << "\n";
+                cout << BOLDRED << "-------- DEBUG ------------------\n";
+                cout << BOLDRED << "sub_arr_left.size() - i = " << sub_arr_left.size() - i << "\n";
+                cout << BOLDRED << "q - i = " << q - i << "\n";*/
+                inputs[k] = sub_arr_right[j];
+                inversion += sub_arr_left.size() - i;
+                //cout << "Inversion number found " << inversion << YELLOW << "\n";
+                j++;
+            }
             k++;
         }
 
@@ -69,23 +76,24 @@ namespace cpstl {
             j++;
             k++;
         }
-
+        //cout << RESET;
         return inversion;
     }
 
-    template<typename T>
-    T merge_sort(vector<T> &inputs, size_t p, size_t r) {
-        T tot_sum = 0;
+    template<typename T, typename R>
+    R merge_sort(vector<T> &inputs, size_t p, size_t r) {
+        R tot_sum = 0;
         if (p < r) {
             auto q = (p + r) / 2;
-            tot_sum += merge_sort(inputs, p, q);
-            tot_sum += merge_sort(inputs, q + 1, r);
-            tot_sum += merge(inputs, p, q, r);
+            tot_sum += merge_sort<T, R>(inputs, p, q);
+            tot_sum += merge_sort<T, R>(inputs, q + 1, r);
+            tot_sum += merge<T, R>(inputs, p, q, r);
+            //cout << BOLDMAGENTA << "FINAL INVERSION FOUND " << tot_sum << YELLOW << "\n";
         }
         return tot_sum;
     }
 }
 
 //Type declaration
-template int cpstl::merge_sort<int>(vector<int> &inputs, size_t p, size_t r);
+template long cpstl::merge_sort<int, long>(vector<int> &inputs, size_t p, size_t r);
 
