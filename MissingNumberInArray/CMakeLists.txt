@@ -5,5 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(
         ${PROJECT_NAME}
-        src/Main.cpp
+        src/test/Main.cpp
+        src/test/TestTool.cpp
+        src/Utils.cpp
         src/core/MissingNumberInArray.cpp)

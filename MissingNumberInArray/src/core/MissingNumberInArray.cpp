@@ -7,15 +7,46 @@
 using namespace std;
 
 template <typename T>
-T get_missing_number_naive(std::vector<T> const &inputs)
+T get_missing_number_with_sum(std::vector<T> const &inputs, std::size_t size)
 {
-    for (int i = 1; i < inputs.size(); i++) {
-        T delta = inputs.at(i) - inputs.at(i - 1);
-        if (delta > 1) {
-            return inputs.at(i) - 1;
-        }
+    T sum = 0;
+
+    for (std::size_t i = 1; i <= size; i++) {
+        sum += i;
     }
-    return INT32_MAX;
+
+    for (size_t i = 0; i < inputs.size(); i++) {
+        sum -= inputs.at(i);
+    }
+
+    return sum;
 }
 
-template int get_missing_number_naive(std::vector<int> const &inputs);
+template <typename T>
+T get_missing_number_bitmagic(std::vector<T> const &inputs, std::size_t size)
+{
+    T xor_val = 0;
+
+    for (int i = 1; i <= size; i++) {
+        xor_val ^= i;
+    }
+    for (int i = 0; i < inputs.size(); i++) {
+        xor_val ^= inputs.at(i);
+    }
+    return xor_val;
+}
+
+template <typename T>
+T get_missing_number_formula(std::vector<T> const &inputs, std::size_t size)
+{
+    T sum = 0;
+    T tot_sum = size * (size + 1) / 2;
+    for (int i = 0; i < inputs.size(); i++) {
+        sum += inputs.at(i);
+    }
+    return tot_sum - sum;
+}
+
+template int get_missing_number_with_sum(std::vector<int> const &inputs, std::size_t size);
+template int get_missing_number_bitmagic(std::vector<int> const &inputs, std::size_t size);
+template int get_missing_number_formula(std::vector<int> const &inputs, std::size_t size);
