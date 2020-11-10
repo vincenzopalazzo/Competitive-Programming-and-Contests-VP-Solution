@@ -7,10 +7,11 @@
 
 using namespace std;
 
-std::vector<pair<int, int64_t>> calc_next_larger_elem_stack(const std::vector<int64_t> &inputs)
+template <typename T>
+std::vector<pair<int, T>> calc_next_larger_elem_stack(const std::vector<T> &inputs)
 {
-    std::stack<pair<int, int64_t>> stack;
-    std::vector<pair<int, int64_t>> result;
+    std::stack<pair<int, T>> stack;
+    std::vector<pair<int, T>> result;
     stack.emplace(0, inputs.at(0));
     for (int i = 1; i < inputs.size(); i++) {
         if (stack.empty()) {
@@ -34,9 +35,10 @@ std::vector<pair<int, int64_t>> calc_next_larger_elem_stack(const std::vector<in
     return result;
 }
 
-std::vector<int64_t> calc_next_larger_elem_naive(const std::vector<int64_t> &inputs)
+template <typename T>
+std::vector<T> calc_next_larger_elem_naive(const std::vector<T> &inputs)
 {
-    std::vector<int64_t> result;
+    std::vector<T> result;
     result.reserve(inputs.size());
 
     for (int i = 0; i < inputs.size(); i++) {
@@ -76,3 +78,8 @@ int64_t get_larger_elem(const std::vector<int64_t> &inputs, int input_pos, int g
     }
     return get_larger_elem(inputs, input_pos, gap + 1);
 }
+
+template std::vector<std::pair<int, int>> calc_next_larger_elem_stack(const std::vector<int> &inputs);
+template std::vector<std::pair<int, int64_t>> calc_next_larger_elem_stack(const std::vector<int64_t> &inputs);
+template std::vector<int> calc_next_larger_elem_naive(const std::vector<int> &inputs);
+template std::vector<int64_t> calc_next_larger_elem_naive(const std::vector<int64_t> &inputs);

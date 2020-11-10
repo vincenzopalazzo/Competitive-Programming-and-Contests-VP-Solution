@@ -10,8 +10,10 @@
 
 std::vector<int64_t> calc_next_larger_elem_naive_recursive(const std::vector<int64_t> &inputs);
 
-std::vector<std::pair<int, int64_t>> calc_next_larger_elem_stack(const std::vector<int64_t> &inputs);
+template <typename T>
+std::vector<std::pair<int, T>> calc_next_larger_elem_stack(const std::vector<T> &inputs);
 
-std::vector<int64_t> calc_next_larger_elem_naive(const std::vector<int64_t> &inputs);
+template <typename T>
+std::vector<T> calc_next_larger_elem_naive(const std::vector<T> &inputs);
 
 #endif //SPYCBLOCK_SOLTEST_H

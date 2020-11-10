@@ -1,6 +1,3 @@
-//
-// Created by vincent on 9/20/20.
-//
 #include <iostream>
 #include <vector>
 #include <map>
@@ -8,10 +5,10 @@
 
 using namespace std;
 
-std::vector<pair<int, int64_t>> calc_next_larger_elem_stack(const std::vector<int64_t> &inputs)
+std::vector<pair<int, int64_t>> calc_next_larger_elem_stack(std::vector<int64_t> const &inputs)
 {
-  std::stack<pair<int, int64_t>> stack;
-  std::vector<pair<int, int64_t>> result;
+    std::stack<pair<int, int64_t>> stack;
+    std::vector<pair<int, int64_t>> result;
     stack.emplace(0, inputs.at(0));
     for (int i = 1; i < inputs.size(); i++) {
         if (stack.empty()) {
@@ -40,7 +37,7 @@ int main() {
     int num_test_cases = 0;
     std::cin >> num_test_cases;
 
-    std::vector<int> inputs;
+    std::vector<int64_t> inputs;
     for (int i = 0; i < num_test_cases; ++i) {
         int n = 0;
         std::cin >> n;
@@ -50,14 +47,14 @@ int main() {
             std::cin >> x;
             inputs.push_back(x);
         }
-        std::vector<std::pair<int, int>> map = calc_next_larger_elem_stack(inputs);
+        std::vector<std::pair<int, int64_t>> map = calc_next_larger_elem_stack(inputs);
 
         int64_t res[map.size()];
         for (auto elem : map) {
             res[elem.first] = elem.second;
         }
-        for (int i = 0; i < map.size(); i++) {
-            std::cout << res[i] << " ";
+        for (int j = 0; j < map.size(); j++) {
+            std::cout << res[j] << " ";
         }
         std::cout << "\n";
         inputs.clear();
