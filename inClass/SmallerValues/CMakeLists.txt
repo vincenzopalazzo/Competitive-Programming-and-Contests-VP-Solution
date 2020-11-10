@@ -8,5 +8,4 @@ add_executable(
         src/test/Main.cpp
         src/test/TestTool.cpp
         src/Utils.cpp
-        src/core/SegmentTree.cpp
         src/core/SmallerValue.cpp)
