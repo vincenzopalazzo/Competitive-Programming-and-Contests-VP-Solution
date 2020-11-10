@@ -32,7 +32,7 @@ pair<T, int> calculate_number_of_tower(vector<T> &inputs) {
     int actual_max = 1;
     int number_tower = 0;
 
-    sort(inputs.begin(), inputs.end()));
+    sort(inputs.begin(), inputs.end());
     for (int i = 0; i < inputs.size(); i++) {
         int pos = binary_search(inputs, inputs.at(i), i + 1, inputs.size() - 1);
         if (pos != -1) {

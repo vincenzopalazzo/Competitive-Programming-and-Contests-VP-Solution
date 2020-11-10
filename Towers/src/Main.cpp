@@ -4,7 +4,8 @@
 #include <iostream>
 #include "core/Tower.h"
 
-int main(int argc, char *argv[]) {
+int main()
+{
     std::vector<int> inputs = {6, 5, 6, 7};
     std::pair<int, int> result = calculate_number_of_tower(inputs);
     std::cout << result.first << " " << result.second << std::endl;
