@@ -26,7 +26,7 @@ Name | Solved | Repository | Report |
 *Sliding window maximum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/SlidingWindowMaximum) | [Report](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/SlidingWindowMaximum/benchmark/docs/bm_result.md) |
 *Next larger element* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NextLargerElement) | _ |
 *Towers* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NextLargerElement) | _ |
-*Finding Team Member* | _ | _ | _ |
+*Finding Team Member* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/FindingTeamMember) | _ |
 *The Monkey and the Oiled Bamboo* | _ | _ | _ |
 *Inversion count* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/InversionCounting) | _ |
 
