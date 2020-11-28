@@ -8,6 +8,13 @@
 #include <vector>
 
 template <typename T, typename R>
-R estimate_dimension_k(std::vector<T> const &inputs);
+R estimate_dimension_k_trivial(std::vector<T> const &inputs);
+
+template <typename T, typename R>
+R estimate_dimension_k_subtraction(std::vector<T> const &inputs);
+
+
+template <typename T, typename R>
+R estimate_dimension_k_bisection(std::vector<T> &inputs);
 
 #endif //SPYCBLOCK_SOLTEST_H

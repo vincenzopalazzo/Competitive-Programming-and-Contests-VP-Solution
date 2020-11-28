@@ -28,13 +28,13 @@ namespace cpstl {
         std::cout << BOLDRED;
         std::cout << name_test  << " FAILED" << "\n";
         std::cout << "Aspected " << aspected << " but received " << actual << "\n";
-        std::cout << BOLDWHITE << "\n|------------ END " << name_test << " -------------------|" << RESET << "\n\n";
+        //std::cout << BOLDWHITE << "|------------ END " << name_test << " -------------------|" << RESET << "\n\n";
     }
 
     template<typename T>
     void assert_equal(std::string name_test, std::vector<T> const &aspected, std::vector<T> const &actual)
     {
-        std::cout << BOLDWHITE << "\n|------------ TEST " << name_test << " -------------------|" << RESET << "\n";
+        std::cout << BOLDWHITE << "|------------ TEST " << name_test << " -------------------|" << RESET << "\n";
         if (aspected.size() != actual.size()) {
             std::cout << BOLDRED;
             std::cout << name_test  << " FAILED" << "\n";
@@ -53,6 +53,6 @@ namespace cpstl {
             }
         }
         std::cout << BOLDGREEN << name_test  << " PASSED" << RESET << "\n";
-        std::cout << BOLDWHITE << "\n|------------ END " << name_test << " -------------------|" << RESET << "\n";
+        //std::cout << BOLDWHITE << "|------------ END " << name_test << " -------------------|" << RESET << "\n";
     }
 }
