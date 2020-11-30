@@ -25,52 +25,22 @@ using namespace std;
 
 void TEST_CASE_ONE_SEGMENT_TREE()
 {
-    vector<int> inputs = {18, 17, 13, 19, 15, 11, 20};
+    vector<int> inputs = {1, 2, 3, 4};
     cpstl::cp_log(LOG, inputs);
     vector<Query<int>> queries;
-    queries.emplace_back(false, 5, 7);
-    queries.emplace_back(false, 1, 3);
-    queries.emplace_back(true, 6, 12);
-    queries.emplace_back(false, 5, 7);
-    queries.emplace_back(false, 3, 4);
-    queries.emplace_back(false, 1, 2);
-    queries.emplace_back(false, 1, 7);
-    queries.emplace_back(false, 7, 7);
+    queries.emplace_back(3, 0);
+    auto update = Query<int>(3, 0);
+    update.update_val = -1;
+    queries.emplace_back(update);
+    queries.emplace_back(0, 1);
+    queries.emplace_back(2, 1);
     auto segment_tree = cpstl::SegmentTree<int>(inputs);
-    auto result = range_minimum_query_segment_tree(segment_tree, queries);
-    cpstl::assert_equal("TEST_CASE_ONE_SEGMENT_TREE", {11, 13, 12, 13, 17, 12, 20}, result);
-}
-
-void TEST_CASE_TWO_SEGMENT_TREE()
-{
-    vector<int> inputs = {1, 5, 2, 4, 3};
-    cpstl::cp_log(LOG, inputs);
-    vector<Query<int>> queries;
-    queries.emplace_back(false, 1, 5);
-    queries.emplace_back(false, 1, 3);
-    queries.emplace_back(false, 3, 5);
-    queries.emplace_back(true, 3, 6);
-    queries.emplace_back(false, 1, 5);
-    auto segment_tree = cpstl::SegmentTree<int>(inputs);
-    auto result = range_minimum_query_segment_tree(segment_tree, queries);
-    cpstl::assert_equal("TEST_CASE_TWO_SEGMENT_TREE", {1, 1, 2, 1}, result);
-}
-
-void TEST_CASE_ONE_NAIVE()
-{
-    vector<int> inputs = {18, 17, 13, 19, 15, 11, 20};
-    cpstl::print_vector(inputs);
-    vector<Query<int>> queries;
-    queries.emplace_back(false, 4, 6);
-    queries.emplace_back(false, 1, 3);
-    auto result = range_minimum_query_naive(inputs, queries);
-    cpstl::assert_equal("TEST_CASE_ONE_NAIVE", {11, 13}, result);
+    auto result = calculate_minimum_rmq_query(segment_tree, queries);
+    cpstl::assert_equal("TEST_CASE_ONE_SEGMENT_TREE", {1, 0, 0}, result);
 }
 
 int main()
 {
     TEST_CASE_ONE_SEGMENT_TREE();
-    TEST_CASE_ONE_NAIVE();
-    TEST_CASE_TWO_SEGMENT_TREE();
     return EXIT_SUCCESS;
 }
