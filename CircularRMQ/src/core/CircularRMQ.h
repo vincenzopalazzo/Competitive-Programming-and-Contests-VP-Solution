@@ -7,7 +7,7 @@
 #include "../test/Utils.hpp"
 #include "SegmentTree.h"
 
-const cpstl::Log LOG(true);
+const cpstl::Log LOG(false);
 
 template <typename T>
 struct Query {
