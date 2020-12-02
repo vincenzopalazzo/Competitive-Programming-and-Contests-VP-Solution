@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/Knapsack.dir/src/test/Main.cpp.o  -o Knapsack 

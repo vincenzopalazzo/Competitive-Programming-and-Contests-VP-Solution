@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/core/Knapsack.h
+vector
+-
+
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/Main.cpp
+cstdlib
+-
+vector
+-
+TestTool.hpp
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/TestTool.hpp
+../core/Knapsack.h
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/core/Knapsack.h
+
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/TestTool.hpp
+iostream
+-
+vector
+-
+colors.h
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/colors.h
+
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/colors.h
+
