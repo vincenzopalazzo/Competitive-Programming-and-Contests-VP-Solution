@@ -28,7 +28,7 @@ inline T sol_knapsack_trivial(T knapsack_capacity, std::vector<Object<T>> object
 
     // Case one -> I take the obj in position n - 1
     // Case two -> I don't take the obj in position n - 1
-    auto case_one = objects[pos - 1].value - sol_knapsack_trivial(knapsack_capacity - objects[pos - 1].weight, objects, pos - 1);
+    auto case_one = objects[pos - 1].value + sol_knapsack_trivial(knapsack_capacity - objects[pos - 1].weight, objects, pos - 1);
     auto case_two = sol_knapsack_trivial(knapsack_capacity, objects, pos - 1);
     return max(case_one, case_two);
 }
