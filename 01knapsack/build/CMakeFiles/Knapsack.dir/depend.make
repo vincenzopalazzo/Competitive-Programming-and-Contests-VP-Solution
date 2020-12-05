@@ -4,5 +4,6 @@
 CMakeFiles/Knapsack.dir/src/test/Main.cpp.o: ../src/core/Knapsack.h
 CMakeFiles/Knapsack.dir/src/test/Main.cpp.o: ../src/test/Main.cpp
 CMakeFiles/Knapsack.dir/src/test/Main.cpp.o: ../src/test/TestTool.hpp
+CMakeFiles/Knapsack.dir/src/test/Main.cpp.o: ../src/test/Utils.hpp
 CMakeFiles/Knapsack.dir/src/test/Main.cpp.o: ../src/test/colors.h
 

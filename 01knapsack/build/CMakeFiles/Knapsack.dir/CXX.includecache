@@ -9,6 +9,8 @@
 /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/core/Knapsack.h
 vector
 -
+../test/Utils.hpp
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/Utils.hpp
 
 /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/Main.cpp
 cstdlib
@@ -24,6 +26,16 @@ TestTool.hpp
 iostream
 -
 vector
+-
+colors.h
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/colors.h
+
+/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/Utils.hpp
+iostream
+-
+vector
+-
+bits/stdc++.h
 -
 colors.h
 /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/colors.h

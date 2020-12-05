@@ -23,21 +23,46 @@
 
 using namespace std;
 
-void TEST_CASE_ONE_KNAPSACK_TRIVIAL()
+void TEST_CASE_ONE_KNAPSACK_RECURSION()
 {
     vector<Object<int>> objects;
     objects.emplace_back(10, 60);
     objects.emplace_back(20, 100);
     objects.emplace_back(30, 120);
     int capacity = 50;
-    auto maximum_elm = sol_knapsack_trivial(capacity, objects, objects.size());
+    auto maximum_elm = sol_knapsack_recursion(capacity, objects, objects.size());
 
-    cpstl::assert_equal("TEST_CASE_ONE_KNAPSACK_TRIVIAL", 220, maximum_elm);
+    cpstl::assert_equal("TEST_CASE_ONE_KNAPSACK_RECURSION", 220, maximum_elm);
 }
 
+void TEST_CASE_ONE_KNAPSACK_BOTTOM_UP()
+{
+    vector<Object<int>> objects;
+    objects.emplace_back(10, 60);
+    objects.emplace_back(20, 100);
+    objects.emplace_back(30, 120);
+    int capacity = 50;
+    auto maximum_elm = sol_knapsack_bottom_up(capacity, objects, objects.size());
+
+    cpstl::assert_equal("TEST_CASE_ONE_KNAPSACK_BOTTOM_UP", 220, maximum_elm);
+}
+
+void TEST_CASE_ONE_KNAPSACK_MEMORIZATION()
+{
+    vector<Object<int>> objects;
+    objects.emplace_back(10, 60);
+    objects.emplace_back(20, 100);
+    objects.emplace_back(30, 120);
+    int capacity = 50;
+    auto maximum_elm = sol_knapsack_memorization(capacity, objects, objects.size());
+
+    cpstl::assert_equal("TEST_CASE_ONE_KNAPSACK_MEMORIZATION", 220, maximum_elm);
+}
 
 int main()
 {
-    TEST_CASE_ONE_KNAPSACK_TRIVIAL();
+    TEST_CASE_ONE_KNAPSACK_RECURSION();
+    TEST_CASE_ONE_KNAPSACK_BOTTOM_UP();
+    TEST_CASE_ONE_KNAPSACK_MEMORIZATION();
     return EXIT_SUCCESS;
 }

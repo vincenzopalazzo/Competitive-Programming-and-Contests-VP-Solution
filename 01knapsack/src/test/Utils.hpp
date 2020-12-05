@@ -45,6 +45,20 @@ namespace cpstl {
         std::cout << RESET;
     }
 
+    template<typename T>
+    inline void print_matrix(std::vector<std::vector<T>> const &matrix)
+    {
+        std::cout << BOLDYELLOW;
+        for (auto &row : matrix) {
+            for (auto &col : row) {
+                std::cout << col << " ";
+            }
+            std::cout << "\n";
+        }
+        std::cout << "\n";
+        std::cout << RESET;
+    }
+
     /**
      * This procedure is wrote to load data from the test data
      * download from the https://www.hackerrank.com/
@@ -97,6 +111,16 @@ namespace cpstl {
         if (!log.enable) return;
         std::cout << BOLDYELLOW;
         print_vector(inputs);
+        std::cout << "\n";
+        std::cout << RESET;
+    }
+
+    template<typename T>
+    inline void cp_log_matrix(Log log, std::vector<std::vector<T>> const &matrix)
+    {
+        if (!log.enable) return;
+        std::cout << BOLDYELLOW;
+        print_matrix(matrix);
         std::cout << "\n";
         std::cout << RESET;
     }
