@@ -8,18 +8,21 @@
 using namespace std;
 
 template<typename T, typename R>
-R get_maximum_number_of_house(std::vector<T> &inputs, T buget)
+R lis_dynamic_programming_with_mem(std::vector<T> const &input)
 {
-    sort(inputs.begin(), inputs.end());
-    R number_house = 0;
-    for (auto elem: inputs) {
-        if (buget - elem >= 0) {
-            buget -= elem;
-            if (buget >= 0)
-                number_house++;
+    std::vector<T> mem(input.size(), 1);
+    for (std::size_t i = 0; i < input.size(); i++) {
+        for (std::size_t j = 0; j < i; j++) {
+            if (input[j] < input[i]) {
+                mem[i] = std::max(mem[i], mem[j] + 1);
+            }
         }
     }
-    return number_house;
+    R lis = mem[0];
+    for (std::size_t i = 0; i < input.size(); i++) {
+        lis = std::max(lis, mem[i]);
+    }
+    return lis;
 }
 
 int main()

@@ -64,7 +64,7 @@ namespace cpstl
             // Internal node will have the sum of both of its children
             int segment_left = structure[left_child];
             int segment_right = structure[right_child];
-            structure[start_index] = (origin[segment_left] <= origin[segment_right]) ? segment_left : segment_right;
+            structure[start_index] = (origin[segment_left] >= origin[segment_right]) ? segment_left : segment_right;
         }
 
         int range_query_subroutine(int start_index, int left_index_now, int right_index_now, int query_left, int query_right)
@@ -81,7 +81,7 @@ namespace cpstl
                                                        query_left, query_right);
             if (left_segment == -1) return right_segment;
             if (right_segment == -1) return left_segment;
-            return  (origin[left_segment] <= origin[right_segment]) ? left_segment : right_segment;
+            return  (origin[left_segment] >= origin[right_segment]) ? left_segment : right_segment;
         }
 
         void update_subroutine(int start_index, int left_index, int right_index, int pos, T new_value)
@@ -100,7 +100,7 @@ namespace cpstl
                 }
                 int segment_left = structure[left_child];
                 int segment_right = structure[right_child];
-                structure[start_index] = (origin[segment_left] <= origin[segment_right]) ? segment_left : segment_right;
+                structure[start_index] = (origin[segment_left] >= origin[segment_right]) ? segment_left : segment_right;
             }
         }
 
@@ -161,7 +161,6 @@ namespace cpstl
         {
             return origin[at];
         }
-
     };
 };
 

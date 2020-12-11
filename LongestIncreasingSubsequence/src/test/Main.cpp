@@ -39,45 +39,18 @@ static void TEST_CASE_ONE_DP_MEM()
     cpstl::assert_equal("TEST_CASE_ONE_DP_MEM", 4, result);
 }
 
-static void TEST_CASE_ONE_BIT()
+static void TEST_CASE_ONE_DP_SEGMENT_TREE()
 {
-    vector<int> map = {10, 9, 2, 5, 3, 7, 101, 18};
+    vector<int> map = {10,9,2,5,3,7,101,18};
     cpstl::cp_log(LOG, map);
-    auto result = lis_dynamic_programming_binary_index_tree<int, int>(map);
-    cpstl::assert_equal("TEST_CASE_ONE_BIT", 4, result);
-}
-
-static void TEST_CASE_TWO_BIT()
-{
-    vector<int> map = {0, 1, 0, 3, 2, 3};
-    cpstl::cp_log(LOG, map);
-    auto result = lis_dynamic_programming_binary_index_tree<int, int>(map);
-    cpstl::assert_equal("TEST_DEMO", 4, result);
-}
-
-static void TEST_CASE_THREE_BIT()
-{
-    vector<int> map = {7, 7, 7, 7, 7, 7, 7};
-    cpstl::cp_log(LOG, map);
-    auto result = lis_dynamic_programming_binary_index_tree<int, int>(map);
-    cpstl::assert_equal("TEST_CASE_THREE_BIT", 1, result);
-}
-
-static void TEST_CASE_FOUR_BIT()
-{
-    vector<int> map = {4, 10, 4, 3, 8, 9};
-    cpstl::cp_log(LOG, map);
-    auto result = lis_dynamic_programming_binary_index_tree<int, int>(map);
-    cpstl::assert_equal("TEST_CASE_FOUR_BIT", 3, result);
+    auto result = lis_dynamic_programming_segment_tree<int, int>(map);
+    cpstl::assert_equal("TEST_CASE_ONE_DP_SEGMENT_TREE", 4, result);
 }
 
 int main()
 {
     TEST_CASE_ONE_DP();
     TEST_CASE_ONE_DP_MEM();
-    TEST_CASE_ONE_BIT();
-    TEST_CASE_TWO_BIT();
-    TEST_CASE_THREE_BIT();
-    TEST_CASE_FOUR_BIT();
+    TEST_CASE_ONE_DP_SEGMENT_TREE();
     return EXIT_SUCCESS;
 }
