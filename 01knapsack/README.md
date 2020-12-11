@@ -1,9 +1,9 @@
-## [KNAPSACK - The Knapsack Problem](https://www.spoj.com/problems/KNAPSACK/)
+## [KNAPSACK - The Knapsack Problem](https://www.spoj.com/status/ns=27082549)
 
-- Status: Working in progress :construction: 
+- Status: Completed :heavy_check_mark:
 
 Solved | Solution | Time :clock11: | 
 --- | --- | --- | 
-:construction:  | [Source](#TODO) | XXXX ms | 
+:heavy_check_mark:  | [Source](#TODO) | 0.02 ms | 
 
 ## Solution or Solution discussion

@@ -42,31 +42,30 @@ inline T sol_knapsack_recursion(T knapsack_capacity, std::vector<Object<T>> cons
  * Auxiliary Space complexity: O(M*N).
  */
 template <typename T>
-inline T sol_knapsack_bottom_up(T knapsack_capacity, std::vector<Object<T>> const &objects, size_t pos)
-{
+inline T sol_knapsack_bottom_up(T knapsack_capacity, std::vector<Object<T>> const &objects, std::size_t pos){
     std::vector<std::vector<T>> k(pos + 1, std::vector<T>(knapsack_capacity + 1));
-    for (size_t i = 0; i <= pos; i++) {
-        for (size_t w = 0; w <= knapsack_capacity; w++) {
+    for (std::size_t i = 0; i <= pos; i++) {
+        for (std::size_t w = 0; w <= knapsack_capacity; w++) {
             if (i == 0 || w == 0) {
-                continue;
+                k[i][w] = 0;
             } else if (objects[i - 1].weight <= knapsack_capacity) {
-                auto first_val = objects[i-1].value + k[i - 1][w - objects[i - 1].weight];
+                // val[i - 1] + K[i - 1][w - wt[i - 1]]
+                auto first_val = objects[i - 1].value + k[i - 1][w - objects[i - 1].weight];
                 auto second_val = k[i - 1][w];
-                auto val = max(first_val, second_val);
-                k[i][w] = val;
+                k[i][w] = max(first_val, second_val);
             } else {
                 k[i][w] = k[i - 1][w];
             }
         }
     }
+    cpstl::cp_log(LOG, "---------------- sol_knapsack_bottom_up -------------------");
     cpstl::cp_log_matrix(LOG, k);
     return k[pos][knapsack_capacity];
 }
 
 template <typename T>
-inline T sol_knapsack_recursion_mem(T knapsack_capacity, std::vector<Object<T>> const &objects, int index, std::vector<std::vector<T>> & mem)
+inline T sol_knapsack_recursion_mem(T knapsack_capacity, std::vector<Object<T>> const &objects, int index, std::vector<std::vector<T>> &mem)
 {
-    cpstl::cp_log_matrix(LOG, mem);
     if (index < 0) return 0;
     if (mem[index][knapsack_capacity] != -1)
         return mem[index][knapsack_capacity];
@@ -78,10 +77,11 @@ inline T sol_knapsack_recursion_mem(T knapsack_capacity, std::vector<Object<T>> 
     }
     // Case one -> I take the obj in position n - 1
     // Case two -> I don't take the obj in position n - 1
-    auto case_one = objects[index - 1].value +
+    auto case_one = objects[index].value +
             sol_knapsack_recursion_mem(knapsack_capacity - objects[index].weight, objects, index - 1, mem);
     auto case_two = sol_knapsack_recursion_mem(knapsack_capacity, objects, index - 1, mem);
     mem[index][knapsack_capacity] = max(case_one, case_two);
+
     return mem[index][knapsack_capacity];
 }
 
@@ -95,5 +95,8 @@ inline T sol_knapsack_memorization(T knapsack_capacity, std::vector<Object<T>> c
             mem[i][j] = -1;
         }
     }
-    return sol_knapsack_recursion_mem(knapsack_capacity, objects, pos - 1, mem);
+    auto res = sol_knapsack_recursion_mem(knapsack_capacity, objects, pos - 1, mem);
+    cpstl::cp_log(LOG, "---------------- sol_knapsack_memorization -------------------");
+    cpstl::cp_log_matrix(LOG, mem);
+    return res;
 }

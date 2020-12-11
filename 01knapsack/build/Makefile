@@ -123,32 +123,32 @@ Knapsack/fast:
 	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/build
 .PHONY : Knapsack/fast
 
-src/test/Main.o: src/test/Main.cpp.o
+src/MainSite.o: src/MainSite.cpp.o
 
-.PHONY : src/test/Main.o
+.PHONY : src/MainSite.o
 
 # target to build an object file
-src/test/Main.cpp.o:
-	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/test/Main.cpp.o
-.PHONY : src/test/Main.cpp.o
+src/MainSite.cpp.o:
+	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/MainSite.cpp.o
+.PHONY : src/MainSite.cpp.o
 
-src/test/Main.i: src/test/Main.cpp.i
+src/MainSite.i: src/MainSite.cpp.i
 
-.PHONY : src/test/Main.i
+.PHONY : src/MainSite.i
 
 # target to preprocess a source file
-src/test/Main.cpp.i:
-	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/test/Main.cpp.i
-.PHONY : src/test/Main.cpp.i
+src/MainSite.cpp.i:
+	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/MainSite.cpp.i
+.PHONY : src/MainSite.cpp.i
 
-src/test/Main.s: src/test/Main.cpp.s
+src/MainSite.s: src/MainSite.cpp.s
 
-.PHONY : src/test/Main.s
+.PHONY : src/MainSite.s
 
 # target to generate assembly for a file
-src/test/Main.cpp.s:
-	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/test/Main.cpp.s
-.PHONY : src/test/Main.cpp.s
+src/MainSite.cpp.s:
+	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/MainSite.cpp.s
+.PHONY : src/MainSite.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Knapsack"
 	@echo "... edit_cache"
-	@echo "... src/test/Main.o"
-	@echo "... src/test/Main.i"
-	@echo "... src/test/Main.s"
+	@echo "... src/MainSite.o"
+	@echo "... src/MainSite.i"
+	@echo "... src/MainSite.s"
 .PHONY : help
 
 

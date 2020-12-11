@@ -57,38 +57,38 @@ include CMakeFiles/Knapsack.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Knapsack.dir/flags.make
 
-CMakeFiles/Knapsack.dir/src/test/Main.cpp.o: CMakeFiles/Knapsack.dir/flags.make
-CMakeFiles/Knapsack.dir/src/test/Main.cpp.o: ../src/test/Main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Knapsack.dir/src/test/Main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Knapsack.dir/src/test/Main.cpp.o -c /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/Main.cpp
+CMakeFiles/Knapsack.dir/src/MainSite.cpp.o: CMakeFiles/Knapsack.dir/flags.make
+CMakeFiles/Knapsack.dir/src/MainSite.cpp.o: ../src/MainSite.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Knapsack.dir/src/MainSite.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Knapsack.dir/src/MainSite.cpp.o -c /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/MainSite.cpp
 
-CMakeFiles/Knapsack.dir/src/test/Main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Knapsack.dir/src/test/Main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/Main.cpp > CMakeFiles/Knapsack.dir/src/test/Main.cpp.i
+CMakeFiles/Knapsack.dir/src/MainSite.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Knapsack.dir/src/MainSite.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/MainSite.cpp > CMakeFiles/Knapsack.dir/src/MainSite.cpp.i
 
-CMakeFiles/Knapsack.dir/src/test/Main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Knapsack.dir/src/test/Main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/test/Main.cpp -o CMakeFiles/Knapsack.dir/src/test/Main.cpp.s
+CMakeFiles/Knapsack.dir/src/MainSite.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Knapsack.dir/src/MainSite.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/src/MainSite.cpp -o CMakeFiles/Knapsack.dir/src/MainSite.cpp.s
 
-CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.requires:
+CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.requires:
 
-.PHONY : CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.requires
+.PHONY : CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.requires
 
-CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.provides: CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.provides.build
-.PHONY : CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.provides
+CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.provides: CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Knapsack.dir/build.make CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.provides.build
+.PHONY : CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.provides
 
-CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.provides.build: CMakeFiles/Knapsack.dir/src/test/Main.cpp.o
+CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.provides.build: CMakeFiles/Knapsack.dir/src/MainSite.cpp.o
 
 
 # Object files for target Knapsack
 Knapsack_OBJECTS = \
-"CMakeFiles/Knapsack.dir/src/test/Main.cpp.o"
+"CMakeFiles/Knapsack.dir/src/MainSite.cpp.o"
 
 # External object files for target Knapsack
 Knapsack_EXTERNAL_OBJECTS =
 
-Knapsack: CMakeFiles/Knapsack.dir/src/test/Main.cpp.o
+Knapsack: CMakeFiles/Knapsack.dir/src/MainSite.cpp.o
 Knapsack: CMakeFiles/Knapsack.dir/build.make
 Knapsack: CMakeFiles/Knapsack.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vincent/Github/Competitive-Programming-and-Contests-VP-Solution/01knapsack/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Knapsack"
@@ -99,7 +99,7 @@ CMakeFiles/Knapsack.dir/build: Knapsack
 
 .PHONY : CMakeFiles/Knapsack.dir/build
 
-CMakeFiles/Knapsack.dir/requires: CMakeFiles/Knapsack.dir/src/test/Main.cpp.o.requires
+CMakeFiles/Knapsack.dir/requires: CMakeFiles/Knapsack.dir/src/MainSite.cpp.o.requires
 
 .PHONY : CMakeFiles/Knapsack.dir/requires
 
