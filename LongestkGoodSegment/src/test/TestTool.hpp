@@ -61,7 +61,7 @@ namespace cpstl {
                 std::cout << BOLDRED;
                 std::cout << name_test  << " FAILED" << "\n";
                 std::cout << "Aspected vector at postion " << i << " has different value from the actual vector" << "\n";
-                std::cout << "Asspected value is: " << aspected.at(i) << " and the actual value is " << actual.at(i) << "\n";
+                std::cout << "Aspected value is: " << aspected.at(i) << " and the actual value is " << actual.at(i) << "\n";
                 std::cout << RESET;
                 return;
             }

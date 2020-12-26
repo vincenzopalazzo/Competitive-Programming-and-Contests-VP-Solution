@@ -87,7 +87,6 @@ namespace cpstl {
         if (!log.enable) return;
         std::cout << BOLDYELLOW;
         std::cout << message;
-        std::cout << "\n";
         std::cout << RESET;
     }
 
@@ -97,7 +96,6 @@ namespace cpstl {
         if (!log.enable) return;
         std::cout << BOLDYELLOW;
         print_vector(inputs);
-        std::cout << "\n";
         std::cout << RESET;
     }
 }

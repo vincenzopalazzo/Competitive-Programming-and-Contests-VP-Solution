@@ -3,43 +3,48 @@
 //
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-template<typename T, typename R>
-R get_maximum_number_of_house(std::vector<T> &inputs, T buget)
+template<typename T>
+bool check_goodness(std::vector<T> const &input, std::size_t from, std::size_t to)
 {
-    sort(inputs.begin(), inputs.end());
-    R number_house = 0;
-    for (auto elem: inputs) {
-        if (buget - elem >= 0) {
-            buget -= elem;
-            if (buget >= 0)
-                number_house++;
+    for (int j = from + 1; j < to; j++) {
+        if (input[j] != input[j - 1] + 1) return false;
+    }
+    return true;
+}
+
+template<typename T>
+std::pair<std::size_t, std::size_t> calculate_kgood_segment(std::vector<T> const &input, T k_elems)
+{
+    std::pair<std::size_t, std::size_t> result;
+    if (k_elems == 1 || k_elems == 0) {
+        result.first = result.second = k_elems;
+        return result;
+    }
+    for (int i = 0; i < input.size(); i++) {
+        if (check_goodness(input, i, i + k_elems)) {
+            result.first = i + 1;
+            result.second = i + k_elems;
         }
     }
-    return number_house;
+    return result;
 }
 
 int main()
 {
-    int T;
-    scanf("%d", &T);
+    int n, k;
+    scanf("%d", &n);
+    scanf("%d", &k);
 
-    for(std::size_t t = 1; t <= T; t++) {
-        int size;
-        scanf("%d", &size);
-        int buget;
-        scanf("%d", &buget);
-        vector<int> inputs;
-        inputs.reserve(size);
-        for (std::size_t i = 0; i < size; i++) {
-            int value;
-            scanf("%d", &value);
-            inputs.push_back(value);
-        }
-        int result = get_maximum_number_of_house<int, int>(inputs, buget);
-        printf("Case #%lu: %d\n", t, result);
+    vector<int> inputs;
+    inputs.reserve(n);
+    for(std::size_t t = 0; t < n; t++) {
+        int elem;
+        scanf("%d", &elem);
+        inputs.push_back(elem);
     }
+    auto result = calculate_kgood_segment(inputs, k);
+    printf("%lu %lu", result.first, result.second);
 }

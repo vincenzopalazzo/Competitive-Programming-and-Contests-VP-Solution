@@ -4,6 +4,7 @@
 
 Solved | Solution | Time :clock11: | 
 --- | --- | --- | 
-:construction:  | [Source](#TODO) | XXXX ms | 
+:construction:  | [Naive](#TODO) | XXXX ms | 
+:construction:  | [Two pointers](#TODO) | XXXX ms | 
 
 ## Solution or Solution discussion

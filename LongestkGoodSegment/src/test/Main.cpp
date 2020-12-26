@@ -19,58 +19,44 @@
 #include <cstdlib>
 #include <vector>
 #include "TestTool.hpp"
-#include "../core/RangeMinimumQuery.hpp"
+#include "../core/LongestkGoodSegment.h"
+#include "Utils.hpp"
+
+const cpstl::Log LOG(true);
 
 using namespace std;
 
-void TEST_CASE_ONE_SEGMENT_TREE()
-{
-    vector<int> inputs = {18, 17, 13, 19, 15, 11, 20};
-    cpstl::cp_log(LOG, inputs);
-    vector<Query<int>> queries;
-    queries.emplace_back(false, 5, 7);
-    queries.emplace_back(false, 1, 3);
-    queries.emplace_back(true, 6, 12);
-    queries.emplace_back(false, 5, 7);
-    queries.emplace_back(false, 3, 4);
-    queries.emplace_back(false, 1, 2);
-    queries.emplace_back(false, 1, 7);
-    queries.emplace_back(false, 7, 7);
-    auto segment_tree = cpstl::SegmentTree<int>(inputs);
-    auto result = range_minimum_query_segment_tree(segment_tree, queries);
-    cpstl::assert_equal("TEST_CASE_ONE_SEGMENT_TREE", {11, 13, 12, 13, 17, 12, 20}, result);
-}
-
-void TEST_CASE_TWO_SEGMENT_TREE()
-{
-    vector<int> inputs = {1, 5, 2, 4, 3};
-    cpstl::cp_log(LOG, inputs);
-    vector<Query<int>> queries;
-    queries.emplace_back(false, 1, 5);
-    queries.emplace_back(false, 1, 3);
-    queries.emplace_back(false, 3, 5);
-    queries.emplace_back(true, 3, 6);
-    queries.emplace_back(false, 1, 5);
-    auto segment_tree = cpstl::SegmentTree<int>(inputs);
-    auto result = range_minimum_query_segment_tree(segment_tree, queries);
-    cpstl::assert_equal("TEST_CASE_TWO_SEGMENT_TREE", {1, 1, 2, 1}, result);
-}
-
 void TEST_CASE_ONE_NAIVE()
 {
-    vector<int> inputs = {18, 17, 13, 19, 15, 11, 20};
-    cpstl::print_vector(inputs);
-    vector<Query<int>> queries;
-    queries.emplace_back(false, 4, 6);
-    queries.emplace_back(false, 1, 3);
-    auto result = range_minimum_query_naive(inputs, queries);
-    cpstl::assert_equal("TEST_CASE_ONE_NAIVE", {11, 13}, result);
+    vector<int> inputs = {1, 2, 3, 4, 5};
+    cpstl::cp_log(LOG, inputs);
+    auto index = calculate_kgood_segment_naive(inputs, 5);
+    vector<int> result = {(int)index.first, (int)index.second};
+    cpstl::assert_equal("TEST_CASE_ONE_NAIVE", {1, 5}, result);
+}
+
+void TEST_CASE_TWO_NAIVE()
+{
+    vector<int> inputs = {6, 5, 1, 2, 3, 2, 1, 4, 5};
+    cpstl::cp_log(LOG, inputs);
+    auto index = calculate_kgood_segment_naive(inputs, 3);
+    vector<int> result = {(int)index.first, (int)index.second};
+    cpstl::assert_equal("TEST_CASE_TWO_NAIVE", {3, 5}, result);
+}
+
+void TEST_CASE_THREE_NAIVE()
+{
+    vector<int> inputs = {1, 2, 3};
+    cpstl::cp_log(LOG, inputs);
+    auto index = calculate_kgood_segment_naive(inputs, 1);
+    vector<int> result = {(int)index.first, (int)index.second};
+    cpstl::assert_equal("TEST_CASE_THREE_NAIVE", {1, 1}, result);
 }
 
 int main()
 {
-    TEST_CASE_ONE_SEGMENT_TREE();
     TEST_CASE_ONE_NAIVE();
-    TEST_CASE_TWO_SEGMENT_TREE();
+    TEST_CASE_TWO_NAIVE();
+    TEST_CASE_THREE_NAIVE();
     return EXIT_SUCCESS;
 }
