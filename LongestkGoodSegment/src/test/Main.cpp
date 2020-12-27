@@ -35,6 +35,15 @@ void TEST_CASE_ONE_NAIVE()
     cpstl::assert_equal("TEST_CASE_ONE_NAIVE", {1, 5}, result);
 }
 
+void TEST_CASE_ONE_TWO_POINTER()
+{
+    vector<int> inputs = {1, 2, 3, 4, 5};
+    cpstl::cp_log(LOG, inputs);
+    auto index = calculate_kgood_segment_two_pointer(inputs, 5);
+    vector<int> result = {(int)index.first, (int)index.second};
+    cpstl::assert_equal("TEST_CASE_ONE_TWO_POINTER", {1, 5}, result);
+}
+
 void TEST_CASE_TWO_NAIVE()
 {
     vector<int> inputs = {6, 5, 1, 2, 3, 2, 1, 4, 5};
@@ -42,6 +51,15 @@ void TEST_CASE_TWO_NAIVE()
     auto index = calculate_kgood_segment_naive(inputs, 3);
     vector<int> result = {(int)index.first, (int)index.second};
     cpstl::assert_equal("TEST_CASE_TWO_NAIVE", {3, 5}, result);
+}
+
+void TEST_CASE_TWO_TWO_POINTER()
+{
+    vector<int> inputs = {6, 5, 1, 2, 3, 2, 1, 4, 5};
+    cpstl::cp_log(LOG, inputs);
+    auto index = calculate_kgood_segment_two_pointer(inputs, 3);
+    vector<int> result = {(int)index.first, (int)index.second};
+    cpstl::assert_equal("TEST_CASE_TWO_TWO_POINTER", {3, 7}, result);
 }
 
 void TEST_CASE_THREE_NAIVE()
@@ -53,10 +71,22 @@ void TEST_CASE_THREE_NAIVE()
     cpstl::assert_equal("TEST_CASE_THREE_NAIVE", {1, 1}, result);
 }
 
+void TEST_CASE_THREE_TWO_POINTER()
+{
+    vector<int> inputs = {1, 2, 3};
+    cpstl::cp_log(LOG, inputs);
+    auto index = calculate_kgood_segment_naive(inputs, 1);
+    vector<int> result = {(int)index.first, (int)index.second};
+    cpstl::assert_equal("TEST_CASE_THREE_TWO_POINTER", {1, 1}, result);
+}
+
 int main()
 {
     TEST_CASE_ONE_NAIVE();
+    TEST_CASE_ONE_TWO_POINTER();
     TEST_CASE_TWO_NAIVE();
+    TEST_CASE_TWO_TWO_POINTER();
     TEST_CASE_THREE_NAIVE();
+    TEST_CASE_THREE_TWO_POINTER();
     return EXIT_SUCCESS;
 }

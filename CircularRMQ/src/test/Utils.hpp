@@ -91,6 +91,18 @@ namespace cpstl {
         std::cout << RESET;
     }
 
+    inline void cp_log(Log log, bool verbose, std::string message)
+    {
+        if (!log.enable) return;
+        if (verbose)
+            std::cout << BOLDRED;
+        else
+            std::cout << BOLDYELLOW;
+        std::cout << message;
+        std::cout << "\n";
+        std::cout << RESET;
+    }
+
     template<typename T>
     inline void cp_log(Log log, std::vector<T> const &inputs)
     {

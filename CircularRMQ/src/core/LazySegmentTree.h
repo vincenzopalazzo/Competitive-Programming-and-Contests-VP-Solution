@@ -1,12 +1,23 @@
-//
-// Created by vincent on 11/13/20.
-//
-#include <iostream>
+/**
+ * Segment tree data structure implementation
+ * Copyright (C) 2020  Vincenzo Palazzo vincenzopalazzodev@gmail.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 #include <vector>
-#include <cmath>
-#include <cstring>
-
-using namespace std;
+#include <iostream>
 
 namespace cpstl
 {
@@ -52,7 +63,7 @@ namespace cpstl
             // Internal node will have the sum of both of its children
             int segment_left = structure[left_child];
             int segment_right = structure[right_child];
-            structure[start_index] = (segment_left <= segment_right) ? segment_left : segment_right;
+            structure[start_index] = std::min(segment_left, segment_right);
         }
 
         int range_query_subroutine(int start_index, int left_index, int right_index, int query_left, int query_right)
@@ -154,31 +165,27 @@ namespace cpstl
             return range_query_subroutine(1, 0, origin.size() - 1, start_index, end_index);
         }
 
+        /**
+         * This procedure update the value stored inside the structure in one single position, this use the
+         * update_range_subroutine with from == to == at; to run the procedure update
+         * @param at: it is the position in the original array, the function change the value also in the original array
+         * @param new_value the value that we want override in position at.
+         */
+        void update(int at, T value)
+        {
+            update_range_subroutine(1, 0, origin.size() - 1, at, at, value);
+        }
+
+        /**
+         * Update the range with with the sum operation to the original array,
+         * This function will modify the original array original[pos] += new_val.
+         * @param from: Start position where start to update the original array.
+         * @param to: End position where stop to update the original array.
+         * @param new_val: The value to sum to each position of the range in the original array.
+         */
         void update_range(int from, int to, T new_val)
         {
             update_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
-        }
-
-        inline int left_child(int x)
-        {
-            int left = left_child_index(x);
-            return structure[left];
-        }
-
-        inline int right_child(int x)
-        {
-            int left = right_child_index(x);
-            return structure[left];
-        }
-
-        inline T get_elem(int at)
-        {
-            return origin[at];
-        }
-
-        inline T value_at(int at)
-        {
-            return origin[at];
         }
 
         inline size_t get_origin_size()
@@ -192,84 +199,3 @@ namespace cpstl
         }
     };
 };
-
-template <typename T>
-struct Query {
-    size_t start;
-    size_t end;
-    T update_val = INT32_MIN;
-    bool update = false;
-
-    Query(size_t start, size_t anEnd) : start(start), end(anEnd) {}
-    Query(size_t start, size_t anEnd, T updateVal, bool update) : start(start), end(anEnd), update_val(updateVal),
-                                                                  update(update) {}
-};
-
-template <typename T>
-std::vector<T> calculate_minimum_rmq_query_lazy(cpstl::LazySegmentTree<T> &segmentTree, std::vector<Query<T>> const &queries)
-{
-    std::vector<T> results;
-    results.reserve(queries.size());
-    for (auto &query : queries) {
-        if (query.start > query.end) {
-            if (query.update) {
-                segmentTree.update_range(0, query.end, query.update_val);
-                segmentTree.update_range(query.start, segmentTree.get_origin_size() - 1, query.update_val);
-                continue;
-            }
-            //Is a circular RMQ query
-            auto val_one = segmentTree.range_query(0, query.end);
-            auto val_two = segmentTree.range_query(query.start, segmentTree.get_origin_size() - 1);
-            auto min = std::min(val_one, val_two);
-            results.push_back(min);
-            continue;
-        }
-        if (query.update) {
-            segmentTree.update_range(query.start, query.end, query.update_val);
-            continue;
-        }
-        // It is a normal RMQ query
-        auto val = segmentTree.range_query(query.start, query.end);
-        results.push_back(val);
-    }
-    return results;
-}
-
-
-template<typename T>
-vector<T> read_sequence(size_t n) {
-    vector<T> input(n);
-    for(size_t i = 0; i < n; i++)
-        cin >> input[i];
-    return input;
-}
-
-int main() {
-    size_t N;
-    cin >> N;
-
-    auto inputs = read_sequence<int64_t>(N);
-    auto segment_tree = cpstl::LazySegmentTree<int64_t>(inputs);
-
-    size_t K;
-    cin >> K;
-    std::vector<Query<int64_t>> queries;
-    queries.reserve(K);
-    char line[32];
-    cin.getline(line, 32); // Skip newline from previous line
-    for(int i = 0; i < K; i++) {
-        cin.getline(line, 32);
-        int64_t start = atoi(strtok(line, " "));
-        int64_t end = atoi(strtok(NULL, " "));
-        char* delta = strtok(NULL, " ");
-        if(delta == NULL)
-            queries.emplace_back(start, end);
-        else
-            queries.emplace_back(start, end, std::atoi(delta), true);
-    }
-    auto result = calculate_minimum_rmq_query_lazy(segment_tree, queries);
-    for (auto elem: result) {
-        cout << elem << "\n";
-    }
-    return EXIT_SUCCESS;
-}

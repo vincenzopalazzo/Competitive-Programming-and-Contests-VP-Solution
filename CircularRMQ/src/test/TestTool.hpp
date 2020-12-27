@@ -22,8 +22,7 @@
 
 namespace cpstl {
 
-    /**
-    void assert_is_true(std::string name_test, bool condition)
+    inline void assert_is_true(std::string name_test, bool condition)
     {
         if (condition) {
             std::cout << BOLDGREEN << name_test  << " PASSED" << RESET << "\n";
@@ -31,7 +30,7 @@ namespace cpstl {
         }
         std::cout << BOLDRED << name_test  << " FAILED" << RESET << "\n";
     }
-    **/
+
     template<typename T>
     inline void assert_equal(std::string name_test, T aspected, T actual)
     {

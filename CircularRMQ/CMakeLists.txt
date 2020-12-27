@@ -5,5 +5,5 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(
         ${PROJECT_NAME}
-        src/MainSite.cpp
-        src/core/CircularRMQ.cpp)
+        src/test/Main.cpp
+)
