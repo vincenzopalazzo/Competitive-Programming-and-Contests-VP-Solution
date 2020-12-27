@@ -8,6 +8,6 @@ find_package(benchmark REQUIRED)
 add_executable(
         ${PROJECT_NAME}
         Main.cpp
-        ../src/core/RangeMinimumQuery.cpp)
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE benchmark::benchmark)
