@@ -3,53 +3,63 @@
 //
 #include <cstdlib>
 #include <vector>
+#include <queue>
+
+const int N = 1200300;
 
 template<typename T>
-bool check_goodness_naive(std::vector<T> const &input, std::size_t from, std::size_t to)
+std::pair<std::size_t, std::size_t> calculate_kgood_segment_two_pointer_queue(std::vector<T> const inputs, T elements)
 {
-    for (int j = from + 1; j < to; j++) {
-        if (input[j] != input[j - 1] + 1) return false;
-    }
-    return true;
-}
-
-/**
- * The problem ask to find the k_good segment and return the
- * range of the segment.
- * kgood segment is the segment that contains the k_elems consecutive numbers
- * @tparam T: input type
- */
-template<typename T>
-std::pair<std::size_t, std::size_t> calculate_kgood_segment_naive(std::vector<T> const &input, T k_elems)
-{
+    std::vector<T> frequence(N);
     std::pair<std::size_t, std::size_t> result;
-    if (k_elems == 1 || k_elems == 0) {
-        result.first = result.second = k_elems;
-        return result;
-    }
-    for (int i = 0; i < input.size() - k_elems + 1; i++) {
-        if (check_goodness_naive(input, i, i + k_elems)) {
-            result.first = i + 1;
-            result.second = i + k_elems;
+    std::queue<T> queue;
+    T actual_el = 0;
+    std::size_t res = 0;
+    for (std::size_t i = 0; i < inputs.size(); i++) {
+        auto val = inputs[i];
+        if (frequence[val]++ == 0)
+            actual_el++;
+        queue.push(val);
+
+        while (!queue.empty() && actual_el > elements) {
+            if (--frequence[queue.front()] == 0)
+                actual_el--;
+            queue.pop();
+        }
+
+        if (res < queue.size()) {
+            res = queue.size();
+            result.first = i - res + 1;
+            result.second = i;
         }
     }
+    result.first++;
+    result.second++;
     return result;
 }
 
 template<typename T>
 std::pair<std::size_t, std::size_t> calculate_kgood_segment_two_pointer(std::vector<T> const inputs, T elements)
 {
-    std::pair<std::size_t, std::size_t> result(0, 1);
-    auto consecutive = 1;
-    while(consecutive < elements && result.second < inputs.size()) {
-        if (inputs[result.second] == inputs[result.first] + consecutive) {
-            consecutive++;
-            result.second++;
-        } else {
-            result.first++;
-            consecutive = 1;
-            result.second = result.first;
+    std::vector<T> count(N);
+    std::pair<std::size_t, std::size_t> result(-1, -1);
+    T current_size = 0;
+    std::size_t pos = 0;
+    for (std::size_t i = 0; i < inputs.size(); i++) {
+        while (pos < inputs.size()) {
+            auto val = inputs[pos];
+            if (++count[val] == 1) current_size++;
+            if (current_size > elements) {
+                if (--count[val] == 0) current_size--;
+                break;
+            }
+            pos++;
         }
+        if (result.second - result.first < pos - i) {
+            result.first = i;
+            result.second = pos;
+        }
+        if (--count[inputs[i]] == 0) current_size--;
     }
     result.first++;
     return result;

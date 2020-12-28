@@ -3,32 +3,69 @@
 //
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
+const int N = 1200300;
+
 template<typename T>
-bool check_goodness(std::vector<T> const &input, std::size_t from, std::size_t to)
+std::pair<std::size_t, std::size_t> calculate_kgood_segment_two_pointer_queue(std::vector<T> const inputs, T elements)
 {
-    for (int j = from + 1; j < to; j++) {
-        if (input[j] != input[j - 1] + 1) return false;
+    std::vector<T> frequence(N);
+    std::pair<std::size_t, std::size_t> result;
+    std::queue<T> queue;
+    T actual_el = 0;
+    std::size_t res = 0;
+    for (std::size_t i = 0; i < inputs.size(); i++) {
+        auto val = inputs[i];
+        if (frequence[val]++ == 0)
+            actual_el++;
+        queue.push(val);
+
+        while (!queue.empty() && actual_el > elements) {
+            if (--frequence[queue.front()] == 0)
+                actual_el--;
+            queue.pop();
+        }
+
+        if (res < queue.size()) {
+            res = queue.size();
+            result.first = i - res + 1;
+            result.second = i;
+        }
     }
-    return true;
+    result.first++;
+    result.second++;
+    return result;
 }
 
 template<typename T>
-std::pair<std::size_t, std::size_t> calculate_kgood_segment(std::vector<T> const &input, T k_elems)
+std::pair<std::size_t, std::size_t> calculate_kgood_segment_two_pointer(std::vector<T> const inputs, T elements)
 {
-    std::pair<std::size_t, std::size_t> result;
-    if (k_elems == 1 || k_elems == 0) {
-        result.first = result.second = k_elems;
-        return result;
-    }
-    for (int i = 0; i < input.size() - k_elems + 1; i++) {
-        if (check_goodness(input, i, i + k_elems)) {
-            result.first = i + 1;
-            result.second = i + k_elems;
+
+    std::vector<T> count;
+    count.resize(N, 0);
+    std::pair<std::size_t, std::size_t> result(-1, -1);
+    T current_size = 0;
+    std::size_t pos = 0;
+    for (std::size_t i = 0; i < inputs.size(); i++) {
+        while (pos < inputs.size()) {
+            auto val = inputs[pos];
+            if (++count[val] == 1) current_size++;
+            if (current_size > elements) {
+                if (--count[val] == 0) current_size--;
+                break;
+            }
+            pos++;
         }
+        if (result.second - result.first < pos - i) {
+            result.first = i;
+            result.second = pos;
+        }
+        if (--count[inputs[i]] == 0) current_size--;
     }
+    result.first++;
     return result;
 }
 
@@ -38,13 +75,13 @@ int main()
     scanf("%d", &n);
     scanf("%d", &k);
 
-    vector<int> inputs;
+    vector<uint32_t> inputs;
     inputs.reserve(n);
     for(std::size_t t = 0; t < n; t++) {
-        int elem;
+        uint32_t elem;
         scanf("%d", &elem);
         inputs.push_back(elem);
     }
-    auto result = calculate_kgood_segment(inputs, k);
+    auto result = calculate_kgood_segment_two_pointer_queue<uint32_t>(inputs, k);
     printf("%lu %lu", result.first, result.second);
 }
