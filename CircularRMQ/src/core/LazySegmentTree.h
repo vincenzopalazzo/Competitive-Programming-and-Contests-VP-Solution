@@ -66,11 +66,11 @@ namespace cpstl
             structure[start_index] = std::min(segment_left, segment_right);
         }
 
-        int range_query_subroutine(int start_index, int left_index, int right_index, int query_left, int query_right)
+        T range_query_subroutine(int start_index, int left_index, int right_index, int query_left, int query_right)
         {
             propagate(start_index, left_index, right_index);
             // outside the range
-            if (query_left > right_index || query_right < left_index)  return -1;
+            if (query_left > right_index || query_right < left_index)  return INT32_MAX;
             // range represented by a node is completely inside the given range
             if (left_index >= query_left && right_index <= query_right)  return structure[start_index];
             // range represented by a node is partially inside and partially outside the given range
@@ -81,8 +81,8 @@ namespace cpstl
                                                       query_left, query_right);
             int right_segment = range_query_subroutine(right_child, middle_point + 1, right_index,
                                                        query_left, query_right);
-            if (left_segment == -1) return right_segment;
-            if (right_segment == -1) return left_segment;
+            if (left_segment == INT32_MAX) return right_segment;
+            if (right_segment == INT32_MAX) return left_segment;
             return std::min(left_segment, right_segment);
         }
 
@@ -191,6 +191,11 @@ namespace cpstl
         inline size_t get_origin_size()
         {
             return origin.size();
+        }
+
+        inline size_t size()
+        {
+            return structure.size();
         }
 
         inline std::vector<T> get_origin()

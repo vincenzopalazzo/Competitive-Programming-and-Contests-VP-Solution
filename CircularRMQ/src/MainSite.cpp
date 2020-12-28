@@ -25,7 +25,7 @@ namespace cpstl
          * @param left_index the left index of the range
          * @param right_index the right index of the range
          */
-        void build_structure(int left_index, int right_index)
+        void build_structure(std::size_t left_index, std::size_t right_index)
         {
             build_structure_procedure(1, left_index, right_index - 1);
         }
@@ -37,41 +37,41 @@ namespace cpstl
          * @param left_index
          * @param right_index
          */
-        void build_structure_procedure(int start_index, int left_index, int right_index)
+        void build_structure_procedure(std::size_t start_index, std::size_t left_index, std::size_t right_index)
         {
             if (left_index == right_index) {
                 // Leaf node will have a single element
                 structure[start_index] = origin[left_index];
                 return;
             }
-            int middle_point = (left_index + right_index) / 2;
-            int left_child = left_child_index(start_index);
-            int right_child = right_child_index(start_index);
+            auto middle_point = (left_index + right_index) / 2;
+            auto left_child = left_child_index(start_index);
+            auto right_child = right_child_index(start_index);
             build_structure_procedure(left_child, left_index, middle_point);
             build_structure_procedure(right_child, middle_point + 1, right_index);
             // Internal node will have the sum of both of its children
-            int segment_left = structure[left_child];
-            int segment_right = structure[right_child];
+            auto segment_left = structure[left_child];
+            auto segment_right = structure[right_child];
             structure[start_index] = (segment_left <= segment_right) ? segment_left : segment_right;
         }
 
-        int range_query_subroutine(int start_index, int left_index, int right_index, int query_left, int query_right)
+        T range_query_subroutine(std::size_t start_index, std::size_t left_index, std::size_t right_index, std::size_t query_left, std::size_t query_right)
         {
             propagate(start_index, left_index, right_index);
             // outside the range
-            if (query_left > right_index || query_right < left_index)  return -1;
+            if (query_left > right_index || query_right < left_index)  return INT64_MAX;
             // range represented by a node is completely inside the given range
             if (left_index >= query_left && right_index <= query_right)  return structure[start_index];
             // range represented by a node is partially inside and partially outside the given range
-            int middle_point = (left_index + right_index) / 2;
-            int left_child = left_child_index(start_index);
-            int right_child = right_child_index(start_index);
-            int left_segment = range_query_subroutine(left_child, left_index, middle_point,
+            auto middle_point = (left_index + right_index) / 2;
+            auto left_child = left_child_index(start_index);
+            auto right_child = right_child_index(start_index);
+            auto left_segment = range_query_subroutine(left_child, left_index, middle_point,
                                                       query_left, query_right);
-            int right_segment = range_query_subroutine(right_child, middle_point + 1, right_index,
+            auto right_segment = range_query_subroutine(right_child, middle_point + 1, right_index,
                                                        query_left, query_right);
-            if (left_segment == -1) return right_segment;
-            if (right_segment == -1) return left_segment;
+            if (left_segment == INT64_MAX) return right_segment;
+            if (right_segment == INT64_MAX) return left_segment;
             return std::min(left_segment, right_segment);
         }
 
@@ -84,7 +84,7 @@ namespace cpstl
          * @param to: The end index where stop to update original array
          * @param new_val: The value to sum to each position of the range in the original array.
          */
-        void update_range_subroutine(int start_index, int left_index, int right_index, int from, int to, T new_val)
+        void update_range_subroutine(std::size_t start_index, std::size_t left_index, std::size_t right_index, std::size_t from, std::size_t to, T new_val)
         {
             propagate(start_index, left_index, right_index);
             if (from > to || from > right_index || to < left_index) return;
@@ -92,9 +92,9 @@ namespace cpstl
                 lazy[start_index] += new_val;
                 propagate(start_index, left_index, right_index);
             } else {
-                int middle_point = (left_index + right_index) / 2;
-                int left_child = left_child_index(start_index);
-                int right_child = right_child_index(start_index);
+                auto middle_point = (left_index + right_index) / 2;
+                auto left_child = left_child_index(start_index);
+                auto right_child = right_child_index(start_index);
                 update_range_subroutine(left_child, left_index, middle_point, from, to, new_val);
                 update_range_subroutine(right_child, middle_point + 1, right_index,
                                         from, to, new_val);
@@ -104,7 +104,7 @@ namespace cpstl
             }
         }
 
-        void propagate(int start_index, int left_index, int right_index)
+        void propagate(std::size_t start_index, std::size_t left_index, std::size_t right_index)
         {
             if (lazy[start_index] != 0) {
                 // The node in position start_index was marked as lazy
@@ -123,12 +123,12 @@ namespace cpstl
             }
         }
 
-        inline int left_child_index(const int index)
+        inline std::size_t left_child_index(const int index)
         {
             return index * 2;
         }
 
-        inline int right_child_index(const int index)
+        inline std::size_t right_child_index(const int index)
         {
             return (index * 2) + 1;
         }
@@ -136,7 +136,7 @@ namespace cpstl
 
         LazySegmentTree(std::vector<T> &origin): origin(origin)
         {
-            int size = origin.size();
+            std::size_t size = origin.size();
             structure = std::vector<T>(size * 4);
             lazy = std::vector<T>(size * 4);
             origin = origin;
@@ -149,39 +149,39 @@ namespace cpstl
             lazy.clear();
         }
 
-        int range_query(int start_index, int end_index)
+        T range_query(std::size_t start_index, std::size_t end_index)
         {
             return range_query_subroutine(1, 0, origin.size() - 1, start_index, end_index);
         }
 
-        void update_range(int from, int to, T new_val)
+        void update_range(std::size_t from, std::size_t to, T new_val)
         {
             update_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
         }
 
-        inline int left_child(int x)
+        inline std::size_t left_child(std::size_t x)
         {
             int left = left_child_index(x);
             return structure[left];
         }
 
-        inline int right_child(int x)
+        inline std::size_t right_child(std::size_t x)
         {
             int left = right_child_index(x);
             return structure[left];
         }
 
-        inline T get_elem(int at)
+        inline T get_elem(std::size_t at)
         {
             return origin[at];
         }
 
-        inline T value_at(int at)
+        inline T value_at(std::size_t at)
         {
             return origin[at];
         }
 
-        inline size_t get_origin_size()
+        inline std::size_t get_origin_size()
         {
             return origin.size();
         }
@@ -190,6 +190,11 @@ namespace cpstl
         {
             return origin;
         }
+
+        inline size_t size()
+        {
+            return structure.size();
+        }
     };
 };
 
@@ -197,7 +202,7 @@ template <typename T>
 struct Query {
     size_t start;
     size_t end;
-    T update_val = INT32_MIN;
+    T update_val = INT64_MAX;
     bool update = false;
 
     Query(size_t start, size_t anEnd) : start(start), end(anEnd) {}
@@ -209,17 +214,16 @@ template <typename T>
 std::vector<T> calculate_minimum_rmq_query_lazy(cpstl::LazySegmentTree<T> &segmentTree, std::vector<Query<T>> const &queries)
 {
     std::vector<T> results;
-    results.reserve(queries.size());
     for (auto &query : queries) {
         if (query.start > query.end) {
             if (query.update) {
                 segmentTree.update_range(0, query.end, query.update_val);
-                segmentTree.update_range(query.start, segmentTree.get_origin_size() - 1, query.update_val);
+                segmentTree.update_range(query.start, segmentTree.size() - 1, query.update_val);
                 continue;
             }
             //Is a circular RMQ query
             auto val_one = segmentTree.range_query(0, query.end);
-            auto val_two = segmentTree.range_query(query.start, segmentTree.get_origin_size() - 1);
+            auto val_two = segmentTree.range_query(query.start, segmentTree.size() - 1);
             auto min = std::min(val_one, val_two);
             results.push_back(min);
             continue;
@@ -234,7 +238,6 @@ std::vector<T> calculate_minimum_rmq_query_lazy(cpstl::LazySegmentTree<T> &segme
     }
     return results;
 }
-
 
 template<typename T>
 vector<T> read_sequence(size_t n) {

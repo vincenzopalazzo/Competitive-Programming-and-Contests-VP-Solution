@@ -76,29 +76,31 @@ std::vector<T> calculate_minimum_rmq_query_lazy(cpstl::LazySegmentTree<T> &segme
     std::vector<T> results;
     results.reserve(queries.size());
     for (auto &query : queries) {
-        cpstl::cp_log(LOG, "Query (" + std::to_string(query.start) + ", " + std::to_string(query.end) + ")");
         if (query.start > query.end) {
             cpstl::cp_log(LOG, "Is circular");
             if (query.update) {
-                cpstl::cp_log(LOG, true, "Query (" + std::to_string(query.start) + ", " + std::to_string(query.end) + ") *Update query with value: " + std::to_string(query.update_val));
+                cpstl::cp_log(LOG, true, "Query (" + std::to_string(query.start) + ", " + std::to_string(query.end) +
+                        ") *Update query with value: " + std::to_string(query.update_val));
                 segmentTree.update_range(0, query.end, query.update_val);
-                segmentTree.update_range(query.start, segmentTree.get_origin_size() - 1, query.update_val);
+                segmentTree.update_range(query.start, segmentTree.size() - 1, query.update_val);
                 cpstl::cp_log(LOG, "Result update");
                 cpstl::cp_log(LOG, segmentTree.get_origin());
                 continue;
             }
             //Is a circular RMQ query
             auto val_one = segmentTree.range_query(0, query.end);
-            auto val_two = segmentTree.range_query(query.start, segmentTree.get_origin_size() - 1);
+            auto val_two = segmentTree.range_query(query.start, segmentTree.size() - 1);
             cpstl::cp_log(LOG, "Query (0, " + std::to_string(query.end) + ") -> " + std::to_string(val_one));
-            cpstl::cp_log(LOG, "Query (" + std::to_string(query.start) + ", " + std::to_string(segmentTree.get_origin_size() - 1) + ") -> " + std::to_string(val_two));
+            cpstl::cp_log(LOG, "Query (" + std::to_string(query.start) + ", " + std::to_string(segmentTree.get_origin_size() - 1) +
+                                    ") -> " + std::to_string(val_two));
             auto min = std::min(val_one, val_two);
             cpstl::cp_log(LOG, true, "Size result: " + std::to_string(results.size()) + " " + std::to_string(min));
             results.push_back(min);
             continue;
         }
         if (query.update) {
-            cpstl::cp_log(LOG, true, "Query (" + std::to_string(query.start) + ", " + std::to_string(query.end) + ") *Update query with value: " + std::to_string(query.update_val));
+            cpstl::cp_log(LOG, true, "Query (" + std::to_string(query.start) + ", " + std::to_string(query.end) +
+                            ") *Update query with value: " + std::to_string(query.update_val));
             segmentTree.update_range(query.start, query.end, query.update_val);
             cpstl::cp_log(LOG, "Result update");
             cpstl::cp_log(LOG, segmentTree.get_origin());
