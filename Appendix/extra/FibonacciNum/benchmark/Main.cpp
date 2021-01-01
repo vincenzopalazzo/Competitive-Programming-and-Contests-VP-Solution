@@ -29,7 +29,9 @@ static void BM_FIB_TAB(benchmark::State& state)
 }
 
 
-BENCHMARK(BM_FIB_NAIVE)->Range(1<<0, 1<<10);
+//BENCHMARK(BM_FIB_NAIVE)->Range(1<<0, 1<<10);
+BENCHMARK(BM_FIB_MEM)->Range(1<<0, 1<<10);
+BENCHMARK(BM_FIB_TAB)->Range(1<<0, 1<<10);
 
 BENCHMARK_MAIN();
 
