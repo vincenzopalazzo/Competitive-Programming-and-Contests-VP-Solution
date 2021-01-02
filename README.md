@@ -3,7 +3,7 @@
 This repository contains the solution about the problems proposed at the Course of [Competitive Programming](https://github.com/rossanoventurini/CompetitiveProgramming)
 by University of Pisa.
 
-# Table of Content
+## Table of Content
 
 - [Introduction]()
 - [Built with]()
@@ -11,11 +11,11 @@ by University of Pisa.
 - [How contribute]()
 - [Conclusion]()
 
-# Introduction
+## Introduction
 
-# Built with
+## Built with
 
-# Problems with a briefly discussion about them
+## Problems with a briefly discussion about them
 
 Name | Solved | Repository | Report |
 --- | --- | --- | --- | 
@@ -29,11 +29,45 @@ Name | Solved | Repository | Report |
 *Finding Team Member* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/FindingTeamMember) | _ |
 *The Monkey and the Oiled Bamboo* | :heavy_check_mark:  | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MonkeyAndBamboo) | _ |
 *Inversion count* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/InversionCounting) | _ |
+*Two Types of Spells* | _ | [Code]() | _ |
+*Frogs and Mosquitoes* | _ | [Code]() | _ |
+*Maximum path sum* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MaximumPathSumBetween2LeafNodes) | _ |
+*Longest k Good Segment* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestkGoodSegment) | _ |
+*Ilya and Queries* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/IlyaAndQueries) | _ |
+*Number of ways* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NumberOfWays) | _ |
+*Little girl and maximum sum* | _ | [Code]() | _ |
+*Update the array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/UpdateTheArray) | _ |
+*Nested segments (also segment tree)* |  | [Code]() | _ |
+*Pashmak and Parmida's problem* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/PashmakAndParmida) | _ |
 *Circular RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/CircularRMQ) | TODO |
+*Triplets* | | [Code]() | TODO |
+*Smaller Values* | | [Code]() | TODO |
+*Powerful array* | | [Code]() | TODO |
+*Tree and queries* | | [Code]() | TODO |
+*Longest common subsequence* | | [Code]() | TODO |
+*Minimum number of jumps* | | [Code]() | TODO |
+*Subset sum* | | [Code]() | TODO |
+*0-1 knapsack* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/01knapsack) | TODO |
+*Longest increasing subsequence* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestIncreasingSubsequence) | TODO |
+*Longest bitonic subsequence* | | [Code]() | TODO |
+*Edit distance* | | [Code]() | TODO |
+*Vertex cover* | | [Code]() | TODO |
+*Longest palindromic subsequence* | | [Code]() | TODO |
+*N meetings in one room* | | [Code]() | TODO |
+*Magic numbers* | | [Code]() | TODO |
+*Wilbur and array* | | [Code]() | TODO |
+*Alternativ e thinking* | | [Code]() | TODO |
 
-# How contribute
+## Segment Tree report
 
-# Conclusion
+## Appendix
+Name | Solved | Repository | Report |
+--- | --- | --- | --- | 
+*TODO* | :heavy_check_mark: | [Code]() | _ |
 
-# License
+## How contribute
+
+## Conclusion
+
+## License
 
