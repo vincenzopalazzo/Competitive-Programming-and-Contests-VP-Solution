@@ -7,9 +7,10 @@
 
 using namespace std;
 
+template<typename T>
 struct Node
 {
-    int data;
+    T data;
     struct Node* left;
     struct Node* right;
 
@@ -19,35 +20,35 @@ struct Node
     }
 };
 
-
-
-int max_subtree(Node *node, int *value)
+int max_subtree(Node *node, int &value)
 {
-    if (!node) return INT_MIN;
+    if (!node) return INT32_MIN;
     int left_sum = max_subtree(node->left, value);
     int right_sum = max_subtree(node->right, value);
 
     //left node, the value is the actual date
-    if (left_sum == INT_MIN && right_sum == INT_MIN) return node->data;
+    if (left_sum == INT32_MIN && right_sum == INT32_MIN) {
+        return node->data;
+    }
 
-    int sub_tree_path = node->data;
     // calculate the sub three path, that in this case is the value of the father
     // plus the value of the bigger children
-    sub_tree_path += left_sum > right_sum ? left_sum : right_sum;
+    auto sub_tree_path = std::max(left_sum, right_sum) + node->data;
 
     /// change value max if the node is a middle node and
     // the sum of subtree is grater that the actual max
-    if (left_sum != INT_MIN && right_sum != INT_MIN) {
+    if (left_sum != INT32_MIN && right_sum != INT32_MIN) {
         int sub_tree_max = node->data + left_sum + right_sum;
-        *value = sub_tree_max > *value ? sub_tree_max : *value;
+        value = sub_tree_max > value ? sub_tree_max : value;
     }
-
     return sub_tree_path;
 }
 
 int maxPathSum(Node *node)
 {
-    int max = INT_MIN;
-    max_subtree(node, &max);
+    int max_sum = INT_MIN;
+    max_subtree(node, max_sum);
+    if (max_sum == INT32_MIN) // If the btree has only the root
+        max_sum = node->data;
     return max;
 }
