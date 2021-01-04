@@ -1,0 +1,352 @@
+{
+  "context": {
+    "date": "2021-01-04T18:16:27+01:00",
+    "host_name": "vincent",
+    "executable": "./Benchmark",
+    "num_cpus": 4,
+    "mhz_per_cpu": 3000,
+    "cpu_scaling_enabled": true,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 262144,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 3145728,
+        "num_sharing": 4
+      }
+    ],
+    "load_avg": [1.61,1.36,1.5],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "BM_PREFIX_SUM/4/2097152",
+      "run_name": "BM_PREFIX_SUM/4/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7625987879982858e+09,
+      "cpu_time": 1.7567987500000000e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/8/2097152",
+      "run_name": "BM_PREFIX_SUM/8/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7507504150016756e+09,
+      "cpu_time": 1.7501285719999998e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/16/2097152",
+      "run_name": "BM_PREFIX_SUM/16/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7240176069972222e+09,
+      "cpu_time": 1.7236298400000000e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/32/2097152",
+      "run_name": "BM_PREFIX_SUM/32/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7299713600004907e+09,
+      "cpu_time": 1.7296620810000007e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/64/2097152",
+      "run_name": "BM_PREFIX_SUM/64/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.6912327869977162e+09,
+      "cpu_time": 1.6890420780000000e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/128/2097152",
+      "run_name": "BM_PREFIX_SUM/128/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7536533570055325e+09,
+      "cpu_time": 1.7519772440000007e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/256/2097152",
+      "run_name": "BM_PREFIX_SUM/256/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8500277409984846e+09,
+      "cpu_time": 1.8488041299999995e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/512/2097152",
+      "run_name": "BM_PREFIX_SUM/512/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.9276132449995203e+09,
+      "cpu_time": 1.9236579379999998e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/1024/2097152",
+      "run_name": "BM_PREFIX_SUM/1024/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7931361560004005e+09,
+      "cpu_time": 1.7788541210000002e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/2048/2097152",
+      "run_name": "BM_PREFIX_SUM/2048/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7228800490011053e+09,
+      "cpu_time": 1.7221590030000017e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/4096/2097152",
+      "run_name": "BM_PREFIX_SUM/4096/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.6970195950016205e+09,
+      "cpu_time": 1.6969331430000026e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/8192/2097152",
+      "run_name": "BM_PREFIX_SUM/8192/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.6859626429977653e+09,
+      "cpu_time": 1.6858705229999983e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PREFIX_SUM/16384/2097152",
+      "run_name": "BM_PREFIX_SUM/16384/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7132010059976892e+09,
+      "cpu_time": 1.7130633300000007e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/4/2097152",
+      "run_name": "BM_FENWICK_TREE/4/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8848500989988680e+09,
+      "cpu_time": 1.8846081340000041e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/8/2097152",
+      "run_name": "BM_FENWICK_TREE/8/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8180852899968159e+09,
+      "cpu_time": 1.8180159760000017e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/16/2097152",
+      "run_name": "BM_FENWICK_TREE/16/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8441363209967675e+09,
+      "cpu_time": 1.8437735920000017e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/32/2097152",
+      "run_name": "BM_FENWICK_TREE/32/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8779243370008771e+09,
+      "cpu_time": 1.8767074090000050e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/64/2097152",
+      "run_name": "BM_FENWICK_TREE/64/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8380317180017300e+09,
+      "cpu_time": 1.8377380180000031e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/128/2097152",
+      "run_name": "BM_FENWICK_TREE/128/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8670151030019042e+09,
+      "cpu_time": 1.8668753299999993e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/256/2097152",
+      "run_name": "BM_FENWICK_TREE/256/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8059853029990337e+09,
+      "cpu_time": 1.8058364440000076e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/512/2097152",
+      "run_name": "BM_FENWICK_TREE/512/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8567594240012114e+09,
+      "cpu_time": 1.8566502490000048e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/1024/2097152",
+      "run_name": "BM_FENWICK_TREE/1024/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8710828639959800e+09,
+      "cpu_time": 1.8709202360000033e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/2048/2097152",
+      "run_name": "BM_FENWICK_TREE/2048/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.7895101619978960e+09,
+      "cpu_time": 1.7884294520000026e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/4096/2097152",
+      "run_name": "BM_FENWICK_TREE/4096/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 2.0390355779964011e+09,
+      "cpu_time": 2.0371898340000029e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/8192/2097152",
+      "run_name": "BM_FENWICK_TREE/8192/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.8198812700029521e+09,
+      "cpu_time": 1.8194628899999969e+09,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_FENWICK_TREE/16384/2097152",
+      "run_name": "BM_FENWICK_TREE/16384/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 2.1249457489939232e+09,
+      "cpu_time": 2.1107409350000026e+09,
+      "time_unit": "ns"
+    }
+  ]
+}
