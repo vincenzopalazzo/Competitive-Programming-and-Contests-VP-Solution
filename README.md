@@ -31,7 +31,7 @@ Name | Solved | Repository | Report |
 *Inversion count* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/InversionCounting) | _ |
 *Two Types of Spells* | _ | [Code]() | _ |
 *Frogs and Mosquitoes* | _ | [Code]() | _ |
-*Maximum path sum* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MaximumPathSumBetween2LeafNodes) | _ |
+*Maximum path sum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MaximumPathSumBetween2LeafNodes) | _ |
 *Longest k Good Segment* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestkGoodSegment) | _ |
 *Ilya and Queries* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/IlyaAndQueries) | _ |
 *Number of ways* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NumberOfWays) | _ |
