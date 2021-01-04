@@ -5,11 +5,11 @@ by University of Pisa.
 
 ## Table of Content
 
-- [Introduction]()
-- [Built with]()
-- [Problems with a briefly discussion about them]()
-- [How contribute]()
-- [Conclusion]()
+- [Introduction](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#introduction)
+- [Built with](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#built-with)
+- [Problems with a briefly discussion about them](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#problems-with-a-briefly-discussion-about-them)
+- [How contribute](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#how-contribute)
+- [License](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#license)
 
 ## Introduction
 
@@ -35,7 +35,7 @@ Name | Solved | Repository | Report |
 *Longest k Good Segment* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestkGoodSegment) | _ |
 *Ilya and Queries* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/IlyaAndQueries) | _ |
 *Number of ways* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NumberOfWays) | _ |
-*Little girl and maximum sum* | _ | [Code]() | _ |
+*Little girl and maximum sum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LittleGirlandMaximumSum) | _ |
 *Update the array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/UpdateTheArray) | _ |
 *Nested segments (also segment tree)* |  | [Code]() | _ |
 *Pashmak and Parmida's problem* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/PashmakAndParmida) | _ |
@@ -61,6 +61,7 @@ Name | Solved | Repository | Report |
 ## Segment Tree report
 
 ## Appendix
+
 Name | Solved | Repository | Report |
 --- | --- | --- | --- | 
 *TODO* | :heavy_check_mark: | [Code]() | _ |

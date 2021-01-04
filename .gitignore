@@ -46,3 +46,7 @@ template/src/test/files/2bc4e1f4-0-output-2bb347f.txt
 *.out
 
 FrogsAndMosquitoes/build/
+
+LittleGirlandMaximumSum/benchmark/build/
+
+LittleGirlandMaximumSum/build/
