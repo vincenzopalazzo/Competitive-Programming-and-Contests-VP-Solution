@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-project(Template_competitive_programming)
+project(Triples)
 
 set(CMAKE_CXX_STANDARD 14)
 

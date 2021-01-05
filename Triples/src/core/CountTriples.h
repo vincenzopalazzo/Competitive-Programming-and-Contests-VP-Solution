@@ -9,4 +9,7 @@
 template <typename T, typename R>
 R count_triples_trivial(std::vector<T> const &inputs);
 
+template <typename T, typename R>
+R count_triples_
+
 #endif //SPYCBLOCK_SOLTEST_H
