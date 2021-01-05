@@ -32,6 +32,26 @@ namespace cpstl {
         Log(bool enable) : enable(enable) {}
     };
 
+
+    inline void cp_log(Log log, std::string message)
+    {
+        if (!log.enable) return;
+        std::cout << BOLDYELLOW;
+        std::cout << message;
+        std::cout << "\n";
+        std::cout << RESET;
+    }
+
+    template<typename T>
+    inline void cp_log(Log log, std::vector<T> const &inputs)
+    {
+        if (!log.enable) return;
+        std::cout << BOLDYELLOW;
+        print_vector(inputs);
+        std::cout << "\n";
+        std::cout << RESET;
+    }
+
     template<typename T>
     inline void print_vector(std::vector<T> const &inputs)
     {
@@ -83,24 +103,5 @@ namespace cpstl {
         splits.push_back(input_string.substr(i, std::min(pos, input_string.length()) - i + 1));
 
         return splits;
-    }
-
-    inline void cp_log(Log log, std::string message)
-    {
-        if (!log.enable) return;
-        std::cout << BOLDYELLOW;
-        std::cout << message;
-        std::cout << "\n";
-        std::cout << RESET;
-    }
-
-    template<typename T>
-    inline void cp_log(Log log, std::vector<T> const &inputs)
-    {
-        if (!log.enable) return;
-        std::cout << BOLDYELLOW;
-        print_vector(inputs);
-        std::cout << "\n";
-        std::cout << RESET;
     }
 }
