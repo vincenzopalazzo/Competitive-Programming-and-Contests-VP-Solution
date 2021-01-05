@@ -19,20 +19,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#include <cstdlib>
-#include "TestTool.hpp"
-#include "../core/Solution.hpp"
+#include <benchmark/benchmark.h>
+#include <cmath>
+#include "../src/core/Solution.hpp"
 
-using namespace std;
-
-void TEST_CASE_ONE()
+static void BM_NAIVE_SOLUTION(benchmark::State& state)
 {
-    cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
+    for(auto _ : state) {
+        state.PauseTiming();
+        std::vector<int> input;
+        input.reserve(state.range(1));
+        for (size_t i = 0; i < state.range(1); i++)
+            input.push_back(rand() % state.range(1));
+        state.ResumeTiming();
 
+        solution(input);
+    }
 }
 
-int main()
+static void custom_arguments(benchmark::internal::Benchmark* b);
+
+BENCHMARK(BM_NAIVE_SOLUTION)->Apply(custom_arguments);
+
+BENCHMARK_MAIN();
+
+static void custom_arguments(benchmark::internal::Benchmark* b)
 {
-    TEST_CASE_ONE();
-    return EXIT_SUCCESS;
+    for (int i = 2; i <= 14; i++)
+        b->Args({static_cast<long>(std::pow(2, i)), static_cast<long>(std::pow(2, 21))});
 }
+

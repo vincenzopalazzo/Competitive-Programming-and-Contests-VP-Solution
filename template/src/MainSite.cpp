@@ -19,20 +19,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#include <cstdlib>
-#include "TestTool.hpp"
-#include "../core/Solution.hpp"
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-void TEST_CASE_ONE()
-{
-    cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
+int main() {
+    int N, Q;
+    scanf("%d", &N);
+    scanf("%d", &Q);
 
-}
-
-int main()
-{
-    TEST_CASE_ONE();
-    return EXIT_SUCCESS;
+    std::vector<int> inputs;
+    inputs.reserve(N);
+    //Read the array
+    for (std::size_t t = 0; t < N; t++) {
+        int value;
+        scanf("%d", &value);
+        inputs.push_back(value);
+    }
 }

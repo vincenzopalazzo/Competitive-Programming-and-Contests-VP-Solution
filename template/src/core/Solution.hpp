@@ -20,19 +20,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 #include <cstdlib>
-#include "TestTool.hpp"
-#include "../core/Solution.hpp"
+#include <string>
+#include <vector>
+#include "../test/Utils.hpp"
 
-using namespace std;
+const cpstl::Log LOG(true);
 
-void TEST_CASE_ONE()
-{
-    cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
+template <typename T>
+static void solution(std::vector<T> const &inputs)
+{}
 
-}
-
-int main()
-{
-    TEST_CASE_ONE();
-    return EXIT_SUCCESS;
-}
