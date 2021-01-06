@@ -19,27 +19,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#include <cstdlib>
-#include "TestTool.hpp"
-#include "../core/SmallerValues.hpp"
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-void TEST_CASE_ONE_SEGMENT_TREE()
-{
-    std::vector<int> inputs = {4, 1, 3, 4, 1 };
-    std::vector<Query<int>> queries;
-    queries.emplace_back(0, 1, 3);
-    queries.emplace_back(0, 4, 3);
-    queries.emplace_back(1, 3, 2);
-    auto result = smaller_value_segment_tree<int, int>(inputs, queries);
-    cpstl::assert_equal("TEST_CASE_ONE_SEGMENT_TREE", {1, 3, 1}, result);
-    cpstl::cp_log(LOG, result);
+int main() {
+    int N, Q;
+    scanf("%d", &N);
+    scanf("%d", &Q);
 
-}
-
-int main()
-{
-    TEST_CASE_ONE_SEGMENT_TREE();
-    return EXIT_SUCCESS;
+    std::vector<int> inputs;
+    inputs.reserve(N);
+    //Read the array
+    for (std::size_t t = 0; t < N; t++) {
+        int value;
+        scanf("%d", &value);
+        inputs.push_back(value);
+    }
 }
