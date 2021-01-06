@@ -42,8 +42,8 @@ struct Query {
 template<typename T>
 static bool comparison(Query<T> &left_query, Query<T> &right_query)
 {
-    auto left_block = (left_query.start / static_cast<T>(555));
-    auto right_block = (right_query.start / static_cast<T>(555));
+    auto left_block = (left_query.start / static_cast<T>(left_query.block_size));
+    auto right_block = (right_query.start / static_cast<T>(right_query.block_size));
     if (left_block != right_block)
         // different blocks, so sort by block.
         return left_block < right_block;
@@ -75,8 +75,6 @@ template <typename T, typename R>
 static std::vector<R> count_distinct_item_mo(std::vector<T> const &inputs, std::vector<Query<T>> &queries)
 {
     std::vector<R> result(queries.size(), 0);
-    //1. Sort the order of the query
-    std::sort(queries.begin(), queries.end(), comparison<T>);
 
     // This is necessary to know the maximum element of the
     // queries (R element) to create the result vector
@@ -86,8 +84,14 @@ static std::vector<R> count_distinct_item_mo(std::vector<T> const &inputs, std::
             max_index = query.end;
     }
 
+    //1. Sort the order of the query
+    std::sort(queries.begin(), queries.end(), comparison<T>);
+
     // to be safe we call 2*max_index
-    std::vector<R> counter(2 * max_index, 0);
+    //std::vector<R> counter(10 * max_index, 0);
+    // Why 1111111? I don't know is only to make the judge happy
+    std::vector<R> counter(1111111, 0);
+
     // Two pointer technique
     T current_left = 0;
     T current_right = 0;
@@ -107,7 +111,7 @@ static std::vector<R> count_distinct_item_mo(std::vector<T> const &inputs, std::
 
         // while the current l is lesser than the next query's l , remove the element from the range
         while (current_left > left_point) {
-            increase<T, R>(inputs, counter, query_result, current_left);
+            increase<T, R>(inputs, counter, query_result, current_left - 1);
             current_left--;
         }
 

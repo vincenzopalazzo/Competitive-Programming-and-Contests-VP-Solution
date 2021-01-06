@@ -37,31 +37,6 @@ void TEST_CASE_ONE_MO_ALG()
     cpstl::cp_log(LOG, result);
 }
 
-/**
- * 10
-8 3 2 9 3 4 8 8 12 4
-20
-2 8
-3 4
-3 9
-2 7
-9 10
-8 8
-2 2
-10 10
-8 9
-6 10
-4 8
-3 8
-4 6
-2 9
-4 5
-8 10
-3 8
-8 9
-4 8
-10 10
- */
 void TEST_CASE_TWO_MO_ALG()
 {
     std::vector<int> inputs = {8, 3, 2, 9, 3, 4, 8, 8, 12, 4 };
@@ -89,9 +64,8 @@ void TEST_CASE_TWO_MO_ALG()
     };
     auto result = count_distinct_item_mo<int32_t , int32_t>(inputs, queries);
     cpstl::assert_equal("TEST_CASE_ONE_MO_ALG",
-                        {5, 2, 5, 5, 1, 1, 1, 1, 1,
-                                    2, 4, 5, 3, 5, 2, 2, 5, 1,
-                                     4, 1}, result);
+                        {5, 2, 6, 5, 2, 1, 1, 1, 2, 3, 4,
+                                    5, 3, 6, 2, 3, 5, 2, 4, 1}, result);
     cpstl::cp_log(LOG, result);
 }
 
