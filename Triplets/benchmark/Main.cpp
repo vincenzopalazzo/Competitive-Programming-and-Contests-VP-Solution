@@ -28,9 +28,9 @@ static void BM_ONE_BIT(benchmark::State& state)
     for(auto _ : state) {
         state.PauseTiming();
         std::vector<int64_t> input;
-        input.reserve(state.range(1));
-        for (size_t i = 0; i < state.range(1); i++)
-            input.push_back(rand() % state.range(1));
+        input.reserve(state.range(0));
+        for (size_t i = 0; i < state.range(0); i++)
+            input.push_back(rand() % state.range(0));
         state.ResumeTiming();
         auto res = count_triplets_precomputing_bit<int64_t, int64_t>(input);
     }
@@ -41,9 +41,9 @@ static void BM_TWO_BIT(benchmark::State& state)
     for(auto _ : state) {
         state.PauseTiming();
         std::vector<int64_t> input;
-        input.reserve(state.range(1));
-        for (size_t i = 0; i < state.range(1); i++)
-            input.push_back(rand() % state.range(1));
+        input.reserve(state.range(0));
+        for (size_t i = 0; i < state.range(0); i++)
+            input.push_back(rand() % state.range(0));
         state.ResumeTiming();
         auto res = count_triplets_precomputing_double_bit<int64_t, int64_t>(input);
     }
@@ -58,7 +58,7 @@ BENCHMARK_MAIN();
 
 static void custom_arguments(benchmark::internal::Benchmark* b)
 {
-    for (int i = 2; i <= 28; i++)
-        b->Args({static_cast<long>(std::pow(2, i)), static_cast<long>(std::pow(2, 21))});
+    for (int i = 6; i <= 14; i++)
+        b->Args({static_cast<long>(std::pow(2, i))});
 }
 
