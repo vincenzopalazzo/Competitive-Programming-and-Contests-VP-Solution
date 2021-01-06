@@ -19,13 +19,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-#include <iostream>
-#include <vector>
 #include <cstdlib>
-#include <algorithm>
-#include <cmath>
+#include <string>
+#include <vector>
+#include "../test/Utils.hpp"
 
-using namespace std;
+const cpstl::Log LOG(true);
 
 template<typename T>
 struct Query {
@@ -37,7 +36,7 @@ struct Query {
     std::size_t block_size;
 
     Query(T start, T anEnd, T originalIndex, std::size_t blockSize) : start(start), end(anEnd), original_index(originalIndex),
-                                                                      block_size(std::sqrt(blockSize)) {}
+                                                            block_size(std::sqrt(blockSize)) {}
 };
 
 template<typename T>
@@ -87,6 +86,7 @@ static std::vector<R> count_distinct_item_mo(std::vector<T> const &inputs, std::
             max_index = query.end;
     }
 
+    // to be safe we call 2*max_index
     std::vector<R> counter(2 * max_index, 0);
     // Two pointer technique
     T current_left = 0;
@@ -117,7 +117,7 @@ static std::vector<R> count_distinct_item_mo(std::vector<T> const &inputs, std::
             current_right++;
         }
 
-        while (current_right > right_point + 1) {
+        while (current_right > (right_point + 1)) {
             decrease<T, R>(inputs, counter, query_result, current_right - 1);
             current_right--;
         }
@@ -127,28 +127,3 @@ static std::vector<R> count_distinct_item_mo(std::vector<T> const &inputs, std::
     return result;
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    long long n;
-    scanf("%lld", &n);
-
-    std::vector<long long> inputs(n, 0);
-    for(int i = 0; i < n; i++)
-        scanf("%lld", &inputs[i]);
-
-    long long m;
-    scanf("%lld", &m);
-    std::vector<Query<long long>> queries;
-    for(int i = 0; i < m; i++) {
-        long long L, R;
-        scanf("%lld%lld", &L, &R);
-        // Inside the the following method I need to pass also the
-        // array size to calculate the block, but I think is possible
-        // do better
-        queries.emplace_back(L, R, i, inputs.size());
-    }
-
-    auto result = count_distinct_item_mo<long long, long long>(inputs, queries);
-    for (auto res: result)
-        printf("%lld\n", res);
-}

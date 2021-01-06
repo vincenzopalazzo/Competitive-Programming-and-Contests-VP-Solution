@@ -21,7 +21,7 @@
  */
 #include <benchmark/benchmark.h>
 #include <cmath>
-#include "../src/core/Solution.hpp"
+#include "../src/core/DQueries.hpp"
 
 static void BM_NAIVE_SOLUTION(benchmark::State& state)
 {
