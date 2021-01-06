@@ -58,7 +58,7 @@ Name | Solved | Repository | Report |
 *Pashmak and Parmida's problem* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/PashmakAndParmida) | _ |
 *Circular RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/CircularRMQ) | TODO |
 *Triplets* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Triplets) | _ |
-*Smaller Values* | | [Code]() | _ |
+*Smaller Values* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/SmallerValues) | _ |
 *Powerful array* | | [Code]() | _ |
 *Tree and queries* | | [Code]() | _ |
 *Longest common subsequence* | | [Code]() | _ |
