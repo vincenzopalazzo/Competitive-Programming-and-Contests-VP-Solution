@@ -13,6 +13,22 @@ by University of Pisa.
 
 ## Introduction
 
+Each solution is provided with a battery of test unity and a code structure under the src directory.
+
+- src
+    - test
+      - Main.cpp: Tests units where is possible test the solution in local with the test result on console.
+      - A couple o file to implement the test tools, implemented inside the repository [cpstl]()
+    - core
+      - SolutionName.hpp: file that contains the solution of the problem
+      - One or more data structure file implemented inside the repository [cpstl]()
+    - MainSite.cpp: The file that contains the solution for the online judge
+
+The solution are provided with different solution (where is present or covered from the developer) with a complete benchmark developer with [Google benchmark](https://github.com/google/benchmark)
+on a common machine with the following characteristic.
+
+TODO
+
 ## Built with
 
 ## Problems with a briefly discussion about them
@@ -40,23 +56,23 @@ Name | Solved | Repository | Report |
 *Nested segments (also segment tree)* |  | [Code]() | _ |
 *Pashmak and Parmida's problem* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/PashmakAndParmida) | _ |
 *Circular RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/CircularRMQ) | TODO |
-*Triplets* | | [Code]() | TODO |
-*Smaller Values* | | [Code]() | TODO |
-*Powerful array* | | [Code]() | TODO |
-*Tree and queries* | | [Code]() | TODO |
-*Longest common subsequence* | | [Code]() | TODO |
-*Minimum number of jumps* | | [Code]() | TODO |
-*Subset sum* | | [Code]() | TODO |
-*0-1 knapsack* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/01knapsack) | TODO |
-*Longest increasing subsequence* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestIncreasingSubsequence) | TODO |
-*Longest bitonic subsequence* | | [Code]() | TODO |
-*Edit distance* | | [Code]() | TODO |
-*Vertex cover* | | [Code]() | TODO |
-*Longest palindromic subsequence* | | [Code]() | TODO |
-*N meetings in one room* | | [Code]() | TODO |
-*Magic numbers* | | [Code]() | TODO |
-*Wilbur and array* | | [Code]() | TODO |
-*Alternativ e thinking* | | [Code]() | TODO |
+*Triplets* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Triplets) | _ |
+*Smaller Values* | | [Code]() | _ |
+*Powerful array* | | [Code]() | _ |
+*Tree and queries* | | [Code]() | _ |
+*Longest common subsequence* | | [Code]() | _ |
+*Minimum number of jumps* | | [Code]() | _ |
+*Subset sum* | | [Code]() | _ |
+*0-1 knapsack* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/01knapsack) | _ |
+*Longest increasing subsequence* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestIncreasingSubsequence) | _ |
+*Longest bitonic subsequence* | | [Code]() | _ |
+*Edit distance* | | [Code]() | _ |
+*Vertex cover* | | [Code]() | _ |
+*Longest palindromic subsequence* | | [Code]() | _ |
+*N meetings in one room* | | [Code]() | _ |
+*Magic numbers* | | [Code]() | _ |
+*Wilbur and array* | | [Code]() | _ |
+*Alternativ e thinking* | | [Code]() | _ |
 
 ## Segment Tree report
 
