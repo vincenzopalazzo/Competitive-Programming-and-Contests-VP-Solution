@@ -1,6 +1,9 @@
 /**
- * Segment tree data structure implementation
- * Copyright (C) 2020  Vincenzo Palazzo vincenzopalazzodev@gmail.com
+ * Competitive-Programming-and-Contests-VP-Solution a collection of
+ * code with an engineering approach to solve the problem.
+ * https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution
+ *
+ * Copyright (C) 2020-2021  Vincenzo Palazzo vincenzopalazzodev@gmail.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +55,7 @@ namespace cpstl {
         if (aspected.size() != actual.size()) {
             std::cout << BOLDRED;
             std::cout << name_test  << " FAILED" << "\n";
-            std::cout << "Aspected size is " << aspected.size() << " but it is different from how I received " << actual.size() << "\n";
+            std::cout << "Expected size is " << aspected.size() << " but it is different from how I received " << actual.size() << "\n";
             std::cout << RESET;
             return;
         }
@@ -60,8 +63,8 @@ namespace cpstl {
             if (aspected.at(i) != actual.at(i)) {
                 std::cout << BOLDRED;
                 std::cout << name_test  << " FAILED" << "\n";
-                std::cout << "Aspected vector at postion " << i << " has different value from the actual vector" << "\n";
-                std::cout << "Asspected value is: " << aspected.at(i) << " and the actual value is " << actual.at(i) << "\n";
+                std::cout << "Expected vector at postion " << i << " has different value from the actual vector" << "\n";
+                std::cout << "Expected value is: " << aspected.at(i) << " and the actual value is " << actual.at(i) << "\n";
                 std::cout << RESET;
                 return;
             }

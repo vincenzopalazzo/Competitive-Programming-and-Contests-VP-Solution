@@ -4,9 +4,9 @@
 
 Solved | Solution | Time :clock11: | 
 --- | --- | --- | 
-:heavy_check_mark:  | [Segment Tree](#TODO) | 0.20000000298 ms | 
-_ | [Lazy Segment Tree]() | xxx ms
-_
+:heavy_check_mark: | [Segment Tree](#TODO) | 0.20000000298 ms | 
+:heavy_check_mark: | [Lazy Segment Tree](#TODO) | 0.200000 ms |
+
 ## Solution or Solution discussion
 
 The solution was discussed on the Paper [Segment Tree a Complete Introduction](#TODO), and also on the [benchmark report](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ/benchmark/results/RMQ_benchmark/).
