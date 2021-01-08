@@ -33,7 +33,7 @@ struct Query {
     std::size_t end;
     T value;
 
-    Query(size_t start, size_t anEnd, T value) : start(start), end(anEnd), value(value) {}
+    Query(std::size_t start, std::size_t anEnd, T value) : start(start), end(anEnd), value(value) {}
 };
 
 template <typename T, typename R>
@@ -57,15 +57,12 @@ static std::vector<R> smaller_value_segment_tree(std::vector<T> &inputs, std::ve
     for (auto query: queries) {
         auto query_result = 0;
         auto range = segment_tree.range_query(query.start, query.end);
-        cpstl::cp_log(LOG, range);
         for (auto elem : range) {
-            cpstl::cp_log(LOG, std::to_string(elem) + " <=" + std::to_string(query.value));
             if (elem <= query.value)
                 query_result++;
         }
         result.push_back(query_result);
     }
-
     return result;
 }
 

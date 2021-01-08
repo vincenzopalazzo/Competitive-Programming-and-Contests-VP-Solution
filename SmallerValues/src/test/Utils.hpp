@@ -103,4 +103,64 @@ namespace cpstl {
         std::cout << "\n";
         std::cout << RESET;
     }
+
+    // function to load a segment from file from file
+    template<typename T>
+    inline std::vector<T> load_sequences_from_file(std::string const &name_file)
+    {
+        std::ifstream file_to_load(name_file);
+        assert(file_to_load.is_open() && "File to load unable");
+        int size_array;
+        int size_queries;
+        file_to_load >> size_array;
+        file_to_load >> size_queries;
+        std::vector<T> inputs;
+        inputs.reserve(size_array);
+        for (int i = 0; i < size_array; i++) {
+            int value;
+            file_to_load >> value;
+            inputs.push_back(value);
+        }
+        return inputs;
+    }
+
+    template<typename T>
+    inline std::vector<T> load_query_from_file(std::string const &name_file)
+    {
+        std::ifstream file_to_load(name_file);
+        assert(file_to_load.is_open() && "File to load unable");
+        int size_array;
+        int size_queries;
+        file_to_load >> size_array;
+        file_to_load >> size_queries;
+        for (int i = 0; i < size_array; i++) {
+            int value;
+            file_to_load >> value;
+        }
+        std::vector<T> inputs;
+        inputs.reserve(size_queries);
+        for (int i = 0; i < size_queries; i++) {
+            std::size_t x_val, y_val;
+            int value;
+            file_to_load >> x_val;
+            file_to_load >> y_val;
+            file_to_load >> value;
+            inputs.emplace_back(x_val, y_val, value);
+        }
+        return inputs;
+    }
+
+    template<typename T>
+    inline std::vector<T> load_result_from_file(std::string const &name_file)
+    {
+        std::ifstream file_to_load(name_file);
+        assert(file_to_load.is_open() && "File to load unable");
+        std::vector<T> inputs;
+        T value;
+        while (file_to_load >> value) {
+            inputs.push_back(value);
+
+        }
+        return inputs;
+    }
 }
