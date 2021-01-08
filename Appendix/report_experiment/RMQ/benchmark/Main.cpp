@@ -23,7 +23,7 @@ static void BM_NAIVE_SOLUTION(benchmark::State& state)
     }
 }
 
-static void BM_NAIVE_SEGMENT_TREE_BH(benchmark::State& state)
+static void BM_SEGMENT_TREE_BH(benchmark::State& state)
 {
     for(auto _ : state) {
         state.PauseTiming();
@@ -43,7 +43,7 @@ static void BM_NAIVE_SEGMENT_TREE_BH(benchmark::State& state)
     }
 }
 
-static void BM_NAIVE_LAZY_SEGMENT_TREE_BH(benchmark::State& state)
+static void BM_LAZY_SEGMENT_TREE_BH(benchmark::State& state)
 {
     for(auto _ : state) {
         state.PauseTiming();
@@ -66,8 +66,8 @@ static void BM_NAIVE_LAZY_SEGMENT_TREE_BH(benchmark::State& state)
 static void custom_arguments(benchmark::internal::Benchmark* b);
 
 BENCHMARK(BM_NAIVE_SOLUTION)->Apply(custom_arguments);
-BENCHMARK(BM_NAIVE_SEGMENT_TREE_BH)->Apply(custom_arguments);
-BENCHMARK(BM_NAIVE_LAZY_SEGMENT_TREE_BH)->Apply(custom_arguments);
+BENCHMARK(BM_SEGMENT_TREE_BH)->Apply(custom_arguments);
+BENCHMARK(BM_LAZY_SEGMENT_TREE_BH)->Apply(custom_arguments);
 
 BENCHMARK_MAIN();
 
