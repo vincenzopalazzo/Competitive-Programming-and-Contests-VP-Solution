@@ -13,7 +13,7 @@ by University of Pisa.
 
 ## Introduction
 
-Each solution is provided with a battery of test unity and a code structure under the src directory.
+Each solution is provided with a battery of unit tests and a code structure under the src directory looks like the following tree:
 
 - src
     - test
@@ -25,12 +25,21 @@ Each solution is provided with a battery of test unity and a code structure unde
     - *MainSite.cpp*: The file that contains the solution for the online judge
     - *CMakeFile*
 
-The solution are provided with different implementation (where is present or covered from the developer) with a complete benchmark developer with [Google benchmark](https://github.com/google/benchmark)
-on a common machine with the following characteristic.
+Some solutions are provided with different implementation (where is present or covered from the developer) with complete benchmarks developed with [Google benchmark](https://github.com/google/benchmark).
+The result are stored inside a JSON or a CVS file called *result* and the machine where there are ran has the following characteristic.
 
 TODO
 
+> If you want run the benchmark on your own computer and your computer are a personal computer, in some cases you need to disable some machine setting, but you can following 
+[this answer](https://stackoverflow.com/a/48110959/10854225) on StackOverflow (If you are using a linux machine) 
+
 ## Built with
+
+All the solutions are developed with C++ STD, and also with a couple of external tools reported below:
+
+- [CPSTL](): Competitive Programming Standard library, it is a new project that include a collection of algorithms and data structure for competitive programming in different language.
+- [Google benchmark](): A Google framework to make cool code benchmark, you need to install it if you want run the benchmarks in some problem, othewise you can avoid to install it.
+- [abseil-cpp](https://github.com/abseil/abseil-cpp): TODO I'm not sure that I introduce this library at the moment.
 
 ## Problems with a briefly discussion about them
 
@@ -89,3 +98,22 @@ Name | Solved | Repository | Report |
 
 ## License
 
+<div align="center">
+  <img src="https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png" width="150" height="150"/>
+</div>
+
+Copyright (c) 2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+ 
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
