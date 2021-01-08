@@ -25,6 +25,7 @@
 
 using namespace std;
 
+namespace cpstl {
 /**
  * Binary index tree data structure implementation
  * Copyright (C) 2020  Vincenzo Palazzo vincenzopalazzodev@gmail.com
@@ -43,9 +44,6 @@ using namespace std;
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#include <vector>
-
-namespace cpstl {
     template<class T>
     class BTreeIndex {
     private:
@@ -109,7 +107,7 @@ namespace cpstl {
     };
 }
 
-template <typename T>
+template<typename T>
 struct Segment {
     T x_coordinate;
     T y_coordinate;
@@ -118,7 +116,6 @@ struct Segment {
     Segment(T xCoordinate, T yCoordinate, size_t index) : x_coordinate(xCoordinate), y_coordinate(yCoordinate),
                                                           index(index) {}
 };
-
 
 template<typename T>
 static cpstl::BTreeIndex<T> precompute_into_fenwick_tree(std::vector<Segment<T>> &inputs)
@@ -158,8 +155,8 @@ static std::vector<R> nested_segment_fenwick_tree(std::vector<Segment<T>> &input
     auto fenwick_tree = precompute_into_fenwick_tree(inputs);
     std::vector<R> result(inputs.size(), 0);
     for (auto &segment : inputs) {
+        auto nested_segment = fenwick_tree.sum(segment.y_coordinate) - 1;
         fenwick_tree.update(segment.y_coordinate, -1);
-        auto nested_segment = fenwick_tree.sum(segment.y_coordinate);
         result[segment.index] = nested_segment;
     }
     return result;
@@ -171,18 +168,19 @@ int main() {
     std::size_t N;
     scanf("%ld", &N);
 
-    std::vector<Segment<int64_t>> inputs;
+    std::vector<Segment<long long>> inputs;
     inputs.reserve(N);
     //Read the array
     for (std::size_t index = 0; index < N; index++) {
-        int64_t x;
-        int64_t y;
-        scanf("%ld", &x);
-        scanf("%ld", &y);
+        long long x;
+        long long y;
+        scanf("%lld", &x);
+        scanf("%lld", &y);
         inputs.emplace_back(x, y, index);
     }
 
-    auto result = nested_segment_fenwick_tree<int64_t, int64_t>(inputs);
+    auto result = nested_segment_fenwick_tree<long long, long long>(inputs);
     for (auto res : result)
-        printf("%ld\n", res);
+        printf("%lld\n", res);
 }
+

@@ -28,7 +28,7 @@
 
 const cpstl::Log LOG(true);
 
-template <typename T>
+template<typename T>
 struct Segment {
     T x_coordinate;
     T y_coordinate;

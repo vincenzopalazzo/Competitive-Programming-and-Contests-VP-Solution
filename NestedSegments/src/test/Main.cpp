@@ -59,7 +59,7 @@ void TEST_CASE_THREE_FENWICK()
 
 void TEST_CASE_FOUR_FENWICK()
 {
-    std::vector<Segment<int64_t>> inputs;
+    std::vector<Segment<long long>> inputs;
     inputs.emplace_back(-3, -1, 0);
     inputs.emplace_back(-10, 4, 1);
     inputs.emplace_back(0, 6, 2);
@@ -70,8 +70,8 @@ void TEST_CASE_FOUR_FENWICK()
     inputs.emplace_back(-7, -6, 7);
     inputs.emplace_back(-8, 8, 8);
     inputs.emplace_back(-9, 7, 9);
-    auto result = nested_segment_fenwick_tree<int64_t, int64_t>(inputs);
-    cpstl::assert_equal("TEST_CASE_THREE_FENWICK", {0, 0, 2, 0, 0, 3, 3, 0, 0, 0}, result);
+    auto result = nested_segment_fenwick_tree<long long, long long>(inputs);
+    cpstl::assert_equal("TEST_CASE_THREE_FENWICK", {0, 4, 1, 0, 0, 0, 0, 0, 5, 5}, result);
     cpstl::cp_log(LOG, result);
 }
 
