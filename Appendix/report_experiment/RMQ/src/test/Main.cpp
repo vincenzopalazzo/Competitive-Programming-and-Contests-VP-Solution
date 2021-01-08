@@ -26,7 +26,6 @@ using namespace std;
 void TEST_CASE_ONE_SEGMENT_TREE()
 {
     vector<int> inputs = {18, 17, 13, 19, 15, 11, 20};
-    cpstl::cp_log(LOG, inputs);
     vector<Query<int>> queries;
     queries.emplace_back(false, 5, 7);
     queries.emplace_back(false, 1, 3);
@@ -39,12 +38,12 @@ void TEST_CASE_ONE_SEGMENT_TREE()
     auto segment_tree = cpstl::SegmentTree<int>(inputs);
     auto result = range_minimum_query_segment_tree(segment_tree, queries);
     cpstl::assert_equal("TEST_CASE_ONE_SEGMENT_TREE", {11, 13, 12, 13, 17, 12, 20}, result);
+    cpstl::cp_log(LOG, result);
 }
 
 void TEST_CASE_TWO_SEGMENT_TREE()
 {
     vector<int> inputs = {1, 5, 2, 4, 3};
-    cpstl::cp_log(LOG, inputs);
     vector<Query<int>> queries;
     queries.emplace_back(false, 1, 5);
     queries.emplace_back(false, 1, 3);
@@ -54,12 +53,45 @@ void TEST_CASE_TWO_SEGMENT_TREE()
     auto segment_tree = cpstl::SegmentTree<int>(inputs);
     auto result = range_minimum_query_segment_tree(segment_tree, queries);
     cpstl::assert_equal("TEST_CASE_TWO_SEGMENT_TREE", {1, 1, 2, 1}, result);
+    cpstl::cp_log(LOG, result);
+}
+
+void TEST_CASE_ONE_LAZY_SEGMENT_TREE()
+{
+    vector<int> inputs = {18, 17, 13, 19, 15, 11, 20};
+    vector<Query<int>> queries;
+    queries.emplace_back(false, 5, 7);
+    queries.emplace_back(false, 1, 3);
+    queries.emplace_back(true, 6, 12);
+    queries.emplace_back(false, 5, 7);
+    queries.emplace_back(false, 3, 4);
+    queries.emplace_back(false, 1, 2);
+    queries.emplace_back(false, 1, 7);
+    queries.emplace_back(false, 7, 7);
+    auto segment_tree = cpstl::LazySegmentTree<int>(inputs);
+    auto result = range_minimum_query_lazy_segment_tree(segment_tree, queries);
+    cpstl::assert_equal("TEST_CASE_ONE_LAZY_SEGMENT_TREE", {11, 13, 12, 13, 17, 12, 20}, result);
+    cpstl::cp_log(LOG, result);
+}
+
+void TEST_CASE_TWO_LAZY_SEGMENT_TREE()
+{
+    vector<int> inputs = {1, 5, 2, 4, 3};
+    vector<Query<int>> queries;
+    queries.emplace_back(false, 1, 5);
+    queries.emplace_back(false, 1, 3);
+    queries.emplace_back(false, 3, 5);
+    queries.emplace_back(true, 3, 6);
+    queries.emplace_back(false, 1, 5);
+    auto segment_tree = cpstl::LazySegmentTree<int>(inputs);
+    auto result = range_minimum_query_lazy_segment_tree(segment_tree, queries);
+    cpstl::assert_equal("TEST_CASE_TWO_LAZY_SEGMENT_TREE", {1, 1, 2, 1}, result);
+    cpstl::cp_log(LOG, result);
 }
 
 void TEST_CASE_ONE_NAIVE()
 {
     vector<int> inputs = {18, 17, 13, 19, 15, 11, 20};
-    cpstl::print_vector(inputs);
     vector<Query<int>> queries;
     queries.emplace_back(false, 4, 6);
     queries.emplace_back(false, 1, 3);
@@ -69,8 +101,10 @@ void TEST_CASE_ONE_NAIVE()
 
 int main()
 {
-    TEST_CASE_ONE_SEGMENT_TREE();
     TEST_CASE_ONE_NAIVE();
+    TEST_CASE_ONE_SEGMENT_TREE();
     TEST_CASE_TWO_SEGMENT_TREE();
+    TEST_CASE_ONE_LAZY_SEGMENT_TREE();
+    TEST_CASE_TWO_LAZY_SEGMENT_TREE();
     return EXIT_SUCCESS;
 }
