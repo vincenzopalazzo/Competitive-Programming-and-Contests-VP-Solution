@@ -79,6 +79,9 @@ static std::vector<R> powerful_array_mo_algorithms(std::vector<T> const &inputs,
 
     std::size_t current_left = 0;
     std::size_t current_right = 0;
+
+    // This should be a hash map but the C++ implementation is shit.
+    // (Because under the hood use the linked list)
     std::vector<T> frequency(11100001, 0);
     R query_result = 0;
 
@@ -93,7 +96,7 @@ static std::vector<R> powerful_array_mo_algorithms(std::vector<T> const &inputs,
         }
 
         while (current_left > left_query) {
-            increment<T, R>(inputs, frequency, query_result, current_left + 1);
+            increment<T, R>(inputs, frequency, query_result, current_left - 1);
             current_left--;
         }
 

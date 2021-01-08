@@ -48,7 +48,7 @@ static bool compare(Query &query_a, Query &query_b)
 }
 
 template <typename T, typename R>
-static void increment(std::vector<T> const &inputs, std::vector<T> &frequency, R &answer, std::size_t position)
+static void increment(std::vector<T> const &inputs, std::vector<R> &frequency, R &answer, std::size_t position)
 {
     auto to_position = inputs[position];
     answer -= std::pow(frequency[to_position], 2) * to_position;
@@ -57,7 +57,7 @@ static void increment(std::vector<T> const &inputs, std::vector<T> &frequency, R
 }
 
 template <typename T, typename R>
-static void decrement(std::vector<T> const &inputs, std::vector<T> &frequency, R &answer, std::size_t position)
+static void decrement(std::vector<T> const &inputs, std::vector<R> &frequency, R &answer, std::size_t position)
 {
     auto to_position = inputs[position];
     answer -= std::pow(frequency[to_position], 2) * to_position;
@@ -74,11 +74,13 @@ static std::vector<R> powerful_array_mo_algorithms(std::vector<T> const &inputs,
     // decreasing order by compare logic in the method above
     std::sort(queries.begin(), queries.end(), compare);
 
-
     std::size_t current_left = 0;
     std::size_t current_right = 0;
-    std::vector<T> frequency(1000001, 0);
+    // This should be a hash map but the C++ implementation is shit.
+    // (Because under the hood use the linked list)
+    std::vector<R> frequency(10000001, 0);
     R query_result = 0;
+
     for (auto query : queries) {
         auto left_query = query.start - 1;
         auto right_query = query.end - 1;
@@ -89,7 +91,7 @@ static std::vector<R> powerful_array_mo_algorithms(std::vector<T> const &inputs,
         }
 
         while (current_left > left_query) {
-            increment<T, R>(inputs, frequency, query_result, current_left + 1);
+            increment<T, R>(inputs, frequency, query_result, current_left - 1);
             current_left--;
         }
 
@@ -108,16 +110,16 @@ static std::vector<R> powerful_array_mo_algorithms(std::vector<T> const &inputs,
 }
 
 int main() {
-    int N, Q;
-    scanf("%d", &N);
-    scanf("%d", &Q);
+    int64_t N, Q;
+    scanf("%ld", &N);
+    scanf("%ld", &Q);
 
-    std::vector<int> inputs;
+    std::vector<int64_t> inputs;
     inputs.reserve(N);
     //Read the array
     for (std::size_t t = 0; t < N; t++) {
-        int value;
-        scanf("%d", &value);
+        int64_t value;
+        scanf("%ld", &value);
         inputs.push_back(value);
     }
 
@@ -130,7 +132,7 @@ int main() {
         queries.emplace_back(x, y, inputs.size(), t);
     }
 
-    auto results = powerful_array_mo_algorithms<int, int>(inputs, queries);
+    auto results = powerful_array_mo_algorithms<int64_t, long long >(inputs, queries);
     for (auto result : results)
-        printf("%d\n", result);
+        printf("%lld\n", result);
 }
