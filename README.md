@@ -90,7 +90,7 @@ Name | Solved | Repository | Report |
 
 Name | Solved | Repository | Report |
 --- | --- | --- | --- | 
-*TODO* | :heavy_check_mark: | [Code]() | _ |
+*RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ/benchmark/results/RMQ_benchmark) |
 
 ## How contribute
 
