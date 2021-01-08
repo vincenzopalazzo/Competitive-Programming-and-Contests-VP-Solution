@@ -125,7 +125,7 @@ namespace cpstl {
     }
 
     template<typename T>
-    inline std::vector<T> load_query_from_file(std::string const &name_file)
+    inline std::vector<T> load_query_from_file(std::string const &name_file, bool indexed)
     {
         std::ifstream file_to_load(name_file);
         assert(file_to_load.is_open() && "File to load unable");
@@ -145,7 +145,10 @@ namespace cpstl {
             file_to_load >> x_val;
             file_to_load >> y_val;
             file_to_load >> value;
-            inputs.emplace_back(x_val, y_val, value);
+            if (indexed)
+                inputs.emplace_back(x_val, y_val, value, i, size_array);
+            else
+                inputs.emplace_back(x_val, y_val, value);
         }
         return inputs;
     }

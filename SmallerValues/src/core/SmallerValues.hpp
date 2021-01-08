@@ -32,14 +32,79 @@ struct Query {
     std::size_t start;
     std::size_t end;
     T value;
+    std::size_t index = -1;
+    std::size_t block_size;
 
     Query(std::size_t start, std::size_t anEnd, T value) : start(start), end(anEnd), value(value) {}
+
+    Query(size_t start, size_t anEnd, T value, size_t index, size_t blockSize) : start(start), end(anEnd), value(value),
+                                                                                 index(index),
+                                                                                 block_size(std::sqrt(blockSize)) {}
 };
 
-template <typename T, typename R>
-static std::vector<R> smaller_value_mo_algorithms(std::vector<T> const &inputs, std::vector<Query<T>> const &queries)
+template<typename T>
+static bool compare(Query<T> const &query_a, Query<T> const &query_b) {
+    auto left_block = query_a.start / query_a.block_size;
+    auto right_block = query_b.start / query_b.block_size;
+    if (left_block != right_block)
+        return left_block < right_block;
+    return query_a.end < query_b.end;
+}
+
+template<typename T, typename R>
+static void increment(std::vector<T> const &inputs,  T value, R &answer, std::size_t position)
 {
-    return {};
+    auto to_position = inputs[position];
+    if (to_position <= value)
+        answer++;
+}
+
+template<typename T, typename R>
+static void decrement(std::vector<T> const &inputs, T value, R &answer, std::size_t position)
+{
+    auto to_position = inputs[position];
+    if (to_position > value)
+        answer--;
+}
+
+template <typename T, typename R>
+static std::vector<R> smaller_value_mo_algorithms(std::vector<T> const &inputs, std::vector<Query<T>> &queries)
+{
+    std::vector<R> results(queries.size(), 0);
+    std::sort(queries.begin(), queries.end(), compare<T>);
+
+    std::size_t current_left = 0;
+    std::size_t current_right = 0;
+    R answer = 0;
+
+    for (auto query : queries) {
+        auto left_query = query.start;
+        auto right_query = query.end;
+        auto value_query = query.value;
+
+        while (current_left > left_query) {
+            increment(inputs, value_query, answer, current_left);
+            current_left--;
+        }
+
+        while (current_left < left_query) {
+            decrement(inputs, value_query, answer, current_left - 1);
+            current_left++;
+        }
+
+        while (current_right <= right_query) {
+            increment(inputs, value_query, answer, current_right);
+            current_right++;
+        }
+
+        while (current_right > (right_query + 1)) {
+            decrement(inputs, value_query, answer, current_right -1);
+            current_right--;
+        }
+        results[query.index] = answer;
+    }
+
+    return results;
 }
 
 template <typename T, typename R>
