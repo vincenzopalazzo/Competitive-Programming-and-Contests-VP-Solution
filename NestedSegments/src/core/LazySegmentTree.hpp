@@ -25,52 +25,15 @@ namespace cpstl
     class LazySegmentTree
     {
     protected:
-        std::vector<T> &origin;
+        std::size_t origin_size;
         std::vector<T> structure;
         std::vector<T> lazy;
-
-        /**
-         * This function is used build the segment tree with a binary heap
-         * implementation, and it use the origin array stored in the class.
-         * @tparam T is the type of structure, usually it is a int or another numeric type
-         * @param left_index the left index of the range
-         * @param right_index the right index of the range
-         */
-        void build_structure(std::size_t left_index, std::size_t right_index)
-        {
-            build_structure_procedure(1, left_index, right_index - 1);
-        }
-        /**
-         * This is the sub procedure that help the build_structure procedure to make the logic inside the segment tree
-         * this version store inside the node of Segment Tree the value and not the index of the value
-         * @tparam T is the type of structure, usually it is a int or another numeric type
-         * @param start_index
-         * @param left_index
-         * @param right_index
-         */
-        void build_structure_procedure(std::size_t start_index, std::size_t left_index, std::size_t right_index)
-        {
-            if (left_index == right_index) {
-                // Leaf node will have a single element
-                structure[start_index] = origin[left_index];
-                return;
-            }
-            auto middle_point = (left_index + right_index) / 2;
-            auto left_child = left_child_index(start_index);
-            auto right_child = right_child_index(start_index);
-            build_structure_procedure(left_child, left_index, middle_point);
-            build_structure_procedure(right_child, middle_point + 1, right_index);
-            // Internal node will have the sum of both of its children
-            auto segment_left = structure[left_child];
-            auto segment_right = structure[right_child];
-            structure[start_index] = (segment_left <= segment_right) ? segment_left : segment_right;
-        }
 
         T range_query_subroutine(std::size_t start_index, std::size_t left_index, std::size_t right_index, std::size_t query_left, std::size_t query_right)
         {
             propagate(start_index, left_index, right_index);
             // outside the range
-            if (query_left > query_right)  return -1;
+            if (query_left > query_right)  return INT32_MIN;
             // range represented by a node is completely inside the given range
             if (left_index >= query_left && right_index <= query_right)  return structure[start_index];
             // range represented by a node is partially inside and partially outside the given range
@@ -81,9 +44,10 @@ namespace cpstl
                                                       query_left, std::min(middle_point, query_right));
             auto right_segment = range_query_subroutine(right_child, middle_point + 1, right_index,
                                                        std::max(query_left, middle_point + 1), query_right);
-            if (left_segment == -1) return right_segment;
-            if (right_segment == -1) return left_segment;
-            return std::min(left_child, right_segment);
+
+            if (left_segment == INT32_MIN) return right_segment;
+            if (right_segment == INT32_MIN) return left_segment;
+            return std::max(left_segment, right_segment);
         }
 
         /**
@@ -110,27 +74,24 @@ namespace cpstl
                 update_range_subroutine(left_child, left_index, middle_point, from, std::min(middle_point, to), new_val);
                 update_range_subroutine(right_child, middle_point + 1, right_index,
                                         std::max(from, middle_point + 1), to, new_val);
-                auto left_subtree = (lazy[left_child] != -1) ? lazy[left_child] : structure[left_child];
-                auto right_subtree = (lazy[right_child] != -1) ? lazy[right_child] : structure[right_child];
-                structure[start_index] = (left_subtree <= right_subtree) ? structure[left_child] : structure[right_child];
+                auto left_subtree = (lazy[left_child] != INT32_MIN) ? lazy[left_child] : structure[left_child];
+                auto right_subtree = (lazy[right_child] != INT32_MIN) ? lazy[right_child] : structure[right_child];
+                structure[start_index] = (left_subtree >= right_subtree) ? structure[left_child] : structure[right_child];
             }
         }
 
         void propagate(std::size_t start_index, std::size_t left_index, std::size_t right_index)
         {
-            if (lazy[start_index] != -1) {
+            if (lazy[start_index] != INT32_MIN) {
                 // The node in position start_index was marked as lazy
                 structure[start_index] += lazy[start_index];
                 if (left_index != right_index) {
                     auto left_child = left_child_index(start_index);
                     auto right_child = right_child_index(start_index);
                     lazy[left_child] = lazy[right_child] = lazy[start_index];
-                } else {
-                    // left_index = right_index is the time to update the origin array
-                    origin[left_index] = lazy[start_index];
                 }
                 // mark as the node as not lazy
-                lazy[start_index] = -1;
+                lazy[start_index] = INT32_MIN;
             }
         }
 
@@ -145,14 +106,9 @@ namespace cpstl
         }
 
     public:
-        LazySegmentTree(std::vector<T> &origin): origin(origin)
-        {
-            std::size_t size = origin.size();
-            structure = std::vector<T>(size * 4);
-            lazy = std::vector<T>(size * 4, -1);
-            origin = origin;
-            build_structure(0, size);
-        }
+        LazySegmentTree(std::size_t const size): structure(size * 4),
+                                                    lazy(size * 4, INT32_MIN),
+                                                    origin_size(size) { }
 
         virtual ~LazySegmentTree()
         {
@@ -162,7 +118,7 @@ namespace cpstl
 
         T range_query(std::size_t start_index, std::size_t end_index)
         {
-            return range_query_subroutine(1, 0, origin.size() - 1, start_index, end_index);
+            return range_query_subroutine(1, 0, origin_size - 1, start_index, end_index);
         }
 
         /**
@@ -173,7 +129,7 @@ namespace cpstl
          */
         void update(std::size_t at, T value)
         {
-            update_range_subroutine(1, 0, origin.size() - 1, at, at, value);
+            update_range_subroutine(1, 0, origin_size - 1, at, at, value);
         }
 
         /**
@@ -185,12 +141,7 @@ namespace cpstl
          */
         void update_range(std::size_t from, std::size_t to, T new_val)
         {
-            update_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
-        }
-
-        T get_elem(std::size_t at)
-        {
-            return origin[at];
+            update_range_subroutine(1, 0, origin_size - 1, from, to, new_val);
         }
     };
 };

@@ -25,6 +25,7 @@
 #include "../test/Utils.hpp"
 #include "FenwickTree.hpp"
 #include "SegmentTree.hpp"
+#include "LazySegmentTree.hpp"
 
 const cpstl::Log LOG(true);
 
@@ -81,5 +82,51 @@ static std::vector<R> nested_segment_fenwick_tree(std::vector<Segment<T>> &input
         result[segment.index] = nested_segment;
     }
     return result;
+}
+
+template<typename T>
+static cpstl::LazySegmentTree<T> precompute_into_segment_tree(std::vector<Segment<T>> &inputs) {
+
+    //Compute the maximum index inside the segment
+    std::vector<T> indexes;
+    for (auto &segment : inputs) {
+        indexes.push_back(segment.x_coordinate);
+        indexes.push_back(segment.y_coordinate);
+    }
+    std::sort(indexes.begin(), indexes.end());
+
+    for (auto &segment: inputs) {
+        // lower_bound get the first element that is smaller that segment.x_coordinate
+        auto x_iterator = std::lower_bound(indexes.begin(), indexes.end(), segment.x_coordinate);
+        // lower_bound get the first element that is smaller that segment.y_coordinate
+        auto y_iterator = std::lower_bound(indexes.begin(), indexes.end(), segment.y_coordinate);
+        //What this operation does
+        segment.x_coordinate = static_cast<T>(x_iterator - indexes.begin());
+        segment.y_coordinate = static_cast<T>(y_iterator - indexes.begin());
+        cpstl::cp_log(LOG, "Remap Query (" + std::to_string(segment.x_coordinate) + ", " + std::to_string(segment.y_coordinate) + ")");
+    }
+
+    std::sort(inputs.begin(), inputs.end(), [](auto &segment_a, auto &segment_b){
+        return segment_a.x_coordinate < segment_b.x_coordinate;
+    });
+
+    auto segment_tree = cpstl::LazySegmentTree<T>(indexes.size());
+    for (auto &segment : inputs) {
+        segment_tree.update_range(segment.x_coordinate, segment.y_coordinate, 1);
+    }
+    return segment_tree;
+}
+
+template<typename T, typename R>
+static std::vector<R> nested_segment_segment_tree(std::vector<Segment<T>> &inputs)
+{
+    auto segment_tree = precompute_into_segment_tree(inputs);
+    std::vector<R> results(inputs.size(), 0);
+    for (auto segment : inputs) {
+        cpstl::cp_log(LOG, "Query (" + std::to_string(segment.x_coordinate) + ", " + std::to_string(segment.y_coordinate) + ")");
+        segment_tree.update_range(segment.x_coordinate, segment.y_coordinate, -1);
+        results[segment.index] = segment_tree.range_query(segment.x_coordinate, segment.y_coordinate);
+    }
+    return results;
 }
 
