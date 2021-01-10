@@ -23,8 +23,6 @@
 #include <cmath>
 #include "../src/core/RangeMinimumQuery.hpp"
 
-//TODO the naive solution include only the range minimum query answer without update
-//for the moment
 static void BM_NAIVE_SOLUTION(benchmark::State& state)
 {
     for(auto _ : state) {
@@ -35,7 +33,7 @@ static void BM_NAIVE_SOLUTION(benchmark::State& state)
             input.push_back(rand() % state.range(1));
         std::vector<Query<int>> queries;
         for (size_t i = 0; i < state.range(0); i++)
-            if (i % 2 == 0)
+            if (state.range(0) % 2 == 0)
                 queries.emplace_back(false, rand() % state.range(1), rand() % state.range(1));
             else
                 queries.emplace_back(false, rand() % state.range(1), rand() % state.range(1));
@@ -54,7 +52,7 @@ static void BM_SEGMENT_TREE_BH(benchmark::State& state)
             input.push_back(rand() % state.range(1));
         std::vector<Query<int>> queries;
         for (size_t i = 0; i < state.range(0); i++)
-            if (i % 2 == 0)
+            if (state.range(0) % 2 == 0)
                 queries.emplace_back(false, rand() % state.range(1), rand() % state.range(1));
             else
                 queries.emplace_back(false, rand() % state.range(1), rand() % state.range(1));
@@ -74,7 +72,7 @@ static void BM_LAZY_SEGMENT_TREE_BH(benchmark::State& state)
             input.push_back(rand() % state.range(1));
         std::vector<Query<int>> queries;
         for (size_t i = 0; i < state.range(0); i++)
-            if (i % 2 == 0)
+            if (state.range(0) % 2 == 0)
                 queries.emplace_back(false, rand() % state.range(1), rand() % state.range(1));
             else
                 queries.emplace_back(false, rand() % state.range(1), rand() % state.range(1));

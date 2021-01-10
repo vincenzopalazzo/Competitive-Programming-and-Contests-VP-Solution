@@ -2,7 +2,7 @@
 
 The solution at the problem Range Minimum Query was proposed with tree different solution, such as, Naive Solution, Segment Tree solution, and an improvement of performance with Segment Tree with Lazy propagation.
 
-All the implementation of the this solution are on the Repository [Competitive-Programming-and-Contests-VP-Solution](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/tree/master/Appendix/report_experiment/RMQ) and the implementation of Segment Tree and Segment Tree with Lazy Propagation are on the repository [cpstl](https://github.com/vincenzopalazzo/cpstl).
+All the implementation of the this solution are on the Repository [Competitive-Programming-and-Contests-VP-Solution](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ/) and the implementation of Segment Tree and Segment Tree with Lazy Propagation are on the repository [cpstl](https://vincenzopalazzo.github.io/cpstl/).
 
 ## Range Mininum Query (RMQ) problem.
 
@@ -61,9 +61,7 @@ make_segment_tree_and_naive_benchmark_chart()
 
 With this comparison is possible see how the segment tree is fast to execute this type of queries, and how the naive solution is a very bad because repeate some calculation on the array that can be avoided. However, the version of RMQ proposed to [hackerearth](https://www.hackerearth.com/practice/data-structures/advanced-data-structures/segment-trees/practice-problems/algorithm/range-minimum-query/) required to answer also to some update query that make some change inside the original array, and this change make some alteration inside the Segment Tree.
 
-How described in the Section Lazy Propagation of the Paper (TODO ADD), when the change are frequentlly is possible improve the performance of the segment tree to implement the lazy propagation technique, that is a method to avoid the update of the Segment Tree at the update moment and the update is does when it is required to some important operation.
-
-In the chart below was reported a comparison between the Segment Tree solution and the solution with lazy popagation.
+How described in the Section Lazy Propagation of the Paper (TODO ADD link), when the uèdate on a range are frequentlly it is possible improve the performance of the Segment Tree to implement the Lazy Propagation technique, that is a method to avoid the update of the Segment Tree at the update time and pospone the update only  when it is requiredn. However, not in all the case the lazy propagation is the better choise, because we need to know also the dimension of this update on the range, in the case of RMQ problem on [hackerearth](https://www.hackerearth.com/practice/data-structures/advanced-data-structures/segment-trees/practice-problems/algorithm/range-minimum-query/) it is a simple update to only one element of the array and with this implementation it is tricky understend what is the better datastructure to use. For this reason, in the section below was described a code benchmark of RMQ solution with Segment Tree and another version of solution with Lazy propagnation (LazySegmentTree).
 
 
 ```python
@@ -76,7 +74,5 @@ make_segment_tree_lazy_segment_treee_benchmark_chart()
     
 
 
-We can observe that the RQM solution with lazy propagation is more fast that the solution with 
-the Segment Tree.
-
-Note: In this case we can see also the performace not linear, and the motivation is becase the the array and the input elements are pick with the C++ random function, and for some benchmark the dimension of the query is bigger that others query.
+We can observe that the RQM solution with lazy propagation is slower in  that the solution with 
+the Segment Tree. The cause of this result can be the type of Update on the range, because in this case the update it is only on one element of the range and not in one sub-range and the lazy technique implementation inside the Segment tree can make the query operation slower.
