@@ -1,9 +1,6 @@
 /**
- * Competitive Programming Standard library a collection of code and algorithm
- * to solve Competitive programming problem and problem give at coding interview.
- * https://github.com/vincenzopalazzo/cpstl
- *
- * Copyright (C) 2020-2021  Vincenzo Palazzo vincenzopalazzodev@gmail.com
+ * CPSTL Test tools a collection of methods to make simple test unit
+ * Copyright (C) 2020  Vincenzo Palazzo vincenzopalazzodev@gmail.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +22,7 @@
 
 namespace cpstl {
 
-    /**
-    void assert_is_true(std::string name_test, bool condition)
+    inline void assert_is_true(std::string name_test, bool condition)
     {
         if (condition) {
             std::cout << BOLDGREEN << name_test  << " PASSED" << RESET << "\n";
@@ -34,9 +30,9 @@ namespace cpstl {
         }
         std::cout << BOLDRED << name_test  << " FAILED" << RESET << "\n";
     }
-    **/
+
     template<typename T>
-    inline void assert_equal(std::string name_test, T aspected, T actual)
+    void assert_equal(std::string name_test, T aspected, T actual)
     {
         std::cout << BOLDWHITE << "|------------ TEST " << name_test << " -------------------|" << RESET << "\n";
         if (aspected == actual) {
@@ -45,17 +41,18 @@ namespace cpstl {
         }
         std::cout << BOLDRED;
         std::cout << name_test  << " FAILED" << "\n";
-        std::cout << "Aspected " << aspected << " but received " << actual << "\n";
+        std::cout << "Expected " << aspected << " but received " << actual << "\n";
+        std::cout << BOLDWHITE << "\n|------------ END " << name_test << " -------------------|" << RESET << "\n";
     }
 
     template<typename T>
-    inline void assert_equal(std::string name_test, std::vector<T> const &aspected, std::vector<T> const &actual)
+    void assert_equal(std::string name_test, std::vector<T> const &aspected, std::vector<T> const &actual)
     {
-        std::cout << BOLDWHITE << "|------------ TEST " << name_test << " -------------------|" << RESET << "\n";
+        std::cout << BOLDWHITE << "\n|------------ TEST " << name_test << " -------------------|" << RESET << "\n";
         if (aspected.size() != actual.size()) {
             std::cout << BOLDRED;
             std::cout << name_test  << " FAILED" << "\n";
-            std::cout << "Aspected size is " << aspected.size() << " but it is different from how I received " << actual.size() << "\n";
+            std::cout << "Expected size is " << aspected.size() << " but it is different from how I received " << actual.size() << "\n";
             std::cout << RESET;
             return;
         }
@@ -63,12 +60,13 @@ namespace cpstl {
             if (aspected.at(i) != actual.at(i)) {
                 std::cout << BOLDRED;
                 std::cout << name_test  << " FAILED" << "\n";
-                std::cout << "Aspected vector at postion " << i << " has different value from the actual vector" << "\n";
-                std::cout << "Asspected value is: " << aspected.at(i) << " and the actual value is " << actual.at(i) << "\n";
+                std::cout << "Expected vector at postion " << i << " has different value from the actual vector" << "\n";
+                std::cout << "Expected value is: " << aspected.at(i) << " and the actual value is " << actual.at(i) << "\n";
                 std::cout << RESET;
                 return;
             }
         }
         std::cout << BOLDGREEN << name_test  << " PASSED" << RESET << "\n";
+        std::cout << BOLDWHITE << "\n|------------ END " << name_test << " -------------------|" << RESET << "\n";
     }
 }
