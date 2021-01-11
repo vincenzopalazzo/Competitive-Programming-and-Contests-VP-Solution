@@ -80,7 +80,7 @@ Name | Solved | Repository | Report |
 *Vertex cover* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
 *Longest palindromic subsequence* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
 *N meetings in one room* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
-*Magic numbers* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
+*Magic numbers* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MagicNumbers) | _ |
 *Wilbur and array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/WilburAndArray) | _ |
 *Alternativ e thinking* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/AlternativeThinking) | _ |
 
