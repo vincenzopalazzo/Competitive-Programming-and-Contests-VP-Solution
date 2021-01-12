@@ -18,10 +18,10 @@ Each solution is provided with a battery of unit tests and a code structure unde
 - src
     - test
       - *Main.cpp*: Tests units where is possible test the solution in local with the test result on console.
-      - **.hpp*: A couple of file to implement the test tools, implemented inside the repository [cpstl]()
+      - **.hpp*: A couple of file to implement the test tools, implemented inside the repository [cpstl](https://vincenzopalazzo.github.io/cpstl/)
     - core
       - *SolutionName.hpp*: file that contains the solution of the problem
-      - One or more data structure file implemented inside the repository [cpstl]()
+      - One or more data structure file implemented inside the repository [cpstl](https://vincenzopalazzo.github.io/cpstl/)
     - *MainSite.cpp*: The file that contains the solution for the online judge
     - *CMakeFile*
 
@@ -63,7 +63,7 @@ Name | Solved | Repository | Report |
 *Number of ways* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NumberOfWays) | _ |
 *Little girl and maximum sum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LittleGirlandMaximumSum) | _ |
 *Update the array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/UpdateTheArray) | _ |
-*Nested segments (also segment tree)* | 1/2 :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NestedSegments) | _ |
+*Nested segments (also segment tree)* | 3/3 :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NestedSegments) | _ |
 *Pashmak and Parmida's problem* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/PashmakAndParmida) | _ |
 *Circular RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/CircularRMQ) | TODO |
 *Triplets* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Triplets) | _ |
