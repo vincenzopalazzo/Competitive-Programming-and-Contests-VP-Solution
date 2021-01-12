@@ -47,7 +47,7 @@ namespace cpstl
 
             if (left_segment == INT32_MIN) return right_segment;
             if (right_segment == INT32_MIN) return left_segment;
-            return std::max(left_segment, right_segment);
+            return left_segment + right_segment;
         }
 
         /**
@@ -76,7 +76,7 @@ namespace cpstl
                                         std::max(from, middle_point + 1), to, new_val);
                 auto left_subtree = (lazy[left_child] != INT32_MIN) ? lazy[left_child] : structure[left_child];
                 auto right_subtree = (lazy[right_child] != INT32_MIN) ? lazy[right_child] : structure[right_child];
-                structure[start_index] = (left_subtree >= right_subtree) ? structure[left_child] : structure[right_child];
+                structure[start_index] = left_subtree + right_subtree;
             }
         }
 
