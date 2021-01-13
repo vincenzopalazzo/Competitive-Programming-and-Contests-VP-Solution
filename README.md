@@ -45,7 +45,7 @@ All the solutions are developed with C++ STD, and also with a couple of external
 
 Name | Solved | Repository | Report |
 --- | --- | --- | --- | 
-*Leaders in array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-SolutionLeadersInArray) | _ |
+*Leaders in array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LeadersInArray) | _ |
 *Kadane's algorithm* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/KadanesAlgorithm) | _ |
 *Missing number in array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MissingNumberInArray) | _ |
 *Trapping rain water* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/TrappingRainWater) | _ |
@@ -86,11 +86,14 @@ Name | Solved | Repository | Report |
 
 ## Segment Tree report
 
+During the Courses was developed also a report, with the title ["Segment Tree: A Complete Introduction by Examples"](#TODO)
+
 ## Appendix
 
 Name | Solved | Repository | Report |
 --- | --- | --- | --- | 
 *RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ/benchmark/results/RMQ_benchmark) |
+*FindKthZero* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/FindKthZero) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) |
 
 ## How contribute
 
