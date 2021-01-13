@@ -93,7 +93,8 @@ During the Courses was developed also a report, with the title ["Segment Tree: A
 Name | Solved | Repository | Report |
 --- | --- | --- | --- | 
 *RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ/benchmark/results/RMQ_benchmark) |
-*FindKthZero* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/FindKthZero) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) |
+*Find Kth Zero* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/FindKthZero) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) |
+*KQUERY* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/KQUERY) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) |
 
 ## How contribute
 
