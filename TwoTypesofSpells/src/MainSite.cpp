@@ -1,70 +1,68 @@
-//
-// Created by vincent on 11/13/20.
-//
-#include <iostream>
-#include <vector>
-#include <set>
-#include <algorithm>
-#include <cmath>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-template <typename T, typename R>
-R calculate_max_damage(std::vector<std::pair<int, T>> const &inputs)
-{
-    std::set<T> lightningSpells;
-    std::set<T> fireSpells;
-    for (auto elem: inputs) {
-        if(elem.first == 1)
-            lightningSpells.insert(elem.second);
-        else
-            fireSpells.insert(elem.second);
-    }
-    R totDamage = 0;
-    bool doubled = false;
-    //while (!lightningSpells.empty()) {
-    for (auto elem : lightningSpells) {
-        if (elem > 0) {
-            if (doubled) {
-                totDamage += 2 * elem;
-            } else {
-                doubled = true;
-                totDamage += elem;
-            }
-        }
-    }
-    //while (!fireSpells.empty()) {
-    for (auto elem = fireSpells.crbegin() ; elem != fireSpells.crend(); elem++) {
-        if (*elem > 0) {
-            if (doubled) {
-                totDamage += 2 * *elem;
-                doubled = false;
-            } else {
-                totDamage += *elem;
-            }
-        }
-    }
-    return totDamage;
+int n;
+set <int> sDouble;
+long long sum[2];
+set <int> s[2];
+int cntDouble[2];
+
+// 0: 0 -> 1
+// 1: 1 -> 0
+void upd(int id) {
+    assert(s[id].size() > 0);
+    int x = *s[id].rbegin();
+    if (id == 1) x = *s[id].begin();
+    bool d = sDouble.count(x);
+
+    sum[id] -= x, sum[!id] += x;
+    s[id].erase(x), s[!id].insert(x);
+    cntDouble[id] -= d, cntDouble[!id] += d;
 }
 
-int main()
-{
-    int speels;
-    scanf("%d", &speels);
-    vector<pair<int, long long>> spells;
-    spells.reserve(speels);
-    for(std::size_t t = 1; t <= speels; t++) {
-        int type;
-        int power;
-        scanf("%d", &type);
-        scanf("%d", &power);
-        pair<int, long long> spell(type, power);
-        if (spell.second > 0) {
-            spells.push_back(spell);
+
+int main(){
+    cin >> n;
+    for (int i = 0; i < n; ++i) {
+        int tp, x;
+        cin >> tp >> x;// tp = 1 if double
+
+        if (x > 0) {
+            sum[0] += x;
+            s[0].insert(x);
+            cntDouble[0] += tp;
+            if (tp) sDouble.insert(x);
         } else {
-            auto p = std::find(spells.begin(), spells.end(), pair<int, long long>(spell.first, std::abs(spell.second)));
-            spells.erase(p);
+            x = -x;
+            int id = 0;
+            if (s[1].count(x)) id = 1;
+            else assert(s[0].count(x));
+
+            sum[id] -= x;
+            s[id].erase(x);
+            cntDouble[id] -= tp;
+            if (tp) {
+                assert(sDouble.count(x));
+                sDouble.erase(x);
+            }
         }
-        cout << calculate_max_damage<long long, long long>(spells) << "\n";
+
+        int sumDouble = cntDouble[0] + cntDouble[1];
+        while (s[1].size() < sumDouble) upd(0);
+        while (s[1].size() > sumDouble) upd(1);
+        while (s[1].size() > 0 && s[0].size() > 0 && *s[0].rbegin() > *s[1].begin()) {
+            upd(0);
+            upd(1);
+        }
+        assert(s[1].size() == sumDouble);
+
+        long long res = sum[0] + sum[1] * 2;
+        if (cntDouble[1] == sumDouble && sumDouble > 0) {
+            res -= *s[1].begin();
+            if (s[0].size() > 0) res += *s[0].rbegin();
+        }
+        cout << res << endl;
     }
+    return 0;
 }
