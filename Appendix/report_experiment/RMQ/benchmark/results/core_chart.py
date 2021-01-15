@@ -42,7 +42,7 @@ def make_naive_benchmark_chart():
     fig = pandas.DataFrame({
     'RMQ naive': times,
     }, index=labels)
-    fig.plot.bar(rot=0, figsize=(20,5))
+    fig.plot.bar(rot=0, figsize=(20,5), logy=True)
 
 def make_segment_tree_and_naive_benchmark_chart():
     labels = []
@@ -59,7 +59,7 @@ def make_segment_tree_and_naive_benchmark_chart():
     'RMQ naive': times_naive,
     'RMQ Segment Tree': times_segment
     }, index=labels)
-    stl.plot.bar(rot=0, figsize=(20,5))
+    stl.plot.bar(rot=0, figsize=(20,5), logy=True)
 
 def make_segment_tree_lazy_segment_treee_benchmark_chart():
     labels = []
@@ -75,5 +75,5 @@ def make_segment_tree_lazy_segment_treee_benchmark_chart():
     stl = pandas.DataFrame({
     'RMQ Lazy Propagation': times_lazy,
     'RMQ Segment Tree': times_segment
-    }, index=labels)
-    stl.plot.bar(rot=0, figsize=(20,5))
+    }, index=labels, )
+    stl.plot.bar(rot=0, figsize=(20,5), logy=True)
