@@ -65,7 +65,7 @@ Name | Solved | Repository | Report |
 *Update the array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/UpdateTheArray) | _ |
 *Nested segments (also segment tree)* | 3/3 :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NestedSegments) | _ |
 *Pashmak and Parmida's problem* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/PashmakAndParmida) | _ |
-*Circular RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/CircularRMQ) | TODO |
+*Circular RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/CircularRMQ) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/CircularRMQ/benchmark/results/CircularRMQ_benchmark/) |
 *Triplets* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Triplets) | _ |
 *Smaller Values* | 1/3 :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/SmallerValues) | _ |
 *Powerful array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/PowerfulArray) | _ |
