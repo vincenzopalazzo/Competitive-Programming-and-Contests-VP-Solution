@@ -68,7 +68,7 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 4.9783320330097923e+09,
+sudo -H pip3 install --upgrade pip      "real_time": 4.9783320330097923e+09,
       "cpu_time": 4.9775772810000000e+09,
       "time_unit": "ns"
     },
