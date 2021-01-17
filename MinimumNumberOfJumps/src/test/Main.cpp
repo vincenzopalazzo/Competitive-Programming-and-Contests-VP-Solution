@@ -32,8 +32,16 @@ void TEST_CASE_ONE()
 	cpstl::assert_equal("TEST_CASE_ONE", 0, result);
 }
 
+void TEST_CASE_TWO()
+{
+	std::vector<int> inputs = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
+	auto result = minimize_jump_to_reach_end(inputs);
+	cpstl::assert_equal("TEST_CASE_TWO", 3, result);
+}
+
 int main()
 {
 	TEST_CASE_ONE();
+	TEST_CASE_TWO();
 	return EXIT_SUCCESS;
 }

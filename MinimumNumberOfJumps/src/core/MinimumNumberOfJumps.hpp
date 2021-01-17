@@ -24,13 +24,23 @@
 #include <vector>
 #include "../test/Utils.hpp"
 
-const cpstl::Log LOG(true);
+const cpstl::Log LOG(false);
 
 template <typename T>
 static T minimize_jump_to_reach_end(std::vector<T> const &inputs)
 {
 	if (inputs.empty()) return 0;
-	std::vector<T> jumps_mem(inputs.size(), 0);
+	std::vector<T> jumps_mem(inputs.size(), INT32_MAX);
+	std::vector<T> from_pos(inputs.size(), 0);
+	jumps_mem[0] = 0;
+	for (std::size_t i = 1; i < inputs.size(); i++) {
+		for (std::size_t j = 0; j < i; j++) {
+			if (jumps_mem[i] > jumps_mem[j] + 1) {
+				from_pos[i] = j;
+				jumps_mem[i] = jumps_mem[j] + 1;
+			}
+		}
+	}
 
-	return *jumps_mem.end();
+	return jumps_mem[inputs.size() - 1];
 }
