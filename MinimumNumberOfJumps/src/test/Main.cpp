@@ -39,9 +39,49 @@ void TEST_CASE_TWO()
 	cpstl::assert_equal("TEST_CASE_TWO", 3, result);
 }
 
+void TEST_CASE_THREE()
+{
+	std::vector<int> inputs = {1, 4, 3, 2, 6, 7};
+	auto result = minimize_jump_to_reach_end(inputs);
+	cpstl::assert_equal("TEST_CASE_THREE", 2, result);
+}
+
+void TEST_CASE_FOUR()
+{
+	std::vector<int> inputs = {0, 1};
+	auto result = minimize_jump_to_reach_end(inputs);
+	cpstl::assert_equal("TEST_CASE_FOUR", -1, result);
+}
+
+void TEST_CASE_ONE_OPTIMIZZATION()
+{
+	std::vector<int> inputs = {};
+	auto result = optimize_minimum_jump_to_reach_end(inputs);
+	cpstl::assert_equal("TEST_CASE_ONE_OPTIMIZZATION", 0, result);
+}
+
+void TEST_CASE_TWO_OPTIMIZZATION()
+{
+	std::vector<int> inputs = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
+	auto result = optimize_minimum_jump_to_reach_end(inputs);
+	cpstl::assert_equal("TEST_CASE_THREE_OPTIMIZZATION", 3, result);
+}
+
+void TEST_CASE_THREE_OPTIMIZZATION()
+{
+	std::vector<int> inputs = {1, 4, 3, 2, 6, 7};
+	auto result = optimize_minimum_jump_to_reach_end(inputs);
+	cpstl::assert_equal("TEST_CASE_THREE_OPTIMIZZATION", 2, result);
+}
+
 int main()
 {
 	TEST_CASE_ONE();
 	TEST_CASE_TWO();
+	TEST_CASE_THREE();
+	TEST_CASE_FOUR();
+	TEST_CASE_ONE_OPTIMIZZATION();
+	TEST_CASE_TWO_OPTIMIZZATION();
+	TEST_CASE_THREE_OPTIMIZZATION();
 	return EXIT_SUCCESS;
 }

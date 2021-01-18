@@ -29,7 +29,8 @@ const cpstl::Log LOG(false);
 template <typename T>
 static T minimize_jump_to_reach_end(std::vector<T> const &inputs)
 {
-	if (inputs.empty() || inputs[0] == 0) return 0;
+	if (inputs.empty()) return 0;
+	if (inputs[0] == 0) return -1;
 	std::vector<T> jumps_mem(inputs.size(), INT32_MAX);
 	std::vector<T> from_pos(inputs.size(), 0);
 	jumps_mem[0] = 0;
@@ -41,6 +42,32 @@ static T minimize_jump_to_reach_end(std::vector<T> const &inputs)
 			}
 		}
 	}
+	auto result = (jumps_mem[jumps_mem.size() - 1] == INT32_MAX)
+		? -1 : jumps_mem[jumps_mem.size() - 1];
+	return result;
+}
 
-	return jumps_mem[inputs.size() - 1];
+template<typename T>
+static T optimize_minimum_jump_to_reach_end(std::vector<T> const &inputs)
+{
+	if (inputs.empty()) return 0;
+	if (inputs[0] == 0) { return -1;}
+	T max_reach = inputs[0];
+	T steps = inputs[0];
+	T jumps = 1;
+	for (T i = 1; i < inputs.size(); i++) {
+		if (i == inputs.size() - 1) {
+			return jumps;
+		}
+		max_reach = std::max(max_reach, i + inputs[i]);
+		steps--;
+		if (steps == 0) {
+			jumps++;
+			if (i > max_reach) {
+				return -1;
+			}
+			steps = max_reach - i;
+		}
+	}
+	return -1;
 }
