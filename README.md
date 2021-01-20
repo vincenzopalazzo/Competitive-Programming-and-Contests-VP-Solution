@@ -30,8 +30,8 @@ The result are stored inside a JSON or a CVS file called *result* and the machin
 
 TODO
 
-> If you want run the benchmark on your own computer and your computer are a personal computer, in some cases you need to disable some machine setting, but you can following 
-[this answer](https://stackoverflow.com/a/48110959/10854225) on StackOverflow (If you are using a linux machine) 
+> If you want run the benchmark on your own computer and your computer are a personal computer, in some cases you need to disable some machine setting, but you can following
+[this answer](https://stackoverflow.com/a/48110959/10854225) on StackOverflow (If you are using a linux machine)
 
 ## Built with
 
@@ -44,7 +44,7 @@ All the solutions are developed with C++ STD, and also with a couple of external
 ## Problems with a briefly discussion about them
 
 Name | Solved | Repository | Report |
---- | --- | --- | --- | 
+--- | --- | --- | --- |
 *Leaders in array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LeadersInArray) | _ |
 *Kadane's algorithm* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/KadanesAlgorithm) | _ |
 *Missing number in array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MissingNumberInArray) | _ |
@@ -76,7 +76,7 @@ Name | Solved | Repository | Report |
 *0-1 knapsack* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/01knapsack) | _ |
 *Longest increasing subsequence* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestIncreasingSubsequence) | _ |
 *Longest bitonic subsequence* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
-*Edit distance* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
+*Edit distance* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/EditDistance) | _ |
 *Vertex cover* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
 *Longest palindromic subsequence* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
 *N meetings in one room* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
@@ -91,7 +91,7 @@ During the Courses was developed also a report, with the title ["Segment Tree: A
 ## Appendix
 
 Name | Solved | Repository | Report |
---- | --- | --- | --- | 
+--- | --- | --- | --- |
 *RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ/benchmark/results/RMQ_benchmark) |
 *Find Kth Zero* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/FindKthZero) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) |
 *KQUERY* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/KQUERY) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) |
@@ -112,7 +112,7 @@ This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
- 
+
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
