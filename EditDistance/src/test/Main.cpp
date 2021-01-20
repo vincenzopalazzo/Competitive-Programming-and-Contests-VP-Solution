@@ -21,18 +21,38 @@
  */
 #include <cstdlib>
 #include "TestTool.hpp"
-#include "../core/Solution.hpp"
+#include "../core/EditDistance.hpp"
 
 using namespace std;
 
 void TEST_CASE_ONE()
 {
-    cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
+	std::string one = "geek";
+	std::string two = "gesek";
+	auto result = number_of_operation_into_str<int>(one, two);
+        cpstl::assert_equal("TEST_CASE_ONE", 1, result);
+}
 
+void TEST_CASE_TWO()
+{
+	std::string one = "gfg";
+	std::string two = "gfg";
+	auto result = number_of_operation_into_str<int>(one, two);
+	cpstl::assert_equal("TEST_CASE_TWO", 0, result);
+}
+
+void TEST_CASE_THREE()
+{
+	std::string one = "ecfbefdcfca";
+	std::string two = "badfcbebbf";
+	auto result = number_of_operation_into_str<int>(one, two);
+	cpstl::assert_equal("TEST_CASE_THREE", 9, result);
 }
 
 int main()
 {
     TEST_CASE_ONE();
+    TEST_CASE_TWO();
+    TEST_CASE_THREE();
     return EXIT_SUCCESS;
 }

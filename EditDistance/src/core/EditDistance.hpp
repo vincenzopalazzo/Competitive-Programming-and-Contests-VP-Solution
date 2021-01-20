@@ -24,9 +24,35 @@
 #include <vector>
 #include "../test/Utils.hpp"
 
-const cpstl::Log LOG(true);
+const cpstl::Log LOG(false);
 
 template <typename T>
-static void solution(std::vector<T> const &inputs)
-{}
+static T number_of_operation_into_str(std::string const &string_one,
+				      std::string const &string_two)
+{
+	std::vector<std::vector<T>> mem(string_one.size() + 1,
+					  std::vector<T>(string_two.size() + 1));
 
+	//Init the first line
+	for (std::size_t i = 1; i < string_one.size(); i++)
+		mem[0][i] = i;
+	for (std::size_t i = 1; i < string_two.size(); i++)
+		mem[i][0] = i;
+
+	for (std::size_t i = 1; i <= string_one.size(); i++) {
+		for (std::size_t j = 1; j <= string_two.size(); j++) {
+			if (string_one[i] == string_two[j]) {
+				mem[i][j] = mem[i - 1][j - 1];
+			} else {
+				auto upper_elem = mem[i][j - 1];
+				auto prev_elem = mem[i - 1][j];
+				auto diagonal = mem[i - 1][j - 1];
+				auto elem = std::min(upper_elem, prev_elem);
+				mem[i][j] = 1 + std::min(elem, diagonal);
+			}
+
+		}
+	}
+
+	return mem[string_one.size()][string_two.size()];
+}
