@@ -23,10 +23,40 @@
 #include <string>
 #include <vector>
 #include "../test/Utils.hpp"
+#include "SegmentTree.hpp"
 
 const cpstl::Log LOG(true);
 
 template <typename T>
-static void solution(std::vector<T> const &inputs)
-{}
+struct Query {
+    T value;
+    std::size_t at;
+    bool update;
+
+    Query(T value) : value(value) {
+        update = false;
+        at = -1;
+    }
+
+    Query(T value, size_t at) : value(value), at(at) {
+        update = true;
+    }
+};
+
+template <typename T, typename R>
+static std::vector<R> find_number_of_zeros(std::vector<T> &inputs, std::vector<Query<T>> const &queries)
+{
+    auto segment_tree = cpstl::SegmentTree<T, R>(inputs);
+    vector<R> results;
+    results.reserve(queries.size());
+    for (auto query : queries) {
+        if (query.update) {
+            segment_tree.update(query.at, query.value);
+        } else {
+            auto result = segment_tree.range_query(query.value);
+            results.push_back(result);
+        }
+    }
+    return results;
+}
 

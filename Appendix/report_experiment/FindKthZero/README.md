@@ -1,10 +1,9 @@
-## [Find Kth Zero](https://www.hackerrank.com/contests/modena-coding-oct-2017/challenges/kthzero)
+## [Kth Zero](https://www.hackerrank.com/contests/stryker-codesprint/challenges/kth-zero/problem)
 
-- Status: Working in progress :construction: 
+- Status: Completed :heavy_check_mark:
 
 Solved | Solution | Time :clock11: | 
 --- | --- | --- | 
-:construction:  | [Segment Tree](#TODO) | XXXX ms | 
-:construction:  | [Lazy Segment Tree](#TODO) | XXXX ms | 
+:heavy_check_mark:  | [Custom Segment Tree](https://www.hackerrank.com/contests/stryker-codesprint/challenges/kth-zero/submissions/code/1329754112) | 0.08 s | 
 
 ## Solution or Solution discussion

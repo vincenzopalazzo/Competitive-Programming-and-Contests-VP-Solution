@@ -21,14 +21,23 @@
  */
 #include <cstdlib>
 #include "TestTool.hpp"
-#include "../core/Solution.hpp"
+#include "../core/FindKthZero.hpp"
 
 using namespace std;
 
 void TEST_CASE_ONE()
 {
-    cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
-
+    vector<int> inputs = {1, 0, 3, 0, 5};
+    vector<Query<int>> queries;
+    queries.emplace_back( 2);
+    queries.emplace_back(5,1);
+    queries.emplace_back(1);
+    queries.emplace_back(10, 3);
+    queries.emplace_back(1);
+    queries.emplace_back(0, 4);
+    queries.emplace_back(2);
+    auto result = find_number_of_zeros<int, int>(inputs, queries);
+    cpstl::assert_equal("TEST_CASE_ONE", {3, 3, -1, -1}, result);
 }
 
 int main()
