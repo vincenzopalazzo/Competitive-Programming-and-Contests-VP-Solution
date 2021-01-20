@@ -51,7 +51,7 @@ Name | Solved | Repository | Report |
 *Trapping rain water* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/TrappingRainWater) | _ |
 *Sliding window maximum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/SlidingWindowMaximum) | [Report](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/SlidingWindowMaximum/benchmark/docs) |
 *Next larger element* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NextLargerElement) | _ |
-*Towers* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/NextLargerElement) | _ |
+*Towers* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Towers) | _ |
 *Finding Team Member* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/FindingTeamMember) | _ |
 *The Monkey and the Oiled Bamboo* | :heavy_check_mark:  | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MonkeyAndBamboo) | _ |
 *Inversion count* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/InversionCounting) | _ |
