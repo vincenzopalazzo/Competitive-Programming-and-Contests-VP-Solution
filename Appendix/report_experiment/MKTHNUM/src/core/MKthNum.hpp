@@ -20,19 +20,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 #include <cstdlib>
-#include "TestTool.hpp"
-#include "../core/Solution.hpp"
+#include <string>
+#include <vector>
+#include "../test/Utils.hpp"
+#include "PersistentSegmentTree.hpp"
 
-using namespace std;
+const cpstl::Log LOG(true);
 
-void TEST_CASE_ONE()
-{
-    cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
+template <typename T>
+struct Query {
+  T target;
+  std::size_t start;
+  std::size_t end;
 
-}
+  Query(std::size_t start, std::size_t end, T target):
+    start(start), end(end), target(target) {}
+};
 
-int main()
-{
-    TEST_CASE_ONE();
-    return EXIT_SUCCESS;
+template <typename T>
+static void solution(std::vector<T> const &inputs)
+{}
+
+template <typename T>
+static T get_smaller_number_naive(std::vector<T> &inputs,
+                                  std::vector<Query<T>> const &queries) {
+  return inputs[0];
 }
