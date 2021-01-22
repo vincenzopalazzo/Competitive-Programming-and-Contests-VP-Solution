@@ -1,11 +1,11 @@
-## [https://leetcode.com/problems/longest-palindromic-subsequence/submissions/](https://leetcode.com/problems/longest-palindromic-subsequence/submissions/)
+## [Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/submissions/)
 
 - Status: Completed :heavy_check_mark:
 
 Solved | Solution | Time :clock11: |
 --- | --- | --- |
-:heavy_check_mark:  | [Dynamic Programming (O(N^2))](#TODO) |  TLE  |
-:heavy_checl_mark:  | [Dynamic Programming (O(N))](#TODO)    | 56 ms |
+:heavy_check_mark:  | [Dynamic Programming (O(N^2))](https://leetcode.com/submissions/detail/446297759/) |  TLE  |
+:heavy_checl_mark:  | [Dynamic Programming (O(N))](https://leetcode.com/submissions/detail/446302755/)    | 56 ms |
 
 ## Solution or Solution discussion
 
