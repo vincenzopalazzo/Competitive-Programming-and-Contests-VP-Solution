@@ -17,57 +17,124 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
- #include <vector>
 #include <set>
+#include <vector>
 
-// working with this solution https://codeforces.com/contest/1398/submission/101462455
+// working with this solution
+// https://codeforces.com/contest/1398/submission/101462455
 
-template<typename T>
+template <typename T>
 struct Spell {
-    uint type;
-    T damage;
-    Spell(uint type, T damage) : type(type), damage(damage) {}
+	uint type;
+	T damage;
+	Spell(uint type, T damage) : type(type), damage(damage) {}
 };
 
-template<typename T>
-void update_status_by_spell(Spell<T> spell)
-{}
+template <typename T>
+struct SpellsByType {
+	std::set<T> fire;
+	std::set<T> lightning;
+};
 
-template<typename T, typename R>
-R make_final_sum(std::vector<T> &normal_spells, std::vector<T> double_spells, std::set<T> &sum, std::set<T> double_sum)
+// Manatain the counter of no doubled spells by types
+template <typename T>
+struct TotSum {
+	T fire = 0;
+	T lightning = 0;
+};
+
+// Mantains the count of doubled spells by type
+template <typename T>
+struct DoubledCounter {
+	T fire = 0;
+	T lightning = 0;
+};
+
+template <typename T, typename R>
+void update_status_by_spell(std::set<T> const &spells_by_type, TotSum<R> &tot_sum_by_type,
+			    DoubledCounter<T> &double_counter_by_type, std::size_t spells_doubled_size, bool is_fire)
 {
-    return 0;
+	auto sum_by_type = *spells_by_type.rbegin();
+	if(!is_fire)
+		sum_by_type = *spells_by_type.begin();
+
+	if (is_fire) {
+		tot_sum_by_type.fire -= sum_by_type;
+		tot_sum_by_type.lightning += sum_by_type;
+		double_counter_by_type.fire -= spells_doubled_size;
+		double_counter_by_type.lightning += spells_doubled_size;
+	} else {
+		tot_sum_by_type.fire += sum_by_type;
+		tot_sum_by_type.lightning -= sum_by_type;
+	}
 }
 
 template <typename T, typename R>
-R calculate_max_damage(std::vector<Spell<T>> const &inputs)
+R make_final_sum(DoubledCounter<T> &doubled_counter, SpellsByType<T> &spells, TotSum<R> &tot_sum, std::size_t spells_doubled)
 {
-    //Divide the spells inside two different tree
-    std::set<T> double_spell;
-    std::set<T> normal_spells;
-    std::vector<T> sum(2, 0);
-    std::vector<T> sum_double(2, 0);
-    std::set<T> tree_sum[2];
-    for (auto spell : inputs) {
-        if (spell.damage > 0) {
-            sum[0] += spell.damage;
-            normal_spells.push_back(spell.damage);
-            double_spell[0] += spell.type;
-            if (spell.type == 1)  sum_double.push_back(spell.damage);
-        } else {
-            auto damage = std::abs(spell.damage);
-            auto id = 0; // What is this?
-            if (sum[1].count(damage)) id = 1;
-            sum[id] -= damage;
-            tree_sum.sum(damage);
-            double_spell[id] -= spell.type;
-            if (spell.type == 1) {
-                sum_double.erase(damage);
-            }
-        }
+	auto sum_double = doubled_counter.lightning + doubled_counter.lightning;
+	while (spells.lightning.size() < sum_double)
+		update_status_by_spell(spells.fire, tot_sum, doubled_counter, spells_doubled, true);
+	while (spells.lightning.size() < sum_double)
+		update_status_by_spell(spells.lightning, tot_sum, doubled_counter, spells_doubled, false);
+	while (spells.lightning.size() > 0 && spells.fire.size() > 0 &&
+	       *spells.fire.rbegin() > *spells.lightning.begin()) {
+		update_status_by_spell(spells.fire, tot_sum, doubled_counter, spells_doubled, true);
+		update_status_by_spell(spells.lightning, tot_sum, doubled_counter, spells_doubled, false);
+	}
 
-        R final_sum = make_final_sum(double_spell, sum_double, spell, sum);
-    }
+	R final_sum = tot_sum.fire + tot_sum.lightning * 2;
+	if (doubled_counter.lightning == sum_double && sum_double > 0) {
+		final_sum -= *spells.lightning.rbegin();
+		if (spells.fire.size() > 0) final_sum += *spells.fire.rbegin();
+	}
+        return final_sum;
+}
+
+template <typename T, typename R>
+std::vector<R> calculate_max_damage(std::vector<Spell<T>> const &inputs)
+{
+	DoubledCounter<T> double_counter;
+	TotSum<R> tot_sum;
+	SpellsByType<T> spells;
+	std::set<T> doubled_spells;
+	std::vector<R> result;
+	for (auto spell : inputs) {
+		auto damage = spell.damage;
+		auto type = spell.type;
+		if (spell.damage > 0) {
+			// Add damage
+			tot_sum.fire += spell.damage;
+			if(type == 0) {
+				spells.fire.insert(damage);
+			} else {
+				spells.lightning.insert(damage);
+				doubled_spells.insert(damage);
+			}
+			double_counter.fire += damage;
+		} else {
+			// remove damage
+			auto damege = std::abs((int)spell.type);
+			auto tipe_selected = 0;
+
+			if (spells.fire.count(damage)) tipe_selected = 0;
+
+			if (tipe_selected == 0) {
+				tot_sum.fire -= damege;
+				spells.fire.erase(damage);
+			} else {
+				tot_sum.lightning -= damage;
+				spells.lightning.erase(damage);
+				double_counter.lightning -= 1;
+				doubled_spells.erase(damage);
+			}
+		}
+
+		auto final_sum = make_final_sum<T, R>(double_counter, spells, tot_sum, doubled_spells.size());
+		result.push_back(final_sum);
+	}
+	return {};
 }
