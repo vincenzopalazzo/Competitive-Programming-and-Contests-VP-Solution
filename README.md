@@ -78,7 +78,7 @@ Name | Solved | Repository | Report |
 *Longest bitonic subsequence* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestBitonicSubsequence) | _ |
 *Edit distance* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/EditDistance) | _ |
 *Vertex cover* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
-*Longest palindromic subsequence* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
+*Longest palindromic subsequence* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestPalindromicSubsequence) | _ |
 *N meetings in one room* | | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
 *Magic numbers* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MagicNumbers) | _ |
 *Wilbur and array* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/WilburAndArray) | _ |
