@@ -25,9 +25,8 @@
 using namespace std;
 
 int main() {
-    int N, Q;
+    int N;
     scanf("%d", &N);
-    scanf("%d", &Q);
 
     std::vector<int> inputs;
     inputs.reserve(N);
