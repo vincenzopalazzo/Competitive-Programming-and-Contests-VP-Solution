@@ -17,32 +17,38 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
+#include "../test/Utils.hpp"
+#include "PersistentSegmentTree.hpp"
 #include <cstdlib>
 #include <string>
 #include <vector>
-#include "../test/Utils.hpp"
-#include "PersistentSegmentTree.hpp"
 
 const cpstl::Log LOG(true);
 
-template <typename T>
-struct Query {
-  T target;
-  std::size_t start;
-  std::size_t end;
+template <typename T> struct Query {
+	T target;
+	std::size_t start;
+	std::size_t end;
 
-  Query(std::size_t start, std::size_t end, T target):
-    start(start), end(end), target(target) {}
+	Query(std::size_t start, std::size_t end, T target)
+	    : start(start), end(end), target(target)
+	{
+	}
 };
 
 template <typename T>
-static void solution(std::vector<T> const &inputs)
-{}
+static void
+get_smaller_number_persistent_segtree(std::vector<T> const &inputs,
+				      std::vector<Query<T>> const &queries)
+{
+}
 
 template <typename T>
 static T get_smaller_number_naive(std::vector<T> &inputs,
-                                  std::vector<Query<T>> const &queries) {
-  return inputs[0];
+				  std::vector<Query<T>> const &queries)
+{
+	return inputs[0];
 }
