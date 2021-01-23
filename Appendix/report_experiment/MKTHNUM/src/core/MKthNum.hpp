@@ -20,35 +20,68 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  */
-#include "../test/Utils.hpp"
-#include "PersistentSegmentTree.hpp"
-#include <cstdlib>
-#include <string>
+#include <map>
 #include <vector>
 
-const cpstl::Log LOG(true);
+#include "../test/Utils.hpp"
+#include "PersistentSegmentTree.hpp"
 
-template <typename T> struct Query {
-	T target;
-	std::size_t start;
-	std::size_t end;
-
-	Query(std::size_t start, std::size_t end, T target)
-	    : start(start), end(end), target(target)
-	{
-	}
-};
+const cpstl::Log LOG(false);
 
 template <typename T>
-static void
-get_smaller_number_persistent_segtree(std::vector<T> const &inputs,
-				      std::vector<Query<T>> const &queries)
+struct Query {
+  T target;
+  std::size_t start;
+  std::size_t end;
+
+  Query(std::size_t start, std::size_t end, T target)
+      : start(start--), end(end--), target(target) {}
+};
+
+// Look bettere the remapping operation
+//https://github.com/anudeep2011/programming/blob/master/MKTHNUM.cpp#L29
+template <typename T>
+static std::vector<T> remapping_original_array(std::vector<T> const &inputs)
 {
+	std::map<T, T> remap;
+	for (auto elem : inputs)
+		remap[elem] = 0;
+
+	std::vector<T> remap_result(inputs.size());
+	auto maxi = 0;
+	for (auto it = remap.begin(); it != remap.end(); it++) {
+		remap[it->first] = maxi;
+		remap_result[maxi] = it->first;
+		maxi++;
+	}
+
+	return remap_result;
+}
+
+template <typename T, typename R>
+static std::vector<R> get_smaller_number_persistent_segtree(std::vector<T> const &inputs,
+																									std::vector<Query<T>> const &queries) {
+	auto remap = remapping_original_array(inputs);
+	inputs.clear(); // free memory now we have all the result on the reamp vector.
+
+	auto segment_tree = PersistentSegmentTree<T>(0, remap.size());
+
+	for (auto &elem : remap) {
+		segment_tree.update(0, remap.size(), elem);
+	}
+
+	std::vector<R> result;
+	result.reserve(queries.size());
+	for (auto &query : queries) {
+		auto result = segment_tree.range_query(query.start, query.end, 0, remap.size());
+		result.push_back(remap[result]);
+	}
+
+	return result;
 }
 
 template <typename T>
 static T get_smaller_number_naive(std::vector<T> &inputs,
-				  std::vector<Query<T>> const &queries)
-{
-	return inputs[0];
+																	std::vector<Query<T>> const &queries) {
+  return inputs[0];
 }

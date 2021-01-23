@@ -8,14 +8,6 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{**.c,**.h,Makefile}]
+[{**.cpp,**.hpp, CMakefile}]
 indent_style = tab
-indent_size = 8
-
-[**.py]
-indent_style = space
-indent_size = 4
-
-[.travis.yml]
-indent_style = space
 indent_size = 2
