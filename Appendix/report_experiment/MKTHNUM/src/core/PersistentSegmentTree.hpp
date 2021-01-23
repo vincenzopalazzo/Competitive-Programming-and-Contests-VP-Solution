@@ -41,6 +41,8 @@ struct Node {
 template <class T>
 class PersistentSegmentTree {
  protected:
+	std::size_t start_index;
+	std::size_t end_index;
   std::vector<std::shared_ptr<Node<T>>> history;
 
   std::shared_ptr<Node<T>> build_structure(int left_index, int right_index) {
@@ -61,16 +63,16 @@ class PersistentSegmentTree {
       return left_index;
 
     auto middle_point = (left_index + right_index) / 2;
-    auto left_count = first_node->target + second_node->target;
+    auto left_count = first_node->value + second_node->value;
     if (left_count >= target)
-      return range_query_subroutine(first_node->left_node, second_node->left_node, left_index, middle_point, target);
-    return range_query_subroutine(first_node->right_node, second_node->right_node, middle_point + 1, right_index, target);
+      return range_query_subroutine(first_node->left, second_node->left, left_index, middle_point, target);
+    return range_query_subroutine(first_node->right, second_node->right, middle_point + 1, right_index, target);
   }
 
-  std::shared_ptr<Node<T>> update_range_subroutine(
-      std::shared_ptr<Node<T>> &node, int left_index, int right_index, int pos) {
+  std::shared_ptr<Node<T>> update_range_subroutine(std::shared_ptr<Node<T>> &node, std::size_t left_index,
+																									 std::size_t right_index ,int pos) {
     if (left_index == right_index || !node) {
-      return std::make_shared<Node<T>>(node->target + 1);
+      return std::make_shared<Node<T>>(node->value + 1);
     }
 
     int middle_point = (left_index + right_index) / 2;
@@ -87,22 +89,22 @@ class PersistentSegmentTree {
   }
 
  public:
-  PersistentSegmentTree(std::size_t start, std::size_t end) {
+  PersistentSegmentTree(std::size_t start, std::size_t end):
+		start_index(start), end_index(end) {
     auto node = build_structure(start, end);
-    this.history.emplace_back(node);
+    this->history.emplace_back(node);
   }
 
   virtual ~PersistentSegmentTree() {
-    root.reset();
-    history.clear();
+		history.clear();
   }
 
-  int range_query(std::size_t start_node, std::size_t end_node, std::size_t start, std::size_t end, T target) {
-    return range_query_subroutine(this->history[start_node], this->history[end_node], start, end, target);
+  int range_query(std::size_t start_node, std::size_t end_node, T target) {
+    return range_query_subroutine(this->history[start_node], this->history[end_node], this->start_index, this->end_index, target);
   }
 
-  void update(std::size_t start, std::size_t end, T value) {
-    auto new_root = update_range_subroutine(this->history.back(), start, end, value);
+  void update(T value) {
+    auto new_root = update_range_subroutine(this->history.back(), this->start_index, this->end_index, value);
     history.push_back(new_root);
   }
 };

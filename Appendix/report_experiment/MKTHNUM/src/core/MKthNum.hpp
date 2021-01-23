@@ -59,25 +59,24 @@ static std::vector<T> remapping_original_array(std::vector<T> const &inputs)
 }
 
 template <typename T, typename R>
-static std::vector<R> get_smaller_number_persistent_segtree(std::vector<T> const &inputs,
+static std::vector<T> get_smaller_number_persistent_segtree(std::vector<T> const &inputs,
 																									std::vector<Query<T>> const &queries) {
 	auto remap = remapping_original_array(inputs);
-	inputs.clear(); // free memory now we have all the result on the reamp vector.
 
-	auto segment_tree = PersistentSegmentTree<T>(0, remap.size());
+	auto segment_tree = cpstl::PersistentSegmentTree<T>(0, remap.size());
 
 	for (auto &elem : remap) {
-		segment_tree.update(0, remap.size(), elem);
+		segment_tree.update(elem);
 	}
 
-	std::vector<R> result;
-	result.reserve(queries.size());
+	std::vector<T> result_vector;
+	result_vector.reserve(queries.size());
 	for (auto &query : queries) {
-		auto result = segment_tree.range_query(query.start, query.end, 0, remap.size());
-		result.push_back(remap[result]);
+		auto result = segment_tree.range_query(query.start, (std::size_t)query.end - 1, query.target);
+		result_vector.push_back(result_vector[result]);
 	}
 
-	return result;
+	return result_vector;
 }
 
 template <typename T>

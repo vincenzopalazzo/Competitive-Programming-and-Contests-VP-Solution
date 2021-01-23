@@ -25,14 +25,17 @@
 
 using namespace std;
 
-void TEST_CASE_ONE()
-{
-    cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
-
+void TEST_CASE_ONE_PERSISTENT() {
+	std::vector<int> inputs = {1, 5, 2, 6, 3, 7, 4};
+	std::vector<Query<int>> queries;
+	queries.emplace_back(2, 5, 3);
+	queries.emplace_back(4, 4, 1);
+	queries.emplace_back(1, 7, 3);
+	auto result = get_smaller_number_persistent_segtree<int, int>(inputs, queries);
+  cpstl::assert_equal("TEST_CASE_ONE", {5, 6, 3}, result);
 }
 
-int main()
-{
-    TEST_CASE_ONE();
+int main() {
+    TEST_CASE_ONE_PERSISTENT();
     return EXIT_SUCCESS;
 }
