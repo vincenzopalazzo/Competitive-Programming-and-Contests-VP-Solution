@@ -46,8 +46,8 @@ static std::map<T, T> remapping_original_array(std::vector<T> const &inputs,
 {
 	assert(remapping.empty() && "Remapping vector need to be empty");
 	std::map<T, T> remap;
-	for (auto elem : inputs)
-		remap[elem] = 0;
+	for (auto &elem : inputs)
+		remap[elem]++;
 
 	remapping = std::vector<T>(inputs.size(), 0);
   auto maxi = 0;
@@ -76,6 +76,7 @@ static std::vector<T> get_smaller_number_persistent_segtree(std::vector<T> const
 	result_vector.reserve(queries.size());
 	for (auto &query : queries) {
 		auto result = segment_tree.range_query(query.start, (std::size_t)query.end - 1, query.target);
+		std::cout << result << "\n";
 		result_vector.push_back(remapping_vector[result]);
 	}
 	return result_vector;

@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  */
-#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -33,7 +32,7 @@ struct Node {
     T left_val, right_val = 0;
     if (left) left_val = left->value;
     if (right) right_val = right->value;
-    value += (right->value + left->value);
+    value = std::max(right->value, left->value) + 1;
   }
   Node(T value) : left(nullptr), right(nullptr), value(value) {}
 };
@@ -52,7 +51,7 @@ class PersistentSegmentTree {
     }
     int middle_point = (left_index + right_index) / 2;
     auto node_left = build_structure(left_index, middle_point);
-    auto node_right = build_structure(middle_point + 1, right_index);
+    auto node_right = build_structure(middle_point, right_index);
     return std::make_shared<Node<T>>(node_left, node_right, 0);
   }
 
@@ -73,7 +72,7 @@ class PersistentSegmentTree {
 
   std::shared_ptr<Node<T>> update_range_subroutine(std::shared_ptr<Node<T>> &node, std::size_t left_index,
 																									 std::size_t right_index ,int pos) {
-    if (left_index + 1 == right_index || !node) {
+    if (left_index + 1 == right_index) {
       return std::make_shared<Node<T>>(node->value + 1);
     }
 
@@ -82,12 +81,12 @@ class PersistentSegmentTree {
     if (pos <= middle_point) {
       auto left_node = update_range_subroutine(node->left, left_index,
                                                middle_point, pos);
-      return std::make_shared<Node<T>>(left_node, node->right, node->value++);
+      return std::make_shared<Node<T>>(left_node, node->right, node->value + 1);
     }
 
     auto right_node = update_range_subroutine(node->right, middle_point + 1,
                                               right_index, pos);
-    return std::make_shared<Node<T>>(node->left, right_node, node->value++);
+    return std::make_shared<Node<T>>(node->left, right_node, node->value + 1);
   }
 
  public:
@@ -109,6 +108,7 @@ class PersistentSegmentTree {
   void update(T value) {
     auto new_root = update_range_subroutine(this->history.back(), this->start_index, this->end_index, value);
     history.push_back(new_root);
+		std::cout << "Value " << new_root->value << std::endl;
   }
 };
 };  // namespace cpstl
