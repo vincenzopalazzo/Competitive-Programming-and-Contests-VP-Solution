@@ -22,11 +22,11 @@
  */
 #include <map>
 #include <vector>
-
+#include <cassert>
 #include "../test/Utils.hpp"
 #include "PersistentSegmentTree.hpp"
 
-const cpstl::Log LOG(false);
+const cpstl::Log LOG(true);
 
 template <typename T>
 struct Query {
@@ -41,41 +41,43 @@ struct Query {
 // Look bettere the remapping operation
 //https://github.com/anudeep2011/programming/blob/master/MKTHNUM.cpp#L29
 template <typename T>
-static std::vector<T> remapping_original_array(std::vector<T> const &inputs)
+static std::map<T, T> remapping_original_array(std::vector<T> const &inputs,
+																							 std::vector<T> &remapping)
 {
+	assert(remapping.empty() && "Remapping vector need to be empty");
 	std::map<T, T> remap;
 	for (auto elem : inputs)
 		remap[elem] = 0;
 
-	std::vector<T> remap_result(inputs.size());
-	auto maxi = 0;
+	remapping = std::vector<T>(inputs.size(), 0);
+  auto maxi = 0;
 	for (auto it = remap.begin(); it != remap.end(); it++) {
 		remap[it->first] = maxi;
-		remap_result[maxi] = it->first;
+		remapping[maxi] = it->first;
 		maxi++;
 	}
 
-	return remap_result;
+	return remap;
 }
 
 template <typename T, typename R>
 static std::vector<T> get_smaller_number_persistent_segtree(std::vector<T> const &inputs,
-																									std::vector<Query<T>> const &queries) {
-	auto remap = remapping_original_array(inputs);
+																														std::vector<Query<T>> const &queries) {
+	std::vector<T> remapping_vector;
+	auto remap_map = remapping_original_array(inputs, remapping_vector);
 
-	auto segment_tree = cpstl::PersistentSegmentTree<T>(0, remap.size());
+	auto segment_tree = cpstl::PersistentSegmentTree<T>(0, remap_map.size());
 
-	for (auto &elem : remap) {
-		segment_tree.update(elem);
+	for (auto &elem : inputs) {
+		segment_tree.update(remap_map[elem]);
 	}
 
 	std::vector<T> result_vector;
 	result_vector.reserve(queries.size());
 	for (auto &query : queries) {
 		auto result = segment_tree.range_query(query.start, (std::size_t)query.end - 1, query.target);
-		result_vector.push_back(result_vector[result]);
+		result_vector.push_back(remapping_vector[result]);
 	}
-
 	return result_vector;
 }
 
