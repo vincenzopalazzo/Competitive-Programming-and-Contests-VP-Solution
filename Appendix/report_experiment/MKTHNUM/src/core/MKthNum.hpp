@@ -35,49 +35,41 @@ struct Query {
   std::size_t end;
 
   Query(std::size_t start, std::size_t end, T target)
-      : start(start--), end(end--), target(target) {}
+      : start(start), end(end), target(target) {}
 };
 
 // Look bettere the remapping operation
 //https://github.com/anudeep2011/programming/blob/master/MKTHNUM.cpp#L29
 template <typename T>
-static std::map<T, T> remapping_original_array(std::vector<T> const &inputs,
-																							 std::vector<T> &remapping)
+static std::vector<T> remapping_original_array(std::vector<std::pair<T, std::size_t>> &inputs)
 {
-	assert(remapping.empty() && "Remapping vector need to be empty");
-	std::map<T, T> remap;
-	for (auto &elem : inputs)
-		remap[elem]++;
-
-	remapping = std::vector<T>(inputs.size(), 0);
-  auto maxi = 0;
-	for (auto it = remap.begin(); it != remap.end(); it++) {
-		remap[it->first] = maxi;
-		remapping[maxi] = it->first;
-		maxi++;
+	std::sort(inputs.begin(), inputs.end());
+	auto index = 1;
+	std::vector<T> remapping(inputs.size());
+	for (auto elem : inputs) {
+		remapping[elem.second] = index;
+		index++;
 	}
-
-	return remap;
+	return remapping;
 }
 
 template <typename T, typename R>
-static std::vector<T> get_smaller_number_persistent_segtree(std::vector<T> const &inputs,
+static std::vector<T> get_smaller_number_persistent_segtree(std::vector<std::pair<T, std::size_t>> &inputs,
 																														std::vector<Query<T>> const &queries) {
-	std::vector<T> remapping_vector;
-	auto remap_map = remapping_original_array(inputs, remapping_vector);
+	auto remapping = remapping_original_array(inputs);
 
-	auto segment_tree = cpstl::PersistentSegmentTree<T>(0, remap_map.size());
+	auto segment_tree = cpstl::PersistentSegmentTree<T>(1, remapping.size());
 
-	for (auto &elem : inputs) {
-		segment_tree.update(remap_map[elem]);
+	for (auto elem : remapping) {
+		segment_tree.update(elem, 1);
 	}
 
 	std::vector<T> result_vector;
 	result_vector.reserve(queries.size());
-	for (auto &query : queries) {
-		auto result = segment_tree.range_query(query.start, (std::size_t)query.end - 1, query.target);
+	for (auto query : queries) {
+		auto result = segment_tree.range_query(query.start - 1, query.end, query.target);
 		std::cout << result << "\n";
-		result_vector.push_back(remapping_vector[result]);
+		result_vector.push_back(inputs[result - 1].first);
 	}
 	return result_vector;
 }
