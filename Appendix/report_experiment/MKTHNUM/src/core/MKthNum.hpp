@@ -68,8 +68,7 @@ static std::vector<T> get_smaller_number_persistent_segtree(std::vector<std::pai
 	result_vector.reserve(queries.size());
 	for (auto query : queries) {
 		auto result = segment_tree.range_query(query.start - 1, query.end, query.target);
-		std::cout << result << "\n";
-		result_vector.push_back(inputs[result - 1].first);
+	  result_vector.push_back(inputs[result - 1].first);
 	}
 	return result_vector;
 }

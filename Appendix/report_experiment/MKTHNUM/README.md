@@ -1,10 +1,10 @@
 ## [MKTHNUM](https://www.spoj.com/problems/MKTHNUM/)
 
-- Status: Working in progress :construction:
+- Status: Completed
 
 Solved | Solution | Time :clock11: |
 --- | --- | --- |
-:construction:  | [Persistent Segment Tree](#TODO) | XXXX ms |
+:construction:  | [Persistent Segment Tree](https://www.spoj.com/status/ns=27341275) | 3.78 ms |
 :construction:  | [Naive Solution](#TODO)          | XXXX ms |
 
 
