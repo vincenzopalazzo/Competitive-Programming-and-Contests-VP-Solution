@@ -17,16 +17,29 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
 #include <cstdlib>
-#include <string>
-#include <vector>
-#include "../test/Utils.hpp"
 
-const cpstl::Log LOG(true);
+#include "../core/RangeUpdatesSums.hpp"
+#include "TestTool.hpp"
 
-template <typename T>
-static void solution(std::vector<T> const &inputs)
-{}
+using namespace std;
 
+void TEST_CASE_ONE() {
+  std::vector<int> input = {2, 3, 1, 1, 5, 3};
+  std::vector<Query<int>> queries;
+  queries.emplace_back((size_t)3, 5, 3);
+  queries.emplace_back(2, 2,4, 1);
+  queries.emplace_back((size_t)5, 3, 3);
+  queries.emplace_back(5, 2, 4, 2);
+  queries.emplace_back((size_t)5, 3, 3);
+  auto result = range_sum_lazy_segment_tree<int, int>(input, queries);
+  cpstl::assert_equal("TEST_CASE_ONE", {7, 11, 15}, result);
+}
+
+int main() {
+  TEST_CASE_ONE();
+  return EXIT_SUCCESS;
+}
