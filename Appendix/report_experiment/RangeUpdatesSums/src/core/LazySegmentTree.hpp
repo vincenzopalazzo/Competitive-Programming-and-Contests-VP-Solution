@@ -73,7 +73,7 @@ class LazySegmentTree {
                            std::size_t query_right) {
     propagate_increase(start_index, left_index, right_index);
     // outside the range
-    if (query_left > query_right) return -1;
+    if (query_left > query_right) return 0;
     // range represented by a node is completely inside the given range
     if (left_index >= query_left && right_index <= query_right)
       return structure[start_index];
@@ -88,8 +88,8 @@ class LazySegmentTree {
     auto right_segment = range_query_subroutine(
         right_child, middle_point + 1, right_index,
         std::max(query_left, middle_point + 1), query_right);
-    if (left_segment == -1) return right_segment;
-    if (right_segment == -1) return left_segment;
+    if (left_segment == 0) return right_segment;
+    if (right_segment == 0) return left_segment;
     return left_segment + right_segment;
   }
 
@@ -105,8 +105,7 @@ class LazySegmentTree {
    * @param new_val: The value to sum to each position of the range in the
    * original array.
    */
-  void increase_range_subroutine(std::size_t start_index,
-                                 std::size_t left_index,
+  void increase_range_subroutine(std::size_t start_index,std::size_t left_index,
                                  std::size_t right_index, std::size_t from,
                                  std::size_t to, T new_val) {
     propagate_increase(start_index, left_index, right_index);
@@ -122,9 +121,9 @@ class LazySegmentTree {
                                 std::min(middle_point, to), new_val);
       increase_range_subroutine(right_child, middle_point + 1, right_index,
                                 std::max(from, middle_point + 1), to, new_val);
-      auto left_subtree =
-          (lazy[left_child] != -1) ? lazy[left_child] : structure[left_child];
-      auto right_subtree = (lazy[right_child] != -1) ? lazy[right_child]
+      auto left_subtree = (lazy[left_child] != 0) ? lazy[left_child]
+                                                  : structure[left_child];
+      auto right_subtree = (lazy[right_child] != 0) ? lazy[right_child]
                                                      : structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
@@ -142,13 +141,13 @@ class LazySegmentTree {
       auto middle_point = (left_index + right_index) / 2;
       auto left_child = left_child_index(start_index);
       auto right_child = right_child_index(start_index);
-      increase_range_subroutine(left_child, left_index, middle_point, from,
+      update_range_subroutine(left_child, left_index, middle_point, from,
                                 std::min(middle_point, to), new_val);
-      increase_range_subroutine(right_child, middle_point + 1, right_index,
+      update_range_subroutine(right_child, middle_point + 1, right_index,
                                 std::max(from, middle_point + 1), to, new_val);
       auto left_subtree =
-          (lazy[left_child] != -1) ? lazy[left_child] : structure[left_child];
-      auto right_subtree = (lazy[right_child] != -1) ? lazy[right_child]
+          (lazy[left_child] != 0) ? lazy[left_child] : structure[left_child];
+      auto right_subtree = (lazy[right_child] != 0) ? lazy[right_child]
                                                      : structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
@@ -156,7 +155,7 @@ class LazySegmentTree {
 
   void propagate_increase(std::size_t start_index, std::size_t left_index,
                           std::size_t right_index) {
-    if (lazy[start_index] != -1) {
+    if (lazy[start_index] != 0) {
       // The node in position start_index was marked as lazy
       structure[start_index] += lazy[start_index];
       if (left_index != right_index) {
@@ -169,13 +168,13 @@ class LazySegmentTree {
         origin[left_index] += lazy[start_index];
       }
       // mark as the node as not lazy
-      lazy[start_index] = -1;
+      lazy[start_index] = 0;
     }
   }
 
   void propagate_override(std::size_t start_index, std::size_t left_index,
                           std::size_t right_index) {
-    if (lazy[start_index] != -1) {
+    if (lazy[start_index] != 0) {
       // The node in position start_index was marked as lazy
       structure[start_index] = lazy[start_index];
       if (left_index != right_index) {
@@ -187,7 +186,7 @@ class LazySegmentTree {
         origin[left_index] = lazy[start_index];
       }
       // mark as the node as not lazy
-      lazy[start_index] = -1;
+      lazy[start_index] = 0;
     }
   }
 
@@ -201,7 +200,7 @@ class LazySegmentTree {
   LazySegmentTree(std::vector<T> &origin) : origin(origin) {
     std::size_t size = origin.size();
     structure = std::vector<T>(size * 4);
-    lazy = std::vector<T>(size * 4, -1);
+    lazy = std::vector<T>(size * 4);
     origin = origin;
     build_structure(0, size);
   }
@@ -212,8 +211,8 @@ class LazySegmentTree {
   }
 
   T range_query(std::size_t start_index, std::size_t end_index) {
-    return range_query_subroutine(1, 0, origin.size() - 1, start_index,
-                                  end_index);
+    return range_query_subroutine(1, 0, origin.size() - 1,
+                                  start_index, end_index);
   }
 
   /**
@@ -225,7 +224,8 @@ class LazySegmentTree {
    * @param new_value the value that we want override in position at.
    */
   void increase_range(std::size_t from, std::size_t to, T new_val)  {
-    increase_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
+    increase_range_subroutine(1, 0, origin.size() - 1,
+                              from, to, new_val);
   }
 
   /**
@@ -237,10 +237,9 @@ class LazySegmentTree {
    * original array.
    */
   void update_range(std::size_t from, std::size_t to, T new_val) {
-    update_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
+    update_range_subroutine(1, 0, origin.size() - 1,
+                            from, to, new_val);
   }
-
-  T get_elem(std::size_t at) { return origin[at]; }
 };
 };  // namespace cpstl
     // Last update 9/1/2021

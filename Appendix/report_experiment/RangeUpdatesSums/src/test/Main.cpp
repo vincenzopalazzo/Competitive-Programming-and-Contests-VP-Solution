@@ -30,11 +30,11 @@ using namespace std;
 void TEST_CASE_ONE() {
   std::vector<int> input = {2, 3, 1, 1, 5, 3};
   std::vector<Query<int>> queries;
-  queries.emplace_back((size_t)3, 5, 3);
+  queries.emplace_back(3, 5);
   queries.emplace_back(2, 2,4, 1);
-  queries.emplace_back((size_t)5, 3, 3);
+  queries.emplace_back(3, 5);
   queries.emplace_back(5, 2, 4, 2);
-  queries.emplace_back((size_t)5, 3, 3);
+  queries.emplace_back(3, 5);
   auto result = range_sum_lazy_segment_tree<int, int>(input, queries);
   cpstl::assert_equal("TEST_CASE_ONE", {7, 11, 15}, result);
 }

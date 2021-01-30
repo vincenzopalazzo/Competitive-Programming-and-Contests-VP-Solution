@@ -27,7 +27,7 @@
 #include "../test/Utils.hpp"
 #include "LazySegmentTree.hpp"
 
-const cpstl::Log LOG(true);
+const cpstl::Log LOG(false);
 
 template <typename T>
 struct Query {
@@ -44,9 +44,7 @@ struct Query {
 
   Query(T value, std::size_t start, std::size_t anEnd, uint type)
       : value(value), start(start), end(anEnd), type(type) {}
-  Query(T valaue, std::size_t start, uint type)
-      : value(valaue), start(start), end(start), type(type) {}
-  Query(std::size_t start, std::size_t anEnd, uint type) : start(start), end(anEnd), type(type) {}
+  Query(std::size_t start, std::size_t anEnd) : start(start), end(anEnd), type(3) {}
 };
 
 template <typename T, typename R>
@@ -57,12 +55,18 @@ static std::vector<R> range_sum_lazy_segment_tree(std::vector<T> &inputs,
   result.reserve(queries.size());
   for (auto query : queries) {
     switch (query.type) {
-      case 1: segment_tree.increase_range(query.start, query.end, query.value); break;
-      case 2: segment_tree.update_range(query.start, query.end, query.value); break;
+      case 1:
+        cpstl::cp_log(LOG, "+ " + std::to_string(query.value));
+        segment_tree.increase_range(query.start - 1, query.end - 1, query.value);
+        break;
+      case 2:
+        cpstl::cp_log(LOG, "override with " + std::to_string(query.value));
+        segment_tree.update_range(query.start - 1, query.end - 1, query.value);
+        break;
       case 3:
-        auto value = segment_tree.range_query(query.start, query.end);
+        auto value = segment_tree.range_query(query.start - 1, query.end - 1);
         cpstl::cp_log(
-            LOG, "Value in the range Q( " + std::to_string(query.start) + ", " +
+            LOG, "Value in the range Q(" + std::to_string(query.start) + ", " +
                  std::to_string(query.end) + ") -> " + std::to_string(value));
         result.emplace_back(value);
         break;
