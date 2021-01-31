@@ -302,7 +302,6 @@ int main() {
 
   std::vector<Query<long long>> queries;
   queries.reserve(Q);
-  // Read the array
   for (std::size_t t = 0; t < Q; t++) {
     uint type;
     long long start, end;
