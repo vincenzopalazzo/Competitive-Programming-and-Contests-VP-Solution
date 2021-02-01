@@ -108,7 +108,8 @@ class LazySegmentTree {
    * @param new_val: The value to sum to each position of the range in the
    * original array.
    */
-  void increase_range_subroutine(std::size_t start_index,std::size_t left_index,
+  void increase_range_subroutine(std::size_t start_index,
+                                 std::size_t left_index,
                                  std::size_t right_index, std::size_t from,
                                  std::size_t to, T new_val) {
     propagate_increase(start_index, left_index, right_index);
@@ -124,10 +125,10 @@ class LazySegmentTree {
                                 std::min(middle_point, to), new_val);
       increase_range_subroutine(right_child, middle_point + 1, right_index,
                                 std::max(from, middle_point + 1), to, new_val);
-      auto left_subtree = (lazy[left_child] != 0) ? lazy[left_child]
-                                                  : structure[left_child];
-      auto right_subtree = (lazy[right_child] != 0) ? lazy[right_child]
-                                                    : structure[right_child];
+      auto left_subtree =
+          (lazy[left_child] != 0) ? lazy[left_child] : structure[left_child];
+      auto right_subtree =
+          (lazy[right_child] != 0) ? lazy[right_child] : structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
   }
@@ -150,8 +151,8 @@ class LazySegmentTree {
                               std::max(from, middle_point + 1), to, new_val);
       auto left_subtree =
           (lazy[left_child] != 0) ? lazy[left_child] : structure[left_child];
-      auto right_subtree = (lazy[right_child] != 0) ? lazy[right_child]
-                                                    : structure[right_child];
+      auto right_subtree =
+          (lazy[right_child] != 0) ? lazy[right_child] : structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
   }
@@ -214,8 +215,8 @@ class LazySegmentTree {
   }
 
   T range_query(std::size_t start_index, std::size_t end_index) {
-    return range_query_subroutine(1, 0, origin.size() - 1,
-                                  start_index, end_index);
+    return range_query_subroutine(1, 0, origin.size() - 1, start_index,
+                                  end_index);
   }
 
   /**
@@ -226,9 +227,8 @@ class LazySegmentTree {
    * the value also in the original array
    * @param new_value the value that we want override in position at.
    */
-  void increase_range(std::size_t from, std::size_t to, T new_val)  {
-    increase_range_subroutine(1, 0, origin.size() - 1,
-                              from, to, new_val);
+  void increase_range(std::size_t from, std::size_t to, T new_val) {
+    increase_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
   }
 
   /**
@@ -240,11 +240,10 @@ class LazySegmentTree {
    * original array.
    */
   void update_range(std::size_t from, std::size_t to, T new_val) {
-    update_range_subroutine(1, 0, origin.size() - 1,
-                            from, to, new_val);
+    update_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
   }
 };
-};
+};  // namespace cpstl
 
 template <typename T>
 struct Query {
@@ -261,19 +260,21 @@ struct Query {
 
   Query(T value, std::size_t start, std::size_t anEnd, uint type)
       : value(value), start(start), end(anEnd), type(type) {}
-  Query(std::size_t start, std::size_t anEnd) : start(start), end(anEnd), type(3) {}
+  Query(std::size_t start, std::size_t anEnd)
+      : start(start), end(anEnd), type(3) {}
 };
 
 template <typename T, typename R>
-static std::vector<R> range_sum_lazy_segment_tree(std::vector<T> &inputs,
-                                                  std::vector<Query<T>> const &queries) {
+static std::vector<R> range_sum_lazy_segment_tree(
+    std::vector<T> &inputs, std::vector<Query<T>> const &queries) {
   auto segment_tree = cpstl::LazySegmentTree<R>(inputs);
   std::vector<R> result;
   result.reserve(queries.size());
   for (auto const &query : queries) {
     switch (query.type) {
       case 1:
-        segment_tree.increase_range(query.start - 1, query.end - 1, query.value);
+        segment_tree.increase_range(query.start - 1, query.end - 1,
+                                    query.value);
         break;
       case 2:
         segment_tree.update_range(query.start - 1, query.end - 1, query.value);
@@ -317,7 +318,7 @@ int main() {
     }
   }
 
-  auto results = range_sum_lazy_segment_tree<long long, long long>(inputs, queries);
-  for (auto result : results)
-    printf("%lld\n", result);
+  auto results =
+      range_sum_lazy_segment_tree<long long, long long>(inputs, queries);
+  for (auto result : results) printf("%lld\n", result);
 }

@@ -19,11 +19,12 @@
  */
 #include <bits/stdc++.h>
 
+#include <fstream>
 #include <iostream>
 #include <vector>
 
 #include "colors.h"
-
+#
 using namespace std;
 
 namespace cpstl {
@@ -64,6 +65,43 @@ inline void print_vector(std::vector<T> const &inputs) {
   }
   cout << "\n";
   cout << RESET;
+}
+
+template <typename T>
+inline std::vector<T> load_input_from_file(std::string const &name_file) {
+  ifstream input_file(name_file);
+  assert(input_file.is_open());
+
+  std::vector<T> values;
+  while (!input_file.eof()) {
+    std::size_t N, Q;
+    input_file >> N;
+    input_file >> Q;
+    for (std::size_t i = 0; i < N; i++) {
+      T value;
+      input_file >> value;
+      values.push_back(value);
+    }
+    return values;
+  }
+  assert(false && "This should never happen");
+  return values;
+}
+
+
+template <typename T>
+inline std::vector<T> load_results_from_file(std::string const &name_file) {
+  ifstream input_file(name_file);
+  assert(input_file.is_open());
+
+  std::vector<T> results;
+  while (!input_file.eof()) {
+    T value;
+    input_file >> value;
+    results.push_back(value);
+  }
+  results.pop_back();
+  return results;
 }
 
 /**

@@ -23,7 +23,11 @@
 namespace cpstl {
 template <class T>
 class LazySegmentTree {
+ private:
+  enum class LastUpdate { OVERRIDE, INCREASE };
+
  protected:
+  LastUpdate last_update;
   std::vector<T> &origin;
   std::vector<T> structure;
   std::vector<T> lazy;
@@ -71,7 +75,10 @@ class LazySegmentTree {
   T range_query_subroutine(std::size_t start_index, std::size_t left_index,
                            std::size_t right_index, std::size_t query_left,
                            std::size_t query_right) {
-    propagate_increase(start_index, left_index, right_index);
+    if (this->last_update == LastUpdate::INCREASE)
+      propagate_increase(start_index, left_index, right_index);
+    else
+      propagate_override(start_index, left_index, right_index);
     // outside the range
     if (query_left > query_right) return 0;
     // range represented by a node is completely inside the given range
@@ -88,8 +95,6 @@ class LazySegmentTree {
     auto right_segment = range_query_subroutine(
         right_child, middle_point + 1, right_index,
         std::max(query_left, middle_point + 1), query_right);
-    if (left_segment == 0) return right_segment;
-    if (right_segment == 0) return left_segment;
     return left_segment + right_segment;
   }
 
@@ -105,7 +110,8 @@ class LazySegmentTree {
    * @param new_val: The value to sum to each position of the range in the
    * original array.
    */
-  void increase_range_subroutine(std::size_t start_index,std::size_t left_index,
+  void increase_range_subroutine(std::size_t start_index,
+                                 std::size_t left_index,
                                  std::size_t right_index, std::size_t from,
                                  std::size_t to, T new_val) {
     propagate_increase(start_index, left_index, right_index);
@@ -121,12 +127,11 @@ class LazySegmentTree {
                                 std::min(middle_point, to), new_val);
       increase_range_subroutine(right_child, middle_point + 1, right_index,
                                 std::max(from, middle_point + 1), to, new_val);
-      auto left_subtree = (lazy[left_child] != 0) ? lazy[left_child]
-                                                  : structure[left_child];
-      auto right_subtree = (lazy[right_child] != 0) ? lazy[right_child]
-                                                     : structure[right_child];
+      auto left_subtree = lazy[left_child] + structure[left_child];
+      auto right_subtree = lazy[right_child] + structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
+    this->last_update = LastUpdate::INCREASE;
   }
 
   void update_range_subroutine(std::size_t start_index, std::size_t left_index,
@@ -142,15 +147,16 @@ class LazySegmentTree {
       auto left_child = left_child_index(start_index);
       auto right_child = right_child_index(start_index);
       update_range_subroutine(left_child, left_index, middle_point, from,
-                                std::min(middle_point, to), new_val);
+                              std::min(middle_point, to), new_val);
       update_range_subroutine(right_child, middle_point + 1, right_index,
-                                std::max(from, middle_point + 1), to, new_val);
+                              std::max(from, middle_point + 1), to, new_val);
       auto left_subtree =
           (lazy[left_child] != 0) ? lazy[left_child] : structure[left_child];
-      auto right_subtree = (lazy[right_child] != 0) ? lazy[right_child]
-                                                     : structure[right_child];
+      auto right_subtree =
+          (lazy[right_child] != 0) ? lazy[right_child] : structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
+    this->last_update = LastUpdate::OVERRIDE;
   }
 
   void propagate_increase(std::size_t start_index, std::size_t left_index,
@@ -163,9 +169,6 @@ class LazySegmentTree {
         auto right_child = right_child_index(start_index);
         lazy[left_child] += lazy[start_index];
         lazy[right_child] += lazy[start_index];
-      } else {
-        // left_index = right_index is the time to update the origin array
-        origin[left_index] += lazy[start_index];
       }
       // mark as the node as not lazy
       lazy[start_index] = 0;
@@ -181,9 +184,6 @@ class LazySegmentTree {
         auto left_child = left_child_index(start_index);
         auto right_child = right_child_index(start_index);
         lazy[left_child] = lazy[right_child] = lazy[start_index];
-      } else {
-        // left_index = right_index is the time to update the origin array
-        origin[left_index] = lazy[start_index];
       }
       // mark as the node as not lazy
       lazy[start_index] = 0;
@@ -211,8 +211,8 @@ class LazySegmentTree {
   }
 
   T range_query(std::size_t start_index, std::size_t end_index) {
-    return range_query_subroutine(1, 0, origin.size() - 1,
-                                  start_index, end_index);
+    return range_query_subroutine(1, 0, origin.size() - 1, start_index,
+                                  end_index);
   }
 
   /**
@@ -223,9 +223,8 @@ class LazySegmentTree {
    * the value also in the original array
    * @param new_value the value that we want override in position at.
    */
-  void increase_range(std::size_t from, std::size_t to, T new_val)  {
-    increase_range_subroutine(1, 0, origin.size() - 1,
-                              from, to, new_val);
+  void increase_range(std::size_t from, std::size_t to, T new_val) {
+    increase_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
   }
 
   /**
@@ -237,8 +236,7 @@ class LazySegmentTree {
    * original array.
    */
   void update_range(std::size_t from, std::size_t to, T new_val) {
-    update_range_subroutine(1, 0, origin.size() - 1,
-                            from, to, new_val);
+    update_range_subroutine(1, 0, origin.size() - 1, from, to, new_val);
   }
 };
 };  // namespace cpstl
