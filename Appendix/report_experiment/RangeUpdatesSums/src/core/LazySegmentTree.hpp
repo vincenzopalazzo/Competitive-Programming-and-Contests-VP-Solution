@@ -26,6 +26,14 @@ class LazySegmentTree {
  private:
   enum class LastUpdate { OVERRIDE, INCREASE };
 
+  void propagate(std::size_t start_index, std::size_t left_index,
+                 std::size_t right_index) {
+    if (this->last_update == LastUpdate::INCREASE)
+      propagate_increase(start_index, left_index, right_index);
+    else
+      propagate_override(start_index, left_index, right_index);
+  }
+
  protected:
   LastUpdate last_update;
   std::vector<T> &origin;
@@ -75,10 +83,7 @@ class LazySegmentTree {
   T range_query_subroutine(std::size_t start_index, std::size_t left_index,
                            std::size_t right_index, std::size_t query_left,
                            std::size_t query_right) {
-    if (this->last_update == LastUpdate::INCREASE)
-      propagate_increase(start_index, left_index, right_index);
-    else
-      propagate_override(start_index, left_index, right_index);
+    propagate(start_index, left_index, right_index);
     // outside the range
     if (query_left > query_right) return 0;
     // range represented by a node is completely inside the given range
@@ -114,11 +119,12 @@ class LazySegmentTree {
                                  std::size_t left_index,
                                  std::size_t right_index, std::size_t from,
                                  std::size_t to, T new_val) {
-    propagate_increase(start_index, left_index, right_index);
+    propagate(start_index, left_index, right_index);
+    this->last_update = LastUpdate::INCREASE;
     if (from > to) return;
     if ((left_index >= from) && (right_index <= to)) {
       lazy[start_index] = new_val;
-      propagate_increase(start_index, left_index, right_index);
+      propagate(start_index, left_index, right_index);
     } else {
       auto middle_point = (left_index + right_index) / 2;
       auto left_child = left_child_index(start_index);
@@ -131,17 +137,17 @@ class LazySegmentTree {
       auto right_subtree = lazy[right_child] + structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
-    this->last_update = LastUpdate::INCREASE;
   }
 
   void update_range_subroutine(std::size_t start_index, std::size_t left_index,
                                std::size_t right_index, std::size_t from,
                                std::size_t to, T new_val) {
-    propagate_override(start_index, left_index, right_index);
+    propagate(start_index, left_index, right_index);
+    this->last_update = LastUpdate::OVERRIDE;
     if (from > to) return;
     if ((left_index >= from) && (right_index <= to)) {
       lazy[start_index] = new_val;
-      propagate_override(start_index, left_index, right_index);
+      propagate(start_index, left_index, right_index);
     } else {
       auto middle_point = (left_index + right_index) / 2;
       auto left_child = left_child_index(start_index);
@@ -156,7 +162,6 @@ class LazySegmentTree {
           (lazy[right_child] != 0) ? lazy[right_child] : structure[right_child];
       structure[start_index] = left_subtree + right_subtree;
     }
-    this->last_update = LastUpdate::OVERRIDE;
   }
 
   void propagate_increase(std::size_t start_index, std::size_t left_index,
