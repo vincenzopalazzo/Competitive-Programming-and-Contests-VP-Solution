@@ -27,7 +27,7 @@
 #include "../test/Utils.hpp"
 #include "LazySegmentTree.hpp"
 
-const cpstl::Log LOG(true);
+const cpstl::Log LOG(false);
 
 template <typename T>
 struct Query {
@@ -49,14 +49,14 @@ struct Query {
 };
 
 template <typename T, typename R>
-static std::vector<R> range_sum_lazy_segment_tree(
-    std::vector<T> &inputs, std::vector<Query<T>> const &queries) {
+static std::vector<R> range_sum_lazy_segment_tree(std::vector<T> &inputs,
+                                                  std::vector<Query<T>> const &queries) {
   auto segment_tree = cpstl::LazySegmentTree<R>(inputs);
   std::vector<R> result;
   result.reserve(queries.size());
   for (auto query : queries) {
-    cpstl::cp_log(LOG, "Query (" + std::to_string(query.start) + ", " +
-                           std::to_string(query.end) + ")");
+    cpstl::cp_log(LOG, "Query (" + std::to_string(query.start - 1) + ", " +
+                           std::to_string(query.end - 1) + ")");
     switch (query.type) {
       case 1:
         cpstl::cp_log(LOG, "+ " + std::to_string(query.value));
@@ -70,8 +70,8 @@ static std::vector<R> range_sum_lazy_segment_tree(
       case 3:
         auto value = segment_tree.range_query(query.start - 1, query.end - 1);
         cpstl::cp_log(LOG, "Value in the range Q(" +
-                               std::to_string(query.start) + ", " +
-                               std::to_string(query.end) + ") -> " +
+                               std::to_string(query.start - 1) + ", " +
+                               std::to_string(query.end - 1) + ") -> " +
                                std::to_string(value));
         result.emplace_back(value);
         break;
