@@ -25,6 +25,7 @@
 #include <vector>
 
 #include "../test/Utils.hpp"
+#include "OptSegmentTree.hpp"
 #include "PersistentSegmentTree.hpp"
 #include "SegmentTree.hpp"
 
@@ -78,16 +79,32 @@ static std::vector<T> get_kth_number_persistent_segtree(
 }
 
 template <typename T>
-static std::vector<T> get_kth_number_segment_tree(std::vector<T> &inputs,
-                                     std::vector<Query<T>> const &queries) {
+static std::vector<T> get_kth_number_segment_tree(
+    std::vector<T> &inputs, std::vector<Query<T>> const &queries) {
   auto segment_tree = cpstl::SegmentTree<T>(inputs);
   std::vector<T> results;
-  results.reserve(queries.size()); // overestimation
+  results.reserve(queries.size());  // overestimation
 
   for (auto query : queries) {
     auto result = segment_tree.range_query(query.start - 1, query.end - 1);
     auto elem = *std::next(result.begin(), query.target - 1);
     results.push_back(elem);
+  }
+
+  return results;
+}
+
+template <typename T>
+static std::vector<T> get_kth_number_segment_tree_optimization(
+    std::vector<T> &inputs, std::vector<Query<T>> const &queries) {
+  auto segment_tree = cpstl::OptSegmentTree<T>(inputs);
+  std::vector<T> results;
+  results.reserve(queries.size());  // overestimation
+
+  for (auto query : queries) {
+    auto result = segment_tree.range_query(query.start - 1, query.end - 1);
+    std::sort(result.begin(), result.end());
+    results.push_back(result[query.target - 1]);
   }
 
   return results;

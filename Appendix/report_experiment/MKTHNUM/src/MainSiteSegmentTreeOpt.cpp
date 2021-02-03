@@ -20,38 +20,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  */
+#include <algorithm>
 #include <iostream>
 #include <memory>
-#include <set>
 #include <vector>
 
 using namespace std;
 
 namespace cpstl {
-/**
- * Segment tree data structure implementation
- * Copyright (C) 2020  Vincenzo Palazzo vincenzopalazzodev@gmail.com
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
- * USA.
- */
 template <class T>
-class SegmentTree {
+class OptSegmentTree {
  private:
   std::vector<T> &origin;
-  std::vector<std::set<T>> structure;
+  std::vector<std::vector<T>> structure;
 
   /**
    * This function is used build the segment tree with a binary heap
@@ -78,8 +59,8 @@ class SegmentTree {
                                  std::size_t right_index) {
     if (left_index == right_index) {
       // Leaf node will have a single element
-      std::set<T> left;
-      left.insert(origin[left_index]);
+      std::vector<T> left;
+      left.push_back(origin[left_index]);
       structure[start_index] = left;
       return;
     }
@@ -91,17 +72,18 @@ class SegmentTree {
     // Internal node will have the sum of both of its children
     auto segment_left = structure[left_child];
     auto segment_right = structure[right_child];
-    segment_left.insert(segment_right.begin(), segment_right.end());
+    segment_left.insert(segment_left.end(), segment_right.begin(),
+                        segment_right.end());
     structure[start_index] = segment_left;
   }
 
-  std::set<T> range_query_subroutine(std::size_t start_index,
-                                     std::size_t left_index_now,
-                                     std::size_t right_index_now,
-                                     std::size_t query_left,
-                                     std::size_t query_right) {
+  std::vector<T> range_query_subroutine(std::size_t start_index,
+                                        std::size_t left_index_now,
+                                        std::size_t right_index_now,
+                                        std::size_t query_left,
+                                        std::size_t query_right) {
     if (query_left > right_index_now || query_right < left_index_now)
-      return std::set<T>();  // outside the range
+      return std::vector<T>();  // outside the range
     if (left_index_now >= query_left && right_index_now <= query_right)
       return structure[start_index];
 
@@ -115,7 +97,8 @@ class SegmentTree {
                                query_left, query_right);
     if (left_segment.empty()) return right_segment;
     if (right_segment.empty()) return left_segment;
-    left_segment.insert(right_segment.begin(), right_segment.end());
+    left_segment.insert(left_segment.end(), right_segment.begin(),
+                        right_segment.end());
     return left_segment;
   }
 
@@ -126,16 +109,16 @@ class SegmentTree {
   }
 
  public:
-  SegmentTree(std::vector<T> &origin) : origin(origin) {
+  OptSegmentTree(std::vector<T> &origin) : origin(origin) {
     auto size = origin.size();
-    structure = std::vector<std::set<T>>(size * 4);
+    structure = std::vector<std::vector<T>>(size * 4);
     origin = origin;
     build_structure(0, size);
   }
 
-  virtual ~SegmentTree() { structure.clear(); }
+  virtual ~OptSegmentTree() { structure.clear(); }
 
-  std::set<T> range_query(std::size_t start_index, std::size_t end_index) {
+  std::vector<T> range_query(std::size_t start_index, std::size_t end_index) {
     return range_query_subroutine(1, 0, origin.size() - 1, start_index,
                                   end_index);
   }
@@ -153,16 +136,16 @@ struct Query {
 };
 
 template <typename T>
-static std::vector<T> get_kth_number_segment_tree(
+static std::vector<T> get_kth_number_segment_tree_optimization(
     std::vector<T> &inputs, std::vector<Query<T>> const &queries) {
-  auto segment_tree = cpstl::SegmentTree<T>(inputs);
+  auto segment_tree = cpstl::OptSegmentTree<T>(inputs);
   std::vector<T> results;
   results.reserve(queries.size());  // overestimation
 
   for (auto query : queries) {
     auto result = segment_tree.range_query(query.start - 1, query.end - 1);
-    auto elem = *std::next(result.begin(), query.target - 1);
-    results.push_back(elem);
+    std::sort(result.begin(), result.end());
+    results.push_back(result[query.target - 1]);
   }
 
   return results;
@@ -188,7 +171,7 @@ int main() {
     queries.emplace_back(l, r, k);
   }
 
-  auto result = get_kth_number_segment_tree<int>(inputs, queries);
+  auto result = get_kth_number_segment_tree_optimization<int>(inputs, queries);
   for (auto r : result) {
     std::cout << r << "\n";
   }

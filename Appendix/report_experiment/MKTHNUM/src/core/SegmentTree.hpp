@@ -46,7 +46,8 @@ class SegmentTree {
    * @param left_index
    * @param right_index
    */
-  void build_structure_procedure(std::size_t start_index, std::size_t left_index,
+  void build_structure_procedure(std::size_t start_index,
+                                 std::size_t left_index,
                                  std::size_t right_index) {
     if (left_index == right_index) {
       // Leaf node will have a single element
@@ -67,9 +68,11 @@ class SegmentTree {
     structure[start_index] = segment_left;
   }
 
-  std::set<T> range_query_subroutine(std::size_t start_index, std::size_t left_index_now,
-                             std::size_t right_index_now, std::size_t query_left,
-                             std::size_t query_right) {
+  std::set<T> range_query_subroutine(std::size_t start_index,
+                                     std::size_t left_index_now,
+                                     std::size_t right_index_now,
+                                     std::size_t query_left,
+                                     std::size_t query_right) {
     if (query_left > right_index_now || query_right < left_index_now)
       return std::set<T>();  // outside the range
     if (left_index_now >= query_left && right_index_now <= query_right)
@@ -89,9 +92,7 @@ class SegmentTree {
     return left_segment;
   }
 
-  std::size_t left_child_index(std::size_t const index) {
-    return index * 2;
-  }
+  std::size_t left_child_index(std::size_t const index) { return index * 2; }
 
   std::size_t right_child_index(std::size_t const index) {
     return (index * 2) + 1;
@@ -108,8 +109,8 @@ class SegmentTree {
   virtual ~SegmentTree() { structure.clear(); }
 
   std::set<T> range_query(std::size_t start_index, std::size_t end_index) {
-    return range_query_subroutine(1, 0, origin.size() - 1,
-                                  start_index, end_index);
+    return range_query_subroutine(1, 0, origin.size() - 1, start_index,
+                                  end_index);
   }
 };
 };  // namespace cpstl

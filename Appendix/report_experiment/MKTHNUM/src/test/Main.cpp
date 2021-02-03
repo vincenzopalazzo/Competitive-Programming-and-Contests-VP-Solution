@@ -35,7 +35,7 @@ void TEST_CASE_ONE_PERSISTENT() {
   queries.emplace_back(4, 4, 1);
   queries.emplace_back(1, 7, 3);
   auto result = get_kth_number_persistent_segtree<int>(inputs, queries);
-  cpstl::assert_equal("TEST_CASE_ONE", {5, 6, 3}, result);
+  cpstl::assert_equal("TEST_CASE_ONE_PERSISTENT", {5, 6, 3}, result);
 }
 
 void TEST_CASE_ONE_CUSTOM_SEGMENT_TREE() {
@@ -48,8 +48,20 @@ void TEST_CASE_ONE_CUSTOM_SEGMENT_TREE() {
   cpstl::assert_equal("TEST_CASE_ONE_CUSTOM_SEGMENT_TREE", {5, 6, 3}, result);
 }
 
+void TEST_CASE_ONE_CUSTOM_SEGMENT_TREE_OPT() {
+  std::vector<int> inputs = {1, 5, 2, 6, 3, 7, 4};
+  std::vector<Query<int>> queries;
+  queries.emplace_back(2, 5, 3);
+  queries.emplace_back(4, 4, 1);
+  queries.emplace_back(1, 7, 3);
+  auto result = get_kth_number_segment_tree_optimization<int>(inputs, queries);
+  cpstl::assert_equal("TEST_CASE_ONE_CUSTOM_SEGMENT_TREE_OPT", {5, 6, 3},
+                      result);
+}
+
 int main() {
   TEST_CASE_ONE_PERSISTENT();
   TEST_CASE_ONE_CUSTOM_SEGMENT_TREE();
+  TEST_CASE_ONE_CUSTOM_SEGMENT_TREE_OPT();
   return EXIT_SUCCESS;
 }
