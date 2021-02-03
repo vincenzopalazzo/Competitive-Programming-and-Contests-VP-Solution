@@ -17,35 +17,62 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
 #include <benchmark/benchmark.h>
+
 #include <cmath>
-#include "../src/core/Solution.hpp"
 
-static void BM_NAIVE_SOLUTION(benchmark::State& state)
-{
-    for(auto _ : state) {
-        state.PauseTiming();
-        std::vector<int> input;
-        input.reserve(state.range(1));
-        for (size_t i = 0; i < state.range(1); i++)
-            input.push_back(rand() % state.range(1));
-        state.ResumeTiming();
+#include "../src/core/MKthNum.hpp"
 
-        solution(input);
+static void BM_CUSTOM_SEGMENT_TREE(benchmark::State& state) {
+  for (auto _ : state) {
+    state.PauseTiming();
+    std::vector<long long> input;
+    input.reserve(state.range(1));
+    for (size_t i = 0; i < state.range(1); i++)
+      input.push_back(rand() % state.range(1));
+    std::vector<Query<long long>> queries;
+    for (size_t i = 0; i < state.range(0); i++) {
+      auto start = rand() % state.range(1);
+      auto end = rand() % state.range(1);
+      auto kth = std::max(start, end) - std::min(start, end);
+      queries.emplace_back(std::min(start, end), std::max(start, end), kth);
     }
+    state.ResumeTiming();
+    auto result = get_kth_number_segment_tree<long long>(input, queries);
+  }
+}
+
+static void BM_PERSISTENT_SEGMENT_TREE(benchmark::State& state) {
+  for (auto _ : state) {
+    state.PauseTiming();
+    std::vector<std::pair<long long, std::size_t>> input;
+    input.reserve(state.range(1));
+    for (size_t i = 0; i < state.range(1); i++)
+      input.push_back({rand() % state.range(1), i});
+    std::vector<Query<long long>> queries;
+    for (size_t i = 0; i < state.range(0); i++) {
+      auto start = rand() % state.range(1);
+      auto end = rand() % state.range(1);
+      auto kth = std::max(start, end) - std::min(start, end);
+      queries.emplace_back(std::min(start, end), std::max(start, end), kth);
+    }
+    state.ResumeTiming();
+    auto result = get_kth_number_persistent_segtree<long long>(input, queries);
+  }
 }
 
 static void custom_arguments(benchmark::internal::Benchmark* b);
 
-BENCHMARK(BM_NAIVE_SOLUTION)->Apply(custom_arguments);
+BENCHMARK(BM_CUSTOM_SEGMENT_TREE)->Apply(custom_arguments);
+BENCHMARK(BM_PERSISTENT_SEGMENT_TREE)->Apply(custom_arguments);
 
 BENCHMARK_MAIN();
 
-static void custom_arguments(benchmark::internal::Benchmark* b)
-{
-    for (int i = 2; i <= 14; i++)
-        b->Args({static_cast<long>(std::pow(2, i)), static_cast<long>(std::pow(2, 21))});
+static void custom_arguments(benchmark::internal::Benchmark* b) {
+  for (int i = 2; i <= 14; i++)
+    b->Args({static_cast<long>(std::pow(2, i)),
+             static_cast<long>(std::pow(2, 21))});
 }
-

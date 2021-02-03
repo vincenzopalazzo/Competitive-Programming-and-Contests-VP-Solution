@@ -20,13 +20,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  */
+#include <cassert>
 #include <map>
 #include <vector>
-#include <cassert>
+
 #include "../test/Utils.hpp"
 #include "PersistentSegmentTree.hpp"
+#include "SegmentTree.hpp"
 
-const cpstl::Log LOG(true);
+const cpstl::Log LOG(false);
 
 template <typename T>
 struct Query {
@@ -39,42 +41,54 @@ struct Query {
 };
 
 // Look bettere the remapping operation
-//https://github.com/anudeep2011/programming/blob/master/MKTHNUM.cpp#L29
+// https://github.com/anudeep2011/programming/blob/master/MKTHNUM.cpp#L29
 template <typename T>
-static std::vector<T> remapping_original_array(std::vector<std::pair<T, std::size_t>> &inputs)
-{
-	std::sort(inputs.begin(), inputs.end());
-	auto index = 1;
-	std::vector<T> remapping(inputs.size());
-	for (auto elem : inputs) {
-		remapping[elem.second] = index;
-		index++;
-	}
-	return remapping;
-}
-
-template <typename T, typename R>
-static std::vector<T> get_smaller_number_persistent_segtree(std::vector<std::pair<T, std::size_t>> &inputs,
-																														std::vector<Query<T>> const &queries) {
-	auto remapping = remapping_original_array(inputs);
-
-	auto segment_tree = cpstl::PersistentSegmentTree<T>(1, remapping.size());
-
-	for (auto elem : remapping) {
-		segment_tree.update(elem, 1);
-	}
-
-	std::vector<T> result_vector;
-	result_vector.reserve(queries.size());
-	for (auto query : queries) {
-		auto result = segment_tree.range_query(query.start - 1, query.end, query.target);
-	  result_vector.push_back(inputs[result - 1].first);
-	}
-	return result_vector;
+static std::vector<T> remapping_original_array(
+    std::vector<std::pair<T, std::size_t>> &inputs) {
+  std::sort(inputs.begin(), inputs.end());
+  auto index = 1;
+  std::vector<T> remapping(inputs.size());
+  for (auto elem : inputs) {
+    remapping[elem.second] = index;
+    index++;
+  }
+  return remapping;
 }
 
 template <typename T>
-static T get_smaller_number_naive(std::vector<T> &inputs,
-																	std::vector<Query<T>> const &queries) {
-  return inputs[0];
+static std::vector<T> get_kth_number_persistent_segtree(
+    std::vector<std::pair<T, std::size_t>> &inputs,
+    std::vector<Query<T>> const &queries) {
+  auto remapping = remapping_original_array(inputs);
+
+  auto segment_tree = cpstl::PersistentSegmentTree<T>(1, remapping.size());
+
+  for (auto elem : remapping) {
+    segment_tree.update(elem, 1);
+  }
+
+  std::vector<T> result_vector;
+  result_vector.reserve(queries.size());
+  for (auto query : queries) {
+    auto result =
+        segment_tree.range_query(query.start - 1, query.end, query.target);
+    result_vector.push_back(inputs[result - 1].first);
+  }
+  return result_vector;
+}
+
+template <typename T>
+static std::vector<T> get_kth_number_segment_tree(std::vector<T> &inputs,
+                                     std::vector<Query<T>> const &queries) {
+  auto segment_tree = cpstl::SegmentTree<T>(inputs);
+  std::vector<T> results;
+  results.reserve(queries.size()); // overestimation
+
+  for (auto query : queries) {
+    auto result = segment_tree.range_query(query.start - 1, query.end - 1);
+    auto elem = *std::next(result.begin(), query.target - 1);
+    results.push_back(elem);
+  }
+
+  return results;
 }
