@@ -1,0 +1,352 @@
+{
+  "context": {
+    "date": "2021-02-03T12:51:47+01:00",
+    "host_name": "vincent",
+    "executable": "./Benchmark",
+    "num_cpus": 4,
+    "mhz_per_cpu": 3000,
+    "cpu_scaling_enabled": false,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 262144,
+        "num_sharing": 2
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 3145728,
+        "num_sharing": 4
+      }
+    ],
+    "load_avg": [1.91,1.78,1.79],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/4/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/4/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 3.8966243126998962e+10,
+      "cpu_time": 3.7903191229000000e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/8/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/8/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 3.8115228559998283e+10,
+      "cpu_time": 3.8014735065000000e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/16/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/16/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 4.2337273312999969e+10,
+      "cpu_time": 4.2267950559000015e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/32/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/32/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 8.4876541783000000e+10,
+      "cpu_time": 8.4853056746000000e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/64/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/64/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.2567011967100006e+11,
+      "cpu_time": 1.2544077708499998e+11,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/128/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/128/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.9371066240500113e+11,
+      "cpu_time": 1.9257418905400000e+11,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/256/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/256/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 3.7735989401099866e+11,
+      "cpu_time": 3.6073053889199994e+11,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/512/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/512/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.8098533317999866e+11,
+      "cpu_time": 5.8061911753500000e+11,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/1024/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/1024/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.2256700397570002e+12,
+      "cpu_time": 1.2217002861219998e+12,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/2048/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/2048/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 2.6391718621279995e+12,
+      "cpu_time": 2.6186278074070000e+12,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/4096/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/4096/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.2549782078390000e+12,
+      "cpu_time": 5.2103918835970000e+12,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/8192/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/8192/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 1.0700194038434002e+13,
+      "cpu_time": 1.0648608490274998e+13,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_CUSTOM_SEGMENT_TREE/16384/2097152",
+      "run_name": "BM_CUSTOM_SEGMENT_TREE/16384/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 2.1003378790614000e+13,
+      "cpu_time": 2.0834577879347000e+13,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/4/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/4/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.7642648688000916e+10,
+      "cpu_time": 5.6614872455000298e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/8/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/8/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.5842193433993088e+10,
+      "cpu_time": 5.5621633200993530e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/16/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/16/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 6.1573267574000053e+10,
+      "cpu_time": 5.9413889472998566e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/32/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/32/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 6.2660775567004745e+10,
+      "cpu_time": 6.0559494663997612e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/64/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/64/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.7592852565001518e+10,
+      "cpu_time": 5.7029660420004799e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/128/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/128/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.1162499106001633e+10,
+      "cpu_time": 5.1095958953999794e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/256/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/256/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.3811262555005669e+10,
+      "cpu_time": 5.3672822899992752e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/512/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/512/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 5.3680732222004738e+10,
+      "cpu_time": 5.3326557709995544e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/1024/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/1024/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 4.9803293349999878e+10,
+      "cpu_time": 4.9262929750002510e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/2048/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/2048/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 4.6770501815000900e+10,
+      "cpu_time": 4.6727471826998222e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/4096/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/4096/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 4.6391210179994232e+10,
+      "cpu_time": 4.6134249981005272e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/8192/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/8192/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 4.6273517681001976e+10,
+      "cpu_time": 4.6186023540998573e+10,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_PERSISTENT_SEGMENT_TREE/16384/2097152",
+      "run_name": "BM_PERSISTENT_SEGMENT_TREE/16384/2097152",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1,
+      "real_time": 4.5852934573995300e+10,
+      "cpu_time": 4.5681579292999229e+10,
+      "time_unit": "ns"
+    }
+  ]
+}
