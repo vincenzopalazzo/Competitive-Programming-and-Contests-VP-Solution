@@ -26,6 +26,13 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from IPython.display import display_html, display, HTML
 
+HTML(""" <style>
+.output_png {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+</style> """)
 
 mpl.style.use('ggplot')
 
@@ -69,7 +76,7 @@ def make_segment_tree_and_persistent_segmet_tree_benchmark_chart():
         if "BM_PERSISTENT_SEGMENT_TREE" in bm["name"]:
             labels.append('Q: {}'.format(bm['run_name'].split('/')[1]))
             times_persistent.append(bm["real_time"])
-        elif "BM_CUSTOM_SEGMENT_TREE/" in bm["name"]:
+        elif "BM_CUSTOM_SEGMENT_TREE" in bm["name"]:
             times_segment.append(bm["real_time"])
 
     stl = pandas.DataFrame({
@@ -86,7 +93,7 @@ def make_segment_tree_and_persistent_segmet_tree_benchmark_table():
         if "BM_PERSISTENT_SEGMENT_TREE" in bm["name"]:
             labels.append('Q: {}'.format(bm['run_name'].split('/')[1]))
             times_persistent.append('{} ns'.format(bm["real_time"]))
-        elif "BM_CUSTOM_SEGMENT_TREE/" in bm["name"]:
+        elif "BM_CUSTOM_SEGMENT_TREE" in bm["name"]:
             times_segment.append('{} ns'.format(bm["real_time"]))
 
     data = {
