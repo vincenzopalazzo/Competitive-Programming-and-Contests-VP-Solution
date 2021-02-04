@@ -24,7 +24,7 @@ import json
 # %matplotlib inline
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from IPython.display import display_html
+from IPython.display import display_html, display, HTML
 
 
 mpl.style.use('ggplot')
@@ -61,19 +61,37 @@ def make_segment_tree_and_naive_benchmark_chart():
     }, index=labels)
     stl.plot.bar(rot=0, figsize=(20,5), logy=True)
 
-def make_segment_tree_lazy_segment_treee_benchmark_chart():
+def make_segment_tree_and_persistent_segmet_tree_benchmark_chart():
     labels = []
-    times_lazy = []
+    times_persistent = []
     times_segment = []
     for bm in bm_json["benchmarks"]:
-        if "BM_LAZY_SEGMENT_TREE_BH" in bm["name"]:
+        if "BM_PERSISTENT_SEGMENT_TREE" in bm["name"]:
             labels.append('Q: {}'.format(bm['run_name'].split('/')[1]))
-            times_lazy.append(bm["real_time"])
-        elif "BM_SEGMENT_TREE_BH" in bm["name"]:
+            times_persistent.append(bm["real_time"])
+        elif "BM_CUSTOM_SEGMENT_TREE/" in bm["name"]:
             times_segment.append(bm["real_time"])
 
     stl = pandas.DataFrame({
-    'RMQ Lazy Propagation': times_lazy,
-    'RMQ Segment Tree': times_segment
+    'Persistent Segment Tree': times_persistent,
+    'Custom Segment Tree': times_segment
     }, index=labels, )
     stl.plot.bar(rot=0, figsize=(20,5), logy=True)
+    
+def make_segment_tree_and_persistent_segmet_tree_benchmark_table():
+    labels = []
+    times_persistent = []
+    times_segment = []
+    for bm in bm_json["benchmarks"]:
+        if "BM_PERSISTENT_SEGMENT_TREE" in bm["name"]:
+            labels.append('Q: {}'.format(bm['run_name'].split('/')[1]))
+            times_persistent.append('{} ns'.format(bm["real_time"]))
+        elif "BM_CUSTOM_SEGMENT_TREE/" in bm["name"]:
+            times_segment.append('{} ns'.format(bm["real_time"]))
+
+    data = {
+    'Persistent Segment Tree': times_persistent,
+    'Custom Segment Tree': times_segment
+    }
+    df1 = pandas.DataFrame(data=data, index=labels)
+    display(df1)
