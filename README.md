@@ -126,10 +126,11 @@ test the following commands are required
 >> mkdir build && cd build
 >> cmake .. && make
 >> ./NameSolution
+```
 
----- output tests -----
+One possible output is reported below
 
-# Output example
+```bash
 |------------ TEST TEST_CASE_ONE_SEGMENT_TREE -------------------|
 TEST_CASE_ONE_SEGMENT_TREE PASSED
 |------------ TEST TEST_CASE_ONE_LAZY_SEGMENT_TREE -------------------|
