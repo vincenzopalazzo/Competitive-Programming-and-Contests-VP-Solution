@@ -32,6 +32,8 @@ The result are stored inside a JSON or a CVS file called *result* and the machin
 - CPU: Intel Core i5-6300U @ 4x 3GHz
 - RAM: 16 GB.
 
+Some of these benchmarks have a complete discussion with the Jupiter Notebook, see last colum of the tables below.
+
 > If you want run the benchmark on your own computer and your computer are a personal computer, in some cases you need to disable some machine setting, but you can following
 [this answer](https://stackoverflow.com/a/48110959/10854225) on StackOverflow (If you are using a linux machine)
 
