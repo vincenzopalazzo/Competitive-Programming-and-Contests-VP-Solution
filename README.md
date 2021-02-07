@@ -40,7 +40,7 @@ The result are stored inside a JSON or a CVS file called *result* and the machin
 All the solutions are developed with C++ STD, and also with a couple of external tools reported below:
 
 - [CPSTL](https://vincenzopalazzo.github.io/cpstl): Competitive Programming Standard "library", it is a new project with the object to include a complete collection of algorithms and data structure to use in the Competitive Programming problem. Also it is open to support different programming language.
-- [Google benchmark](https://github.com/google/benchmark): A Google framework to make cool code benchmark, you need to install it if you want run the benchmarks in some problem, othewise you can avoid to install it.
+- [Google benchmark](https://github.com/google/benchmark): A Google framework to make cool micro benchmarks, you need to install it if you want run the benchmarks in some problem, othewise you can avoid to install it.
 
 ## Problems with a briefly discussion about them
 
@@ -87,9 +87,9 @@ Name | Solved | Repository | Report |
 
 ## Segment Tree report
 
-During the Courses is developed also a small paper to introduce the Segment tree by Example. ["Segment Tree: A Complete Introduction by Examples"](#TODO)
+During the Courses is developed also a small paper to introduce the Segment tree by Examples. ["Segment Tree: A Complete Introduction by Examples"](#TODO)
 
-## Report Experiment
+## Report Experiments
 
 Name | Solved | Repository | Report |
 --- | --- | --- | --- |
@@ -116,13 +116,15 @@ Name | Solved | Repository |
 
 ## How contribute
 
-The repository is open to receive contribution to improve the solution or the quality of the repository, there are only a few rules to respect that are reported
+The repository is open to receive contribution to improve solutions or the quality of the repository, there are only a few rules to respect that are reported
 below.
 
 - Each solution need to start with the C++ template project, available [here](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/tree/master/template)
-- Each code that is inside the repository need to follow the good formatted code guide lines, so if the solution uses the C++ classes the Google code style need to be included in the solution. .clang-format file available [at the following link](https://github.com/vincenzopalazzo/cpstl/blob/master/.clang-format), otherview is the C++ is without classes a Linux Kernel guide lines need to
-be included clang-format file available [at the following link](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/blob/master/template/.clang-format).
-- New implementation of datastructure need to be published at repository [cpstl](https://vincenzopalazzo.github.io/cpstl/).
+- Each code that is inside the repository need to follow the good formatted code guide lines, so if the solution uses the C++ classes the Google code style need to be included in the solution. _clang-format_ file available [at the following link](https://github.com/vincenzopalazzo/cpstl/blob/master/.clang-format), otherwise is the C++ is without classes a Linux Kernel guide lines need to
+be included _clang-format_ file available [at the following link](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/blob/master/template/.clang-format).
+- New implementation of datastructure need to be push also in repository [cpstl](https://vincenzopalazzo.github.io/cpstl/).
+- Each solution, need to contains a Readme with some details about the implementation and the time execution on the online Judge, one
+example can be the following [solution](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/FibonacciNum/)
 - Have fun.
 
 ## License
