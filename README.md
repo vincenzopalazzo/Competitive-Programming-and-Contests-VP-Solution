@@ -5,11 +5,12 @@ by University of Pisa.
 
 ## Table of Content
 
-- [Introduction](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#introduction)
-- [Built with](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#built-with)
-- [Problems with a briefly discussion about them](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#problems-with-a-briefly-discussion-about-them)
-- [How contribute](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#how-contribute)
-- [License](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution#license)
+- Introduction
+- Built with
+- Problems with a briefly discussion about them
+- How build the solutions
+- How contribute
+- License
 
 ## Introduction
 
@@ -115,6 +116,29 @@ Name | Solved | Repository |
 --- | --- | --- |
 *Allocation* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/google_kikstart/roundA_2020_Allocation) |
 *Plates* | :construction: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/google_kikstart/roundA_2020_Plates) |
+
+## How build the solutions
+
+Each solution contains a complete test unit developed with a Test tools developed adhock as a "Copy and Paste" code, and to build the project to ran the
+test the following commands are required
+
+```bash
+>> mkdir build && cd build
+>> cmake .. && make
+>> ./NameSolution
+
+---- output tests -----
+
+# Output example
+|------------ TEST TEST_CASE_ONE_SEGMENT_TREE -------------------|
+TEST_CASE_ONE_SEGMENT_TREE PASSED
+|------------ TEST TEST_CASE_ONE_LAZY_SEGMENT_TREE -------------------|
+TEST_CASE_ONE_LAZY_SEGMENT_TREE PASSED
+|------------ TEST TEST_CASE_TWO_LAZY_SEGMENT_TREE -------------------|
+TEST_CASE_TWO_LAZY_SEGMENT_TREE PASSED
+|------------ TEST TEST_CASE_THREE_LAZY_SEGMENT_TREE -------------------|
+TEST_CASE_THREE_LAZY_SEGMENT_TREE PASSED
+```
 
 ## How contribute
 
