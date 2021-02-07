@@ -112,7 +112,7 @@ Name | Solved | Repository |
 Name | Solved | Repository |
 --- | --- | --- |
 *Allocation* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/google_kikstart/roundA_2020_Allocation) |
-*Plates* | :construction: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/roundA_2020_Plates) |
+*Plates* | :construction: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/google_kikstart/roundA_2020_Plates) |
 
 ## How contribute
 
