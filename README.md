@@ -28,7 +28,9 @@ Each solution is provided with a battery of unit tests and a code structure unde
 Some solutions are provided with different implementation (where is present or covered from the developer) with complete benchmarks developed with [Google benchmark](https://github.com/google/benchmark).
 The result are stored inside a JSON or a CVS file called *result* and the machine where there are ran has the following characteristic.
 
-TODO
+- OS: Linuxmint 20.1 ulyssa
+- CPU: Intel Core i5-6300U @ 4x 3GHz
+- RAM: 16 GB.
 
 > If you want run the benchmark on your own computer and your computer are a personal computer, in some cases you need to disable some machine setting, but you can following
 [this answer](https://stackoverflow.com/a/48110959/10854225) on StackOverflow (If you are using a linux machine)
@@ -37,9 +39,8 @@ TODO
 
 All the solutions are developed with C++ STD, and also with a couple of external tools reported below:
 
-- [CPSTL](): Competitive Programming Standard library, it is a new project that include a collection of algorithms and data structure for competitive programming in different language.
-- [Google benchmark](): A Google framework to make cool code benchmark, you need to install it if you want run the benchmarks in some problem, othewise you can avoid to install it.
-- [abseil-cpp](https://github.com/abseil/abseil-cpp): TODO I'm not sure that I introduce this library at the moment.
+- [CPSTL](https://vincenzopalazzo.github.io/cpstl): Competitive Programming Standard "library", it is a new project with the object to include a complete collection of algorithms and data structure to use in the Competitive Programming problem. Also it is open to support different programming language.
+- [Google benchmark](https://github.com/google/benchmark): A Google framework to make cool code benchmark, you need to install it if you want run the benchmarks in some problem, othewise you can avoid to install it.
 
 ## Problems with a briefly discussion about them
 
@@ -86,20 +87,43 @@ Name | Solved | Repository | Report |
 
 ## Segment Tree report
 
-During the Courses was developed also a report, with the title ["Segment Tree: A Complete Introduction by Examples"](#TODO)
+During the Courses is developed also a small paper to introduce the Segment tree by Example. ["Segment Tree: A Complete Introduction by Examples"](#TODO)
 
-## Appendix
+## Report Experiment
 
 Name | Solved | Repository | Report |
 --- | --- | --- | --- |
 *RMQ* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RMQ/benchmark/results/RMQ_benchmark) |
-*Kth Zero* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/FindKthZero) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) |
+*Kth Zero* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/FindKthZero) | _ |
 *MKTHNUM* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/MKTHNUM) | [Benchmarks](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/MKTHNUM/benchmark/result/MKTHNUM_benchmark) |
-*Range Updates and Sums* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RangeUpdatesSums/) | _ |
+*Range Updates and Sums* | :construction: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/report_experiment/RangeUpdatesSums/) | _ |
+
+## Appendix
+
+Name | Solved | Repository |
+--- | --- | --- |
+*DQUERY* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/DQUERY) |
+*FibonacciNum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/FibonacciNum) |
+*ClotestValueOnBST* | :construction: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/ClotestValueOnBST) |
+*TwoNumberSum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/TwoNumberSum) |
+
+#### Google kikstart 2020
+
+Name | Solved | Repository |
+--- | --- | --- |
+*Allocation* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/google_kikstart/roundA_2020_Allocation) |
+*Plates* | :construction: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/roundA_2020_Plates) |
 
 ## How contribute
 
-## Conclusion
+The repository is open to receive contribution to improve the solution or the quality of the repository, there are only a few rules to respect that are reported
+below.
+
+- Each solution need to start with the C++ template project, available [here](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/tree/master/template)
+- Each code that is inside the repository need to follow the good formatted code guide lines, so if the solution uses the C++ classes the Google code style need to be included in the solution. .clang-format file available [at the following link](https://github.com/vincenzopalazzo/cpstl/blob/master/.clang-format), otherview is the C++ is without classes a Linux Kernel guide lines need to
+be included clang-format file available [at the following link](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/blob/master/template/.clang-format).
+- New implementation of datastructure need to be published at repository [cpstl](https://vincenzopalazzo.github.io/cpstl/).
+- Have fun.
 
 ## License
 
@@ -107,7 +131,9 @@ Name | Solved | Repository | Report |
   <img src="https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png" width="150" height="150"/>
 </div>
 
-Copyright (c) 2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com
+Copyright (c) 2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com and 
+all the professor of the class Competitive Programming and Contest
+https://github.com/rossanoventurini/CompetitiveProgramming
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
