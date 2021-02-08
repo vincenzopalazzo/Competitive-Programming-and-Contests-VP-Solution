@@ -8,7 +8,7 @@ Given an array of $N$ of different integer numbers, the algorithm needs to answe
 with the following format $Q(L, R, K)$ where $L$ and $R$ is the range $[L, R]$ where the algorithm needs to return the $Kth$ element in the range.
 
 
-In particular, the query needs to be able to answer a question like "What would be the k-th number in a range $[i, j]$, if this the element of this
+In particular, the query needs to be able to answer a question like "What would be the kth number in a range $[i, j]$, if this the element of this
 subarray was sorted?"
 
 #### Example 
@@ -20,10 +20,10 @@ After sorting the elements in the range _[2, 5]_, we get the segment composed fr
 ## Solution with a custom implementation of Segment Tree.
 
 The basic idea to solve this problem is to store a Balanced Binary Tree in each node of the segment, the balanced binary tree help to maintain the element stored inside the segments.
-An implementation is available on the Github repository [Competitive-Programming-and-Contests-VP-Solution](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/).
+An implementation is available on the GitHub repository [Competitive-Programming-and-Contests-VP-Solution](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/).
 However, the time complexity is not enough to solve the problem with the online Judge, and the C++ solution that gets a Time Limit Exceeded available at the following [link](https://www.spoj.com/status/MKTHNUM,macros1/).
 
-To solve with success the problem with the online Judge we need to use Persistent Tree, and the solution is described in the next section.
+To solve with success the problem with online Judge we need to use Persistent Tree, and the solution is described in the next section.
 
 ## Solution with Persistent Segment Tree
 
@@ -35,7 +35,7 @@ This solution is faster than the solution in the previous section because the ti
 
 ## Benchmark Discussion
 
-To compare the solution two solution proposed in the previois section, is used a micro benchmarck library as Google Benckmark to compare the two solution during the exection of it. This section contains a complete discussion of the results.
+To compare the solution two solutions proposed in the previous section is used a micro benchmarks library as Google Benchmark to compare the two solutions during the execution of it. This section contains a complete discussion of the results.
 
 
 ```python
