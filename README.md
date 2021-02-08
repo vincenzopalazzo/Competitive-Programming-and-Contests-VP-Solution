@@ -1,49 +1,49 @@
 # Competitive-Programming-and-Contests-Solution
 
-This repository contains the solution about the problems proposed at the Course of [Competitive Programming](https://github.com/rossanoventurini/CompetitiveProgramming)
-by University of Pisa.
+This repository contains the solution to the problems proposed at the Course of [Competitive Programming](https://github.com/rossanoventurini/CompetitiveProgramming)
+by the University of Pisa.
 
 ## Table of Content
 
 - Introduction
 - Built with
-- Problems with a briefly discussion about them
-- How build the solutions
-- How contribute
+- Problems with a brief discussion about them
+- How to build the solutions
+- How to contribute
 - License
 
 ## Introduction
 
-Each solution is provided with a battery of unit tests and a code structure under the src directory looks like the following tree:
+Each solution is provided with a battery of unit tests and a code structure under the src directory that looks like the following tree:
 
 - src
     - test
-      - *Main.cpp*: Tests units where is possible test the solution in local with the test result on console.
-      - **.hpp*: A couple of file to implement the test tools, implemented inside the repository [cpstl](https://vincenzopalazzo.github.io/cpstl/)
+      - *Main.cpp*: Tests units where is possible to test the solution in local with the test result on the console.
+      - **.hpp*: A couple of files to implement the test tools, implemented inside the repository [cpstl](https://vincenzopalazzo.github.io/cpstl/)
     - core
-      - *SolutionName.hpp*: file that contains the solution of the problem
+      - *SolutionName.hpp*: a file that contains the solution of the problem
       - One or more data structure file implemented inside the repository [cpstl](https://vincenzopalazzo.github.io/cpstl/)
     - *MainSite.cpp*: The file that contains the solution for the online judge
     - *CMakeFile*
 
-Some solutions are provided with different implementation (where is present or covered from the developer) with complete benchmarks developed with [Google benchmark](https://github.com/google/benchmark).
-The result are stored inside a JSON or a CVS file called *result* and the machine where there are ran has the following characteristic.
+Some solutions are provided with different implementations (where is present or covered by the developer) with complete benchmarks developed with [Google benchmark](https://github.com/google/benchmark).
+The result is stored inside a JSON or a CVS file called *result* and the machine where there are running has the following characteristic.
 
 - OS: Linuxmint 20.1 ulyssa
 - CPU: Intel Core i5-6300U @ 4x 3GHz
 - RAM: 16 GB.
 
-Some of these benchmarks have a complete discussion with the Jupiter Notebook, see last colum of the tables below.
+Some of these benchmarks have a complete discussion with the Jupiter Notebook, see the last column of the tables below.
 
-> If you want run the benchmark on your own computer and your computer are a personal computer, in some cases you need to disable some machine setting, but you can following
+> If you want to run the benchmark on your own computer and your computer is a personal computer, in some cases you need to disable some machine setting, but you can follow
 [this answer](https://stackoverflow.com/a/48110959/10854225) on StackOverflow (If you are using a linux machine)
 
 ## Built with
 
 All the solutions are developed with C++ STD, and also with a couple of external tools reported below:
 
-- [CPSTL](https://vincenzopalazzo.github.io/cpstl): Competitive Programming Standard "library", it is a new project with the object to include a complete collection of algorithms and data structure to use in the Competitive Programming problem. Also it is open to support different programming language.
-- [Google benchmark](https://github.com/google/benchmark): A Google framework to make cool micro benchmarks, you need to install it if you want run the benchmarks in some problem, othewise you can avoid to install it.
+- [CPSTL](https://vincenzopalazzo.github.io/cpstl): Competitive Programming Standard "library", is a new project with the object to include a complete collection of algorithms and data structure to use in the Competitive Programming problem. Also, it is open to support different programming languages.
+- [Google benchmark](https://github.com/google/benchmark): A Google framework to make cool micro benchmarks, you need to install it if you want to run the benchmarks in some problem, otherwise you can avoid installing it.
 
 ## Problems with a briefly discussion about them
 
@@ -119,9 +119,9 @@ Name | Solved | Repository |
 *Allocation* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/google_kikstart/roundA_2020_Allocation) |
 *Plates* | :construction: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/google_kikstart/roundA_2020_Plates) |
 
-## How build the solutions
+## How to build the solutions
 
-Each solution contains a complete test unit developed with a Test tools developed adhock as a "Copy and Paste" code, and to build the project to ran the
+Each solution contains a complete test unit developed with a Test tool developed ad-hock as a "Copy and Paste" code, and to build the project to run the
 test the following commands are required
 
 ```bash
@@ -143,16 +143,16 @@ TEST_CASE_TWO_LAZY_SEGMENT_TREE PASSED
 TEST_CASE_THREE_LAZY_SEGMENT_TREE PASSED
 ```
 
-## How contribute
+## How to contribute
 
-The repository is open to receive contribution to improve solutions or the quality of the repository, there are only a few rules to respect that are reported
+The repository is open to receive a contribution to improving solutions or the quality of the repository, there are only a few rules to respect that are reported
 below.
 
 - Each solution need to start with the C++ template project, available [here](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/tree/master/template)
-- Each code that is inside the repository need to follow the good formatted code guide lines, so if the solution uses the C++ classes the Google code style need to be included in the solution. _clang-format_ file available [at the following link](https://github.com/vincenzopalazzo/cpstl/blob/master/.clang-format), otherwise is the C++ is without classes a Linux Kernel guide lines need to
+- Each code that is inside the repository needs to follow the well-formatted code guidelines, so if the solution uses the C++ classes the Google code style needs to be included in the solution. _clang-format_ file available [at the following link](https://github.com/vincenzopalazzo/cpstl/blob/master/.clang-format), otherwise is the C++ is without classes a Linux Kernel guidelines need to
 be included _clang-format_ file available [at the following link](https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution/blob/master/template/.clang-format).
-- New implementation of datastructure need to be push also in repository [cpstl](https://vincenzopalazzo.github.io/cpstl/).
-- Each solution, need to contains a Readme with some details about the implementation and the time execution on the online Judge, one
+- New implementation of data structure needs to be push also in repository [cpstl](https://vincenzopalazzo.github.io/cpstl/).
+- Each solution, need to contain a Readme with some details about the implementation and the time execution on the online Judge, one
 example can be the following [solution](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/Appendix/extra/FibonacciNum/)
 - Have fun.
 
