@@ -61,8 +61,8 @@ Name | Solved | Repository | Report |
 *Finding Team Member* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/FindingTeamMember) | _ |
 *The Monkey and the Oiled Bamboo* | :heavy_check_mark:  | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MonkeyAndBamboo) | _ |
 *Inversion count* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/InversionCounting) | _ |
-*Two Types of Spells* | _ | [Code]() | _ |
-*Frogs and Mosquitoes* | _ | [Code]() | _ |
+*Two Types of Spells* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/TwoTypesofSpells) | _ |
+*Frogs and Mosquitoes* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
 *Maximum path sum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MaximumPathSumBetween2LeafNodes) | _ |
 *Longest k Good Segment* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestkGoodSegment) | _ |
 *Ilya and Queries* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/IlyaAndQueries) | _ |
@@ -164,7 +164,7 @@ example can be the following [solution](https://vincenzopalazzo.github.io/Compet
   <img src="https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png" width="150" height="150"/>
 </div>
 
-Copyright (c) 2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com and 
+Copyright (c) 2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com and
 all the professor of the class Competitive Programming and Contest
 https://github.com/rossanoventurini/CompetitiveProgramming
 
