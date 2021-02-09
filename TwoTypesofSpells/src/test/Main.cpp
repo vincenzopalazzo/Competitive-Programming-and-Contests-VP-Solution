@@ -46,6 +46,5 @@ void TEST_CASE_ONE_LIST()
 int main()
 {
     TEST_CASE_ONE_LIST();
-
     return EXIT_SUCCESS;
 }
