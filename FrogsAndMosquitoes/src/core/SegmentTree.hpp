@@ -52,7 +52,7 @@ class SegmentTree {
                                  std::size_t right_index) {
     if (left_index == right_index) {
       // Leaf node will have a single element
-      structure[start_index] = origin[left_index].position + origin[left_index].length_tongue;
+      structure[start_index] = (origin[left_index].position + origin[left_index].length_tongue);
       return;
     }
     auto middle_point = (left_index + right_index) / 2;
@@ -66,7 +66,7 @@ class SegmentTree {
     structure[start_index] = std::max(segment_left, segment_right);
   }
 
-  std::size_t range_query_subroutine(std::size_t start_index, std::size_t left_index_now,
+  T range_query_subroutine(std::size_t start_index, std::size_t left_index_now,
                              std::size_t right_index_now, std::size_t query_left,
                              std::size_t query_right) {
     if (query_left > right_index_now || query_right < left_index_now)
@@ -127,7 +127,7 @@ class SegmentTree {
 
   virtual ~SegmentTree() { structure.clear(); }
 
-  std::size_t range_query(std::size_t start_index, std::size_t end_index) {
+  T range_query(std::size_t start_index, std::size_t end_index) {
     return range_query_subroutine(1, 0, origin.size() - 1, start_index,
                                   end_index);
   }
@@ -142,7 +142,5 @@ class SegmentTree {
   void update(std::size_t const at, T value) {
     update_subroutine(1, 0, origin.size() - 1, at, value);
   }
-
-  inline T get_elem(std::size_t const at) { return origin[at]; }
 };
 };  // namespace cpstl

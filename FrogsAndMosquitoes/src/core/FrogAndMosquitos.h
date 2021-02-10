@@ -13,7 +13,8 @@
 template<typename T>
 T solve(cpstl::SegmentTree<T> &segment_tree, std::vector<T> &index_frogs, T position_mosquito) {
     auto start_range = 0;
-    auto end_range = std::upper_bound(index_frogs.begin(), index_frogs.end(), position_mosquito) - index_frogs.begin() - 1;
+    std::cout << "Upper bound pos: " << position_mosquito << "\n";
+    auto end_range = std::upper_bound(index_frogs.begin(), index_frogs.end(), position_mosquito) - index_frogs.begin();
     auto pos_frog = segment_tree.range_query(start_range, end_range);
     if (end_range == 0 || pos_frog < position_mosquito) {
         return -1; // no mosquito to eat
@@ -34,7 +35,7 @@ template<typename T, typename R> // TODO missed the original position of the Fro
 void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoes) {
     std::sort(frogs.begin(), frogs.end());
     // We need to do remapping and store a vector if position
-    // because the upperboudn is a little bit complex with the personal structure
+    // because the upperbound is a little bit complex with the personal structure
     // https://stackoverflow.com/questions/44245803/using-lower-bound-or-upper-bound-on-structure-in-c
     std::vector<T> index_frogs;
     index_frogs.reserve(frogs.size());
@@ -48,9 +49,10 @@ void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoe
         if (frog_pos == -1) {
             solutions.insert(std::pair<T, R>(mosquito.position, mosquito.dimension));
         } else {
-            auto frog = &frogs.at(frog_pos - 1);
+            frog_pos -= 1; // the segment tree is indexed by 1 to N;
+            auto frog = &frogs.at(frog_pos - 1); // the position of the fron is in the position (frog_pos - 1) - 1
             frog->mosquito_eaten++;
-            std::cout << "Mos: " << mosquito.position << " -> pos: " << frog_pos - 1 << " eat: " << frog->mosquito_eaten
+            std::cout << "Mos: " << mosquito.position << " -> pos: " << frog_pos << " eat: " << frog->mosquito_eaten
                       << "\n";
             frog->length_tongue += mosquito.dimension;
             segment_tree.update(frog_pos, mosquito.dimension);
@@ -63,7 +65,7 @@ void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoe
                 new_length_tongue += new_mosquito->second;
                 frog->mosquito_eaten++;
                 frog->length_tongue += new_mosquito->second;
-                std::cout << "Mos: " << new_mosquito->first << " -> pos: " << frog_pos - 1 << " eat: " << frog->mosquito_eaten
+                std::cout << "Mos: " << new_mosquito->first << " -> pos: " << frog_pos << " eat: " << frog->mosquito_eaten
                           << "\n";
                 segment_tree.update(frog_pos, new_mosquito->second);
                 solutions.erase(new_mosquito);
