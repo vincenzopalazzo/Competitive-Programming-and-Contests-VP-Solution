@@ -62,7 +62,7 @@ Name | Solved | Repository | Report |
 *The Monkey and the Oiled Bamboo* | :heavy_check_mark:  | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MonkeyAndBamboo) | _ |
 *Inversion count* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/InversionCounting) | _ |
 *Two Types of Spells* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/TwoTypesofSpells) | _ |
-*Frogs and Mosquitoes* | _ | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/) | _ |
+*Frogs and Mosquitoes* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/FrogsAndMosquitoes) | _ |
 *Maximum path sum* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/MaximumPathSumBetween2LeafNodes) | _ |
 *Longest k Good Segment* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/LongestkGoodSegment) | _ |
 *Ilya and Queries* | :heavy_check_mark: | [Code](https://vincenzopalazzo.github.io/Competitive-Programming-and-Contests-VP-Solution/IlyaAndQueries) | _ |
