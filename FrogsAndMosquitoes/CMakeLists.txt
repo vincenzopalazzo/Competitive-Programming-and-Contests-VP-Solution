@@ -5,5 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(
         ${PROJECT_NAME}
-        src/test/Main.cpp
-        src/core/DataStructureFrogAndMosquitos.hpp)
+        src/test/Main.cpp)
