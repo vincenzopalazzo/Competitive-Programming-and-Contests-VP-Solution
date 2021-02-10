@@ -70,4 +70,7 @@ void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoe
             }
         }
     }
+    std::sort(frogs.begin(), frogs.end(), [](auto frog_a, auto frog_b){
+        return frog_a.input_pos < frog_b.input_pos;
+    });
 }

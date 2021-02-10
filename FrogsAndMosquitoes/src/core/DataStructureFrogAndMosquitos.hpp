@@ -5,10 +5,10 @@ struct Frog {
     int length_tongue;
     int position;
     int mosquito_eaten = 0;
+    std::size_t input_pos;
 
-    Frog(int position, int lengthTongue){
-        this->length_tongue = lengthTongue;
-        this->position = position;
+    Frog(int position, int lengthTongue, std::size_t input_pos):
+        position(position), length_tongue(lengthTongue), input_pos(input_pos) {
     }
 
     bool operator <(Frog const &a)const{

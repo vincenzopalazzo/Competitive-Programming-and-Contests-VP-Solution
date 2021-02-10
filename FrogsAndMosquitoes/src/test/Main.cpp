@@ -11,10 +11,10 @@ using namespace std;
 
 void TEST_CASE_ONE() {
     std::vector<Frog> frogs;
-    frogs.emplace_back(10, 2);
-    frogs.emplace_back(15, 0);
-    frogs.emplace_back(6, 1);
-    frogs.emplace_back(0, 1);
+    frogs.emplace_back(10, 2, 0);
+    frogs.emplace_back(15, 0, 1);
+    frogs.emplace_back(6, 1, 2);
+    frogs.emplace_back(0, 1, 3);
 
     std::vector<Mosquito> mosquitoes;
     mosquitoes.emplace_back(110, 10);
