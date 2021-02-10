@@ -25,7 +25,7 @@ namespace cpstl {
 template <class T>
 class SegmentTree {
  private:
-  std::vector<Frog> origin;
+  std::vector<Frog<T>> origin;
   std::vector<T> structure;
 
   /**
@@ -118,7 +118,7 @@ class SegmentTree {
   }
 
  public:
-  SegmentTree(std::vector<Frog> &origin) : origin(origin) {
+  SegmentTree(std::vector<Frog<T>> &origin) : origin(origin) {
     auto size = origin.size();
     structure = std::vector<T>(size * 4);
     origin = origin;

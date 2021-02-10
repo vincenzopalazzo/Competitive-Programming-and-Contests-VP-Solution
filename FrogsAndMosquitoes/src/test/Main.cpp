@@ -10,13 +10,13 @@
 using namespace std;
 
 void TEST_CASE_ONE() {
-    std::vector<Frog> frogs;
+    std::vector<Frog<int>> frogs;
     frogs.emplace_back(10, 2, 0);
     frogs.emplace_back(15, 0, 1);
     frogs.emplace_back(6, 1, 2);
     frogs.emplace_back(0, 1, 3);
 
-    std::vector<Mosquito> mosquitoes;
+    std::vector<Mosquito<int>> mosquitoes;
     mosquitoes.emplace_back(110, 10);
     mosquitoes.emplace_back(1, 1);
     mosquitoes.emplace_back(6, 0);
@@ -27,7 +27,6 @@ void TEST_CASE_ONE() {
     mosquitoes_eaten<int, int>(frogs, mosquitoes);
     std::vector<std::pair<int, int>> results;
     for (auto &frog: frogs){
-        cout << frog.mosquito_eaten;
         results.emplace_back(frog.mosquito_eaten, frog.length_tongue);
     }
     cpstl::assert_equal<int, int>("TEST_CASE_ONE",
@@ -38,17 +37,16 @@ void TEST_CASE_ONE() {
 }
 
 void TEST_CASE_TWO() {
-    std::vector<Frog> frogs;
+    std::vector<Frog<int>> frogs;
     frogs.emplace_back(10, 2, 0);
 
-    std::vector<Mosquito> mosquitoes;
+    std::vector<Mosquito<int>> mosquitoes;
     mosquitoes.emplace_back(20, 2);
     mosquitoes.emplace_back(12, 1);
 
     mosquitoes_eaten<int, int>(frogs, mosquitoes);
     std::vector<std::pair<int, int>> results;
     for (auto &frog: frogs){
-        cout << frog.mosquito_eaten;
         results.emplace_back(frog.mosquito_eaten, frog.length_tongue);
     }
     cpstl::assert_equal<int, int>("TEST_CASE_TWO",

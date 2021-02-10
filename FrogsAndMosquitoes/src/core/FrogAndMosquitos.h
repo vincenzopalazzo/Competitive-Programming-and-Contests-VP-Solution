@@ -9,18 +9,20 @@
 #include <algorithm>
 #include "SegmentTree.hpp"
 
+typedef std::make_signed<std::size_t>::type ssize_t;
+
 // get better name
 template<typename T>
-T solve(cpstl::SegmentTree<T> &segment_tree, std::vector<T> &index_frogs, T position_mosquito) {
-    auto start_range = 0;
-    std::cout << "Upper bound pos: " << position_mosquito << "\n";
-    auto end_range = std::upper_bound(index_frogs.begin(), index_frogs.end(), position_mosquito) - index_frogs.begin();
+ssize_t solve(cpstl::SegmentTree<T> &segment_tree, std::vector<T> &index_frogs, std::size_t position_mosquito) {
+    std::size_t start_range = 0;
+    auto it_end_range = std::upper_bound(index_frogs.begin(), index_frogs.end(), position_mosquito);
+    auto end_range = it_end_range - index_frogs.begin() - 1;
     auto pos_frog = segment_tree.range_query(start_range, end_range);
-    if (end_range == 0 || pos_frog < position_mosquito) {
+    if (it_end_range == index_frogs.end() || pos_frog < position_mosquito) {
         return -1; // no mosquito to eat
     }
-    int middle_point;
-    while (start_range <= end_range) {
+    std::size_t middle_point;
+    while (start_range < end_range) {
         middle_point = (start_range + end_range) / 2;
         pos_frog = segment_tree.range_query(0, middle_point);
         if (start_range < pos_frog)
@@ -31,8 +33,8 @@ T solve(cpstl::SegmentTree<T> &segment_tree, std::vector<T> &index_frogs, T posi
     return start_range;
 }
 
-template<typename T, typename R> // TODO missed the original position of the Frog
-void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoes) {
+template<typename T, typename R>
+void mosquitoes_eaten(std::vector<Frog<T>> &frogs, std::vector<Mosquito<T>> &mosquitoes) {
     std::sort(frogs.begin(), frogs.end());
     // We need to do remapping and store a vector if position
     // because the upperbound is a little bit complex with the personal structure
@@ -45,15 +47,11 @@ void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoe
     std::multiset<std::pair<T, R>> solutions;
     for (auto mosquito : mosquitoes) {
         auto frog_pos = solve(segment_tree, index_frogs, mosquito.position);
-        std::cout << "Res: solve " << frog_pos << "\n";
         if (frog_pos == -1) {
             solutions.insert(std::pair<T, R>(mosquito.position, mosquito.dimension));
         } else {
-            frog_pos -= 1; // the segment tree is indexed by 1 to N;
-            auto frog = &frogs.at(frog_pos - 1); // the position of the fron is in the position (frog_pos - 1) - 1
+            auto frog = &frogs.at(frog_pos); // the position of the fron is in the position (frog_pos - 1) - 1
             frog->mosquito_eaten++;
-            std::cout << "Mos: " << mosquito.position << " -> pos: " << frog_pos << " eat: " << frog->mosquito_eaten
-                      << "\n";
             frog->length_tongue += mosquito.dimension;
             segment_tree.update(frog_pos, mosquito.dimension);
             auto new_length_tongue = frog->length_tongue + frog->position;
@@ -64,10 +62,8 @@ void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoe
                 }
                 new_length_tongue += new_mosquito->second;
                 frog->mosquito_eaten++;
-                frog->length_tongue += new_mosquito->second;
-                std::cout << "Mos: " << new_mosquito->first << " -> pos: " << frog_pos << " eat: " << frog->mosquito_eaten
-                          << "\n";
-                segment_tree.update(frog_pos, new_mosquito->second);
+                frog->length_tongue += mosquito.dimension;
+                segment_tree.update(frog_pos, mosquito.dimension);
                 solutions.erase(new_mosquito);
             }
         }
