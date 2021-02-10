@@ -26,7 +26,8 @@ void TEST_CASE_ONE() {
 
     mosquitoes_eaten<int, int>(frogs, mosquitoes);
     std::vector<std::pair<int, int>> results;
-    for (auto frog: frogs){
+    for (auto &frog: frogs){
+        cout << frog.mosquito_eaten;
         results.emplace_back(frog.mosquito_eaten, frog.length_tongue);
     }
     cpstl::assert_equal<int, int>("TEST_CASE_ONE",

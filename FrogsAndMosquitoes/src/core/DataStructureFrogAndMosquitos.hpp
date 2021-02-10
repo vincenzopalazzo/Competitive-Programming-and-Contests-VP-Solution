@@ -4,12 +4,11 @@
 struct Frog {
     int length_tongue;
     int position;
-    int mosquito_eaten;
+    int mosquito_eaten = 0;
 
     Frog(int position, int lengthTongue){
         this->length_tongue = lengthTongue;
         this->position = position;
-        this->mosquito_eaten = 0;
     }
 
     bool operator <(Frog const &a)const{
