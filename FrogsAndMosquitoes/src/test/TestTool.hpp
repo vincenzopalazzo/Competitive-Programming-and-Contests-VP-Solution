@@ -67,4 +67,36 @@ namespace cpstl {
         }
         std::cout << BOLDGREEN << name_test  << " PASSED" << RESET << "\n";
     }
+
+    template<typename T, typename R>
+    inline void assert_equal(std::string name_test, std::vector<std::pair<T, R>> const &aspected, std::vector<std::pair<T, R>> const &actual)
+    {
+        std::cout << BOLDWHITE << "|------------ TEST " << name_test << " -------------------|" << RESET << "\n";
+        if (aspected.size() != actual.size()) {
+            std::cout << BOLDRED;
+            std::cout << name_test  << " FAILED" << "\n";
+            std::cout << "Aspected size is " << aspected.size() << " but it is different from how I received " << actual.size() << "\n";
+            std::cout << RESET;
+            return;
+        }
+        for (int i = 0; i < aspected.size(); i++) {
+            if (aspected.at(i).first != actual.at(i).first) {
+                std::cout << BOLDRED;
+                std::cout << name_test  << " FAILED" << "\n";
+                std::cout << "Expected vector at position " << i << " has different value from the actual vector" << "\n";
+                std::cout << "(first in pair): Expected value is: " << aspected.at(i).first << " and the actual value is " << actual.at(i).first << "\n";
+                std::cout << RESET;
+                return;
+            }
+            if (aspected.at(i).second != actual.at(i).second) {
+                std::cout << BOLDRED;
+                std::cout << name_test  << " FAILED" << "\n";
+                std::cout << "Expected vector at position " << i << " has different value from the actual vector" << "\n";
+                std::cout << "(second in pair): Expected value is: " << aspected.at(i).second << " and the actual value is " << actual.at(i).second << "\n";
+                std::cout << RESET;
+                return;
+            }
+        }
+        std::cout << BOLDGREEN << name_test  << " PASSED" << RESET << "\n";
+    }
 }

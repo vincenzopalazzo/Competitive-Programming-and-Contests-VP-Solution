@@ -6,100 +6,60 @@
 #include <vector>
 #include <set>
 #include <algorithm>
-#include "LazySegmentTree.h"
+#include "LazySegmentTree.hpp"
 
-struct Frog {
-    int length_tongue;
-    int position;
-    int mosquito_eaten;
-
-    Frog(int position, int lengthTongue){
-        this->length_tongue = lengthTongue;
-        this->position = position;
-        this->mosquito_eaten = 0;
+// get better name
+template<typename T>
+T solve(cpstl::LazySegmentTree<T> &segment_tree, std::vector<T> &index_frogs, T position_mosquito) {
+    auto start_range = 1;
+    auto end_range = *std::lower_bound(index_frogs.begin(), index_frogs.end(), position_mosquito);
+    auto pos_frog = segment_tree.range_query(1, end_range);
+    if (end_range == 0 || pos_frog < position_mosquito) {
+        return -1; // no mosquito to eat
     }
-};
-
-struct Mosquito {
-    int position;
-    int dimension;
-    bool dead = false;
-
-    Mosquito(int position, int dimension){
-        this->dimension = dimension;
-        this->position = position;
+    int middle_point;
+    while (start_range <= end_range) {
+        middle_point = (start_range + end_range) / 2;
+        pos_frog = segment_tree.range_query(1, middle_point);
+        if (pos_frog < pos_frog)
+            start_range = middle_point + 1;
+        else
+            end_range = middle_point - 1;
     }
-};
-
-bool can_eat_mosquito(Frog &frog, Mosquito const &mosquito)
-{
-    return !mosquito.dead && (frog.position == mosquito.position || frog.length_tongue >= (mosquito.position - frog.position));
+    return start_range;
 }
 
-/**
- * The idea is to use a counting sort idea, in particular use the 2 sorted array by position
- * and check if the frog can eat the mosquito.
- *
- * 1. Order array by position
- * 2. Check if the mosquito can be eat from frog.
- */
-
-void eat_mosquitoes_naive(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoes)
-{
-    /*std::sort(frogs.begin(), frogs.end(), [](Frog &a, Frog &b) {
-        return a.position <= b.position;
-    });*/
-    std::sort(mosquitoes.begin(), mosquitoes.end(), [](Mosquito &a, Mosquito &b) {
-        return a.position <= b.position;
-    });
-
-    /**
-     * The bug can be the following assertion, in some cases
-     * the frog can continue to eat a lot of mosquitoes
-     * Each mosquito is landing to the coordinate axis only after frogs eat all possible mosquitoes landed before.
-     * Mosquitoes are given in order of their landing to the coordinate axis.
-     */
-    for (int i = 0; i < frogs.size(); i++) {
-        int j = 0;
-        while (i < frogs.size() && !mosquitoes.empty() && j < mosquitoes.size()) {
-            auto mosquito = mosquitoes.at(j);
-            if (can_eat_mosquito(frogs.at(i), mosquito)) {
-                frogs.at(i).mosquito_eaten++;
-                frogs.at(i).length_tongue += mosquito.dimension;
-                mosquitoes.erase(std::next(mosquitoes.begin(), j));
-                continue;
+template<typename T, typename R>
+void mosquitoes_eaten(std::vector<Frog> &frogs, std::vector<Mosquito> &mosquitoes) {
+    std::sort(frogs.begin(), frogs.end());
+    // We need to do remapping and store a vector if position
+    // because the upperboudn is a little bit complex with the personal structure
+    // https://stackoverflow.com/questions/44245803/using-lower-bound-or-upper-bound-on-structure-in-c
+    std::vector<T> index_frogs;
+    for (auto frog : frogs)
+        index_frogs.emplace_back(frog.position);
+    auto segment_tree = cpstl::LazySegmentTree<T>(frogs);
+    std::multiset<std::pair<T, R>> solutions;
+    for (auto mosquito : mosquitoes) {
+        auto frog_pos = solve(segment_tree, index_frogs, mosquito.position);
+        if (frog_pos == -1) {
+            solutions.insert(std::pair<T, R>(mosquito.position, mosquito.dimension));
+        } else {
+            auto frog = frogs[frog_pos];
+            frog.mosquito_eaten++;
+            frog.length_tongue += mosquito.dimension;
+            segment_tree.update_range(1, frog_pos, mosquito.dimension);
+            auto new_length_tongue = frog.length_tongue + frog.position;
+            while (!solutions.empty()) {
+                auto new_mosquito = solutions.lower_bound(std::pair<T, R>(frog.position, 0));
+                if (new_mosquito == solutions.end() || new_mosquito->first > new_length_tongue)
+                    break;
+                new_length_tongue += new_mosquito->second;
+                frog.mosquito_eaten++;
+                frog.length_tongue += mosquito.dimension;
+                segment_tree.update_range(1, frog_pos, mosquito.dimension);
+                solutions.erase(new_mosquito);
             }
-            j++;
-        }
-    }
-}
-
-void eat_mosquitoes_set(std::vector<Frog> &frogs, std::set<Mosquito> &mosquitoes)
-{
-    /*std::sort(frogs.begin(), frogs.end(), [](Frog &a, Frog &b) {
-        return a.position <= b.position;
-    });*/
-    std::sort(mosquitoes.begin(), mosquitoes.end(), [](Mosquito &a, Mosquito &b) {
-        return a.position <= b.position;
-    });
-
-    /**
-     * The bug can be the following assertion, in some cases
-     * the frog can continue to eat a lot of mosquitoes
-     * Each mosquito is landing to the coordinate axis only after frogs eat all possible mosquitoes landed before.
-     * Mosquitoes are given in order of their landing to the coordinate axis.
-     */
-    for (int i = 0; i < frogs.size(); i++) {
-        int j = 0;
-        while (i < frogs.size() && !mosquitoes.empty() && j < mosquitoes.size()) {
-            auto mosquito = mosquitoes.at(j);
-            if (can_eat_mosquito(frogs.at(i), mosquito)) {
-                frogs.at(i).mosquito_eaten++;
-                frogs.at(i).length_tongue += mosquito.dimension;
-                mosquitoes.erase(std::next(mosquitoes.begin(), j));
-                continue;
-            }
-            j++;
         }
     }
 }
