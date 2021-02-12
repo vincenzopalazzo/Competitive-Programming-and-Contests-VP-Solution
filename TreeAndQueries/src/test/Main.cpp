@@ -25,19 +25,8 @@
 
 using namespace std;
 
-void TEST_CASE_ONE()
-{
-    std::vector<Color<int>> inputs = {
-            {1, 0},
-            {2, 1},
-            {2, 2},
-            {3, 3},
-            {3, 4},
-            {2, 5},
-            {3, 6},
-            {3, 7}
-    };
-
+void TEST_CASE_ONE() {
+    std::vector<int> inputs = {1, 2, 2, 3, 3, 2, 3, 3};
     std::vector<std::vector<int>> edges(8);
 
     edges[0].push_back(1); // 1 -> 2
@@ -72,8 +61,7 @@ void TEST_CASE_ONE()
     cpstl::assert_equal("TEST_CASE_ONE", {2, 2, 1, 0, 1}, result);
 }
 
-int main()
-{
+int main() {
     TEST_CASE_ONE();
     return EXIT_SUCCESS;
 }

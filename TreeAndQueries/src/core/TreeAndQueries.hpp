@@ -33,14 +33,6 @@ struct Tree {
     V key = 0;
 };
 
-template<typename T>
-struct Color {
-    T value;
-    std::size_t index;
-
-    Color(T value, size_t index) : value(value), index(index) {}
-};
-
 template<typename V, typename C>
 struct Query {
     V vertex;
@@ -55,7 +47,7 @@ struct Query {
 };
 
 template<typename T>
-static void eulero_tour_remapping(std::vector<Color<T>> const &inputs, std::vector<std::vector<T>> &edges,
+static void eulero_tour_remapping(std::vector<T> const &inputs, std::vector<std::vector<T>> &edges,
                                   std::vector<Tree<T>> &remapping,
                                   T current, T parent);
 
@@ -92,7 +84,7 @@ static void decrement(std::vector<Tree<T>> const &input,std::vector<T> &counter,
 
 template<typename T, typename R>
 static std::vector<R>
-numbers_of_vertices_with_color(std::vector<Color<T>> &inputs, std::vector<std::vector<T>> &edges,
+numbers_of_vertices_with_color(std::vector<T> &inputs, std::vector<std::vector<T>> &edges,
                                std::vector<Query<T, T>> &queries) {
     std::vector<Tree<T>> eulero_visit;
     eulero_visit.reserve(inputs.size());
@@ -101,12 +93,7 @@ numbers_of_vertices_with_color(std::vector<Color<T>> &inputs, std::vector<std::v
 
     std::stable_sort(queries.begin(), queries.end(), compare<T>);
 
-    auto max_color_val = 0;
-    for (auto color: inputs) {
-        if (max_color_val < color.value) {
-            max_color_val = color.value;
-        }
-    }
+    auto max_color_val = *std::max_element(inputs.begin(), inputs.end());
 
     std::vector<R> result(queries.size(), 0);
     std::vector<T> counter(1 + max_color_val, 0);
@@ -120,23 +107,19 @@ numbers_of_vertices_with_color(std::vector<Color<T>> &inputs, std::vector<std::v
         auto right_point = query.to;
 
         while (current_right < right_point) {
-            increment(eulero_visit, counter, suffix, current_right);
-            current_right++;
+            increment(eulero_visit, counter, suffix, ++current_right);
         }
 
         while (current_left < left_point) {
-            decrement(eulero_visit, counter, suffix, current_left);
-            current_left++;
+            decrement(eulero_visit, counter, suffix, current_left++);
         }
 
         while (current_left > left_point) {
-            increment(eulero_visit, counter, suffix, current_left);
-            current_left--;
+            increment(eulero_visit, counter, suffix, --current_left);
         }
 
         while (current_right > right_point) {
-            decrement(eulero_visit, counter, suffix, current_right);
-            current_right--;
+            decrement(eulero_visit, counter, suffix, current_right--);
         }
         cpstl::cp_log(LOG, "KTh: " + std::to_string(query.kth_color));
         cpstl::cp_log(LOG, suffix);
@@ -148,20 +131,20 @@ numbers_of_vertices_with_color(std::vector<Color<T>> &inputs, std::vector<std::v
 }
 
 template<typename T>
-static void eulero_tour_remapping(std::vector<Color<T>> &inputs, std::vector<std::vector<T>> &edges,
+static void eulero_tour_remapping(std::vector<T> &inputs, std::vector<std::vector<T>> &edges,
                                   std::vector<Tree<T>> &remapping,
                                   T current, T parent) {
     Tree<T> node;
     remapping.emplace_back(node);
     Tree<T> &ref = remapping.back();
-    ref.key = inputs[current].value;
+    ref.key = inputs[current];
     assert(ref.key >= 0);
-    ref.left = (T)remapping.size() - 1;
+    ref.left = remapping.size() - 1;
     for (auto const &edge : edges[current]) {
         if (edge == parent) continue;
         eulero_tour_remapping(inputs, edges, remapping, edge, current);
     }
-    ref.right = (T)remapping.size() - 1;
+    ref.right = remapping.size() - 1;
 }
 
 template<typename T>
