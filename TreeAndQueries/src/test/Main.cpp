@@ -27,21 +27,48 @@ using namespace std;
 
 void TEST_CASE_ONE()
 {
-    std::vector<int> inputs = {1, 2, 2, 3, 3, 2, 3, 3};
-    std::vector<Query<int>> queries;
-    queries.emplace_back(1, 2, 0, inputs.size());
-    queries.emplace_back(1, 5, 1, inputs.size());
-    queries.emplace_back(2, 3, 2, inputs.size());
-    queries.emplace_back(2, 4, 3, inputs.size());
-    queries.emplace_back(5, 6, 4, inputs.size());
-    queries.emplace_back(5, 7, 5, inputs.size());
-    queries.emplace_back(5, 8, 6, inputs.size());
-    queries.emplace_back(1, 2, 7, inputs.size());
-    queries.emplace_back(1, 3, 8, inputs.size());
-    queries.emplace_back(1, 4, 9, inputs.size());
-    queries.emplace_back(2, 3, 10, inputs.size());
-    queries.emplace_back(5, 3, 11, inputs.size());
-    auto result = numbers_of_vertices_with_color<int, int>(inputs, queries);
+    std::vector<Color<int>> inputs = {
+            {1, 0},
+            {2, 1},
+            {2, 2},
+            {3, 3},
+            {3, 4},
+            {2, 5},
+            {3, 6},
+            {3, 7}
+    };
+
+    std::vector<std::vector<int>> edges(8);
+
+    edges[0].push_back(1); // 1 -> 2
+    edges[1].push_back(0); // 1 <- 2
+
+    edges[0].push_back(4);
+    edges[4].push_back(0);
+
+    edges[1].push_back(2);
+    edges[2].push_back(1);
+
+    edges[1].push_back(3);
+    edges[3].push_back(1);
+
+    edges[4].push_back(5);
+    edges[5].push_back(4);
+
+    edges[4].push_back(6);
+    edges[6].push_back(4);
+
+    edges[4].push_back(7);
+    edges[7].push_back(4);
+
+    std::vector<Query<int, int>> queries;
+    queries.emplace_back(1, 2, inputs.size(), 0);
+    queries.emplace_back(1, 3, inputs.size(), 1);
+    queries.emplace_back(1, 4, inputs.size(), 2);
+    queries.emplace_back(2, 3, inputs.size(), 3);
+    queries.emplace_back(5, 3, inputs.size(), 4);
+    auto result = numbers_of_vertices_with_color<int, int>(inputs, edges, queries);
+    cpstl::cp_log(LOG, result);
     cpstl::assert_equal("TEST_CASE_ONE", {2, 2, 1, 0, 1}, result);
 }
 

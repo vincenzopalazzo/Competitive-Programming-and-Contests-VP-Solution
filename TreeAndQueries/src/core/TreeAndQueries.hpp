@@ -26,97 +26,150 @@
 
 const cpstl::Log LOG(true);
 
+template<typename V>
+struct Tree {
+    V left = 0;
+    V right = 0;
+    V key = 0;
+};
+
 template<typename T>
+struct Color {
+    T value;
+    std::size_t index;
+
+    Color(T value, size_t index) : value(value), index(index) {}
+};
+
+template<typename V, typename C>
 struct Query {
-    std::size_t subtree;
-    T color;
+    V vertex;
+    C kth_color;
+    V from; // set value after eulero tour over the tree
+    V to; // set value after eulero tour over the tree
+    std::size_t size_block;
     std::size_t index_query;
-    std::size_t block_size;
 
-    Query(size_t subtree, T color, size_t indexQuery, size_t blockSize) : subtree(subtree), color(color),
-                                                                          index_query(indexQuery),
-                                                                          block_size(std::sqrt(blockSize)) {}
-};
-
-struct Edge {
-    std::size_t from;
-    std::size_t to;
-
-    Edge(size_t from, size_t to) : from(from), to(to) {}
+    Query(V vertex, C kthColor, size_t sizeBlock, std::size_t index_query) :
+            vertex(vertex - 1), kth_color(kthColor), size_block(sizeBlock), index_query(index_query) {}
 };
 
 template<typename T>
-static bool compare(Query<T> const &query_a, Query<T> const &query_b)
-{
-    auto left_block = query_a.subtree / query_a.block_size;
-    auto right_block = query_b.subtree / query_b.block_size;
-    return left_block < right_block;
+static void eulero_tour_remapping(std::vector<Color<T>> const &inputs, std::vector<std::vector<T>> &edges,
+                                  std::vector<Tree<T>> &remapping,
+                                  T current, T parent);
+
+template<typename T>
+static void remapping_query_after_eulero_tour(std::vector<Tree<T>> &eulero_visit,
+                                              std::vector<Query<T, T>> &queries);
+
+template<typename T>
+static bool compare(Query<T, T> const &query_a, Query<T, T> const &query_b) {
+    auto left_block = query_a.from / query_a.size_block;
+    auto right_block = query_b.from / query_b.size_block;
+    if (left_block != right_block)
+        return left_block < right_block;
+    return query_a.to < query_b.to;
 }
 
 template<typename T, typename R>
-static void increment(std::vector<T> const &input, std::map<T, R> counter, R &answer, std::size_t position)
-{
-    auto to_pos = input[position];
-    answer -= counter[to_pos];
+static void increment(std::vector<Tree<T>> const &input, std::vector<T> &counter, std::vector<R> &answer, std::size_t position) {
+    auto to_pos = input[position].key;
     counter[to_pos]++;
-    answer += counter[to_pos];
+    auto count = counter[to_pos];
+    if (count >= answer.size()) answer.push_back(0);
+    answer[count]++;
 }
 
 template<typename T, typename R>
-static void decrement(std::vector<T> const &input, std::map<T, R> counter, R &answer, std::size_t position)
-{
-    auto to_pos = input[position];
-    answer -= counter[to_pos];
+static void decrement(std::vector<Tree<T>> const &input,std::vector<T> &counter, std::vector<R> &answer, std::size_t position) {
+    auto to_pos = input[position].key;
+    auto count = counter[to_pos];
+    answer[count]--;
     counter[to_pos]--;
-    answer += counter[to_pos];
+    if (answer.back() == 0) answer.pop_back();
 }
 
-template <typename T>
-static std::vector<T> remap_tree_into_array(std::vector<T> const &inputs, std::vector<Edge> const &edges)
-{
-    std::vector<T> remap_vector;
+template<typename T, typename R>
+static std::vector<R>
+numbers_of_vertices_with_color(std::vector<Color<T>> &inputs, std::vector<std::vector<T>> &edges,
+                               std::vector<Query<T, T>> &queries) {
+    std::vector<Tree<T>> eulero_visit;
+    eulero_visit.reserve(inputs.size());
+    eulero_tour_remapping<T>(inputs, edges, eulero_visit, 0, -1); // Start from 0 and the parent is null (-1)
+    remapping_query_after_eulero_tour(eulero_visit, queries);
 
-    return remap_vector;
-}
+    std::stable_sort(queries.begin(), queries.end(), compare<T>);
 
-template <typename T, typename R>
-static std::vector<R> numbers_of_vertices_with_color(std::vector<T> const &inputs, std::vector<Edge> const &edges,
-                                                     std::vector<Query<T>> &queries)
-{
-    auto tree_remapped = remap_tree_into_array(inputs, edges);
-
-    std::sort(queries.begin(), queries.end(), compare<T>);
+    auto max_color_val = 0;
+    for (auto color: inputs) {
+        if (max_color_val < color.value) {
+            max_color_val = color.value;
+        }
+    }
 
     std::vector<R> result(queries.size(), 0);
-    std::map<T, R> counter;
-    std::size_t current_left = 0;
-    std::size_t current_right = 0;
-    R answer = 0;
+    std::vector<T> counter(1 + max_color_val, 0);
+    std::vector<R> suffix;
+    suffix.reserve(max_color_val);
+    suffix.push_back(max_color_val);
+    T current_left = 0;
+    T current_right = -1;
     for (auto query : queries) {
-        auto left_point = 0;
-        auto right_point = query.subtree - 1;
-
-        while (current_left > left_point) {
-            increment(inputs, counter, answer, current_left);
-            current_left--;
-        }
-
-        while (current_left < left_point) {
-            decrement(inputs, counter, answer, current_left);
-            current_left++;
-        }
+        auto left_point = query.from;
+        auto right_point = query.to;
 
         while (current_right < right_point) {
-            increment(inputs, counter, answer, current_right);
+            increment(eulero_visit, counter, suffix, current_right);
             current_right++;
         }
 
-        while (current_right > (right_point + 1)) {
-            decrement(inputs, counter, answer, current_right - 1);
+        while (current_left < left_point) {
+            decrement(eulero_visit, counter, suffix, current_left);
+            current_left++;
+        }
+
+        while (current_left > left_point) {
+            increment(eulero_visit, counter, suffix, current_left);
+            current_left--;
+        }
+
+        while (current_right > right_point) {
+            decrement(eulero_visit, counter, suffix, current_right);
             current_right--;
         }
-        result[query.index_query] = answer;
+        cpstl::cp_log(LOG, "KTh: " + std::to_string(query.kth_color));
+        cpstl::cp_log(LOG, suffix);
+        auto r = query.kth_color < suffix.size() ? suffix[query.kth_color] : 0;
+        cpstl::cp_log(LOG, "Suffix: " + std::to_string(r));
+        result[query.index_query] = r;
     }
     return result;
 }
 
+template<typename T>
+static void eulero_tour_remapping(std::vector<Color<T>> &inputs, std::vector<std::vector<T>> &edges,
+                                  std::vector<Tree<T>> &remapping,
+                                  T current, T parent) {
+    Tree<T> node;
+    remapping.emplace_back(node);
+    Tree<T> &ref = remapping.back();
+    ref.key = inputs[current].value;
+    assert(ref.key >= 0);
+    ref.left = (T)remapping.size() - 1;
+    for (auto const &edge : edges[current]) {
+        if (edge == parent) continue;
+        eulero_tour_remapping(inputs, edges, remapping, edge, current);
+    }
+    ref.right = (T)remapping.size() - 1;
+}
+
+template<typename T>
+static void
+remapping_query_after_eulero_tour(std::vector<Tree<T>> &eulero_visit, std::vector<Query<T, T>> &queries) {
+    for (auto &query : queries) {
+        assert(eulero_visit[query.vertex].key >= 0);
+        query.from = eulero_visit[query.vertex].left;
+        query.to = eulero_visit[query.vertex].right;
+    }
+}
