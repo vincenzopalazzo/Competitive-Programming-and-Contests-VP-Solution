@@ -1,6 +1,9 @@
 /**
- * Segment tree data structure implementation
- * Copyright (C) 2020  Vincenzo Palazzo vincenzopalazzodev@gmail.com
+ * Competitive-Programming-and-Contests-VP-Solution a collection of
+ * code with an engineering approach to solve the problem.
+ * https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution
+ *
+ * Copyright (C) 2020-2021  Vincenzo Palazzo vincenzopalazzodev@gmail.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
