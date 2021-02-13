@@ -2,7 +2,7 @@
 // Created by vincent on 9/18/20.
 //
 #include <benchmark/benchmark.h>
-#include "../src/core/Tower.h"
+#include "../src/core/Tower.hpp"
 
 static void BM_Template(benchmark::State& state)
 {
