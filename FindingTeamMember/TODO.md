@@ -1,3 +1,0 @@
-- [ ] Is cool to have inside the template the directory to develop the benchmark with google benchmark mark: [https://github.com/google/benchmark](https://github.com/google/benchmark).
-- [ ] Add a readme inside the subdirectory
-- [ ] others cool things
