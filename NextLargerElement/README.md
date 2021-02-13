@@ -10,12 +10,13 @@ Based on stack | :heavy_check_mark: | 68048218 ns * |
 
 - (*) Test benchmark made with inputs size=262144
 
-The source of some example and a good explanation of XOR that I found is at the [following link](https://florian.github.io/xor-trick/)
-
 ## Naive Solution
 
-TODO add some information to retrivel the idea after some time!
+The naive solution use to for loops to iterate over the input array and return the element in position i if the following condition is verified
+`inputs.at(i) < inputs.at(j)`. The time complexity is O(N ^ 2) and the space complexity is O(N)
 
 ## Stack solution
 
-TODO add some information to retrival the idea after some time!
+The solution on stack use a simple trick over the stack characteristic to keep track of non-contiguous decreasing sequences of elements,
+when a new element is found all the element < of the actual new element is extracted from the stack and punt inside the result array,
+The time complexity of the solution is O(N) and also the space complexity is O(N)
