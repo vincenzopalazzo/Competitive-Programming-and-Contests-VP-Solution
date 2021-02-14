@@ -19,7 +19,7 @@
 #include <cstdlib>
 #include <vector>
 #include "TestTool.hpp"
-#include "../core/LongestIncreasingSubsequence.h"
+#include "../core/LongestIncreasingSubsequence.hpp"
 
 using namespace std;
 
@@ -39,18 +39,10 @@ static void TEST_CASE_ONE_DP_MEM()
     cpstl::assert_equal("TEST_CASE_ONE_DP_MEM", 4, result);
 }
 
-static void TEST_CASE_ONE_DP_SEGMENT_TREE()
-{
-    vector<int> map = {10,9,2,5,3,7,101,18};
-    cpstl::cp_log(LOG, map);
-    auto result = lis_dynamic_programming_segment_tree<int, int>(map);
-    cpstl::assert_equal("TEST_CASE_ONE_DP_SEGMENT_TREE", 4, result);
-}
 
 int main()
 {
     TEST_CASE_ONE_DP();
     TEST_CASE_ONE_DP_MEM();
-    TEST_CASE_ONE_DP_SEGMENT_TREE();
     return EXIT_SUCCESS;
 }
