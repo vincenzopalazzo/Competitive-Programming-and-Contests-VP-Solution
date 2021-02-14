@@ -17,48 +17,33 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
+#include "../test/Utils.hpp"
 #include <cstdlib>
 #include <string>
 #include <vector>
-#include "../test/Utils.hpp"
 
-const cpstl::Log LOG(true);
-
-template <typename T>
-struct Node {
-  T value;
-  Node<T> *left;
-  Node<T> *right;
-
-  Node (Node<T> *left, Node<T> *right, T value):
-    left(left), right(right), value(value){}
-
-  Node (T value):
-    left(nullptr), right(nullptr), value(value) {}
-
-  bool is_leaf() {
-    return left == nullptr && right == nullptr;
-  }
-};
-
+const cpstl::Log LOG(false);
 
 template <typename T>
-static T number_of_vertex_in_the_tree(Node<T> *root)
+static void vertex_covered(std::vector<std::vector<T>> const &vertices, T vertex,
+			   T parent, std::vector<std::vector<T>> &dp_mem)
 {
-  if(!root) return 0;
-  if (root->is_leaf()) return 0;
+	for (auto const &next : vertices[vertex]) {
+		if (next == parent) continue;
+		vertex_covered(vertices, next, vertex, dp_mem);
+		dp_mem[0][vertex] += dp_mem[1][next];
+		dp_mem[1][vertex] += std::min(dp_mem[0][next], dp_mem[1][next]);
+	}
+	dp_mem[1][vertex]++;
+}
 
-  auto with_root = 1 + number_of_vertex_in_the_tree<T>(root->left)
-                             + number_of_vertex_in_the_tree<T>(root->right);
-
-  auto without_root = 0;
-
-  if (root->left)
-    without_root += 1 + number_of_vertex_in_the_tree<T>(root->left->left) + number_of_vertex_in_the_tree<T>(root->left->right);
-  if(root->right)
-    without_root += 1 + number_of_vertex_in_the_tree<T>(root->right->left) + number_of_vertex_in_the_tree<T>(root->right->right);
-
-  return std::min(with_root, without_root);
+template <typename T>
+static T number_of_vertex_in_the_tree(std::vector<std::vector<T>> const &vertices)
+{
+	std::vector<std::vector<T>> dp_mem(2, std::vector<T>(vertices.size(), 0));
+	vertex_covered(vertices, 0, -1, dp_mem);
+	return std::min(dp_mem[0][0], dp_mem[1][0]);
 }

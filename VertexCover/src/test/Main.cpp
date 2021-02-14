@@ -17,31 +17,42 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
-#include <cstdlib>
-#include "TestTool.hpp"
 #include "../core/VertexCover.hpp"
+#include "TestTool.hpp"
+#include <cstdlib>
 
 using namespace std;
 
 void TEST_CASE_ONE()
 {
-	Node<int> *root = new Node<int>(20);
-	root->left = new Node<int>(8);
-	root->left->left = new Node<int>(4);
-	root->left->right = new Node<int>(12);
-	root->left->right->left = new Node<int>(10);
-	root->left->right->right = new Node<int>(14);
-	root->right = new Node<int>(22);
-	root->right->right = new Node<int>(24);
-	auto result = number_of_vertex_in_the_tree(root);
-	cpstl::assert_equal("TEST_CASE_ONE", 3, result);
-	delete root;
+	std::vector<std::vector<int>> vertices(3);
+	vertices[0].push_back(1);
+	vertices[1].push_back(0);
+	vertices[0].push_back(2);
+	vertices[2].push_back(0);
+
+	auto result = number_of_vertex_in_the_tree(vertices);
+	cpstl::assert_equal("TEST_CASE_ONE", 1, result);
+}
+
+void TEST_CASE_TWO()
+{
+	std::vector<std::vector<int>> vertices(3);
+	vertices[0].push_back(1);
+	vertices[1].push_back(0);
+	vertices[1].push_back(2);
+	vertices[2].push_back(1);
+
+	auto result = number_of_vertex_in_the_tree(vertices);
+	cpstl::assert_equal("TEST_CASE_TWO", 1, result);
 }
 
 int main()
 {
-    TEST_CASE_ONE();
-    return EXIT_SUCCESS;
+	TEST_CASE_ONE();
+	TEST_CASE_TWO();
+	return EXIT_SUCCESS;
 }

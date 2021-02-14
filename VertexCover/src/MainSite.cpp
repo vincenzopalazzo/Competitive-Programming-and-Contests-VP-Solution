@@ -17,23 +17,55 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-int main() {
-    int N;
-    scanf("%d", &N);
+template <typename T>
+static void vertex_covered(std::vector<std::vector<T>> const &vertices,
+			   T vertex, T parent,
+			   std::vector<std::vector<T>> &dp_mem)
+{
+	for (auto const &next : vertices[vertex]) {
+		if (next == parent)
+			continue;
+		vertex_covered(vertices, next, vertex, dp_mem);
+		dp_mem[0][vertex] += dp_mem[1][next];
+		dp_mem[1][vertex] += std::min(dp_mem[0][next], dp_mem[1][next]);
+	}
+	dp_mem[1][vertex]++;
+}
 
-    std::vector<int> inputs;
-    inputs.reserve(N);
-    //Read the array
-    for (std::size_t t = 0; t < N; t++) {
-        int value;
-        scanf("%d", &value);
-        inputs.push_back(value);
-    }
+template <typename T>
+static T
+number_of_vertex_in_the_tree(std::vector<std::vector<T>> const &vertices)
+{
+	std::vector<std::vector<T>> dp_mem;
+	dp_mem.push_back(std::vector<T>(vertices.size(), 0));
+	dp_mem.push_back(std::vector<T>(vertices.size(), 0));
+
+	vertex_covered(vertices, 0, -1, dp_mem);
+	return std::min(dp_mem[0][0], dp_mem[1][0]);
+}
+
+int main()
+{
+	int N;
+	scanf("%d", &N);
+    	std::vector<std::vector<int>> vertices(N);
+	// Read the array
+	for (std::size_t t = 0; t < N - 1; t++) {
+		int u, v;
+		scanf("%d%d", &u, &v);
+		u--;
+		v--;
+		vertices[u].push_back(v);
+		vertices[v].push_back(u);
+	}
+	auto result = number_of_vertex_in_the_tree(vertices);
+	printf("%d\n", result);
 }
