@@ -164,9 +164,10 @@ example can be the following [solution](https://vincenzopalazzo.github.io/Compet
   <img src="https://opensource.org/files/osi_keyhole_300X300_90ppi_0.png" width="150" height="150"/>
 </div>
 
-Copyright (c) 2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com and
 all the professor of the class Competitive Programming and Contest
 https://github.com/rossanoventurini/CompetitiveProgramming
+
+Copyright (c) 2020-2021 Vincenzo Palazzo vincenzopalazzodev@gmail.com and
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
