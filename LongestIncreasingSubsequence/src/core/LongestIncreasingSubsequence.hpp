@@ -45,16 +45,14 @@ R _lis_dynamic_programming(std::vector<T> const &input, std::size_t pos, R &max)
 }
 
 template<typename T, typename R>
-R lis_dynamic_programming(std::vector<T> const &input)
-{
+R lis_dynamic_programming(std::vector<T> const &input) {
     R max = 1;
     _lis_dynamic_programming<T, R>(input, input.size(), max);
     return max;
 }
 
 template<typename T, typename R>
-R lis_dynamic_programming_with_mem(std::vector<T> const &input)
-{
+R lis_dynamic_programming_with_mem(std::vector<T> const &input) {
     std::vector<T> mem(input.size(), 1);
     for (std::size_t i = 0; i < input.size(); i++) {
         for (std::size_t j = 0; j < i; j++) {
@@ -72,9 +70,25 @@ R lis_dynamic_programming_with_mem(std::vector<T> const &input)
 
 // Source https://stackoverflow.com/a/2631810/10854225
 template<typename T, typename R>
-R lis_dynamic_programming_bst(std::vector<T> const &input)
+R lis_dynamic_programming_bst(std::vector<T> const &inputs)
 {
-    return 0;
+    auto INT_INFINITY = 1e9;
+    std::vector<T> dp_mem(inputs.size() + 1, INT_INFINITY);
+    dp_mem[0] = - INT_INFINITY;
+    for (std::size_t i = 0; i < inputs.size(); i++) {
+            auto element = inputs[i];
+            auto greater_elem = std::upper_bound(dp_mem.begin(), dp_mem.end(), element) - dp_mem.begin(); // Get the index of element
+            if (dp_mem[greater_elem - 1] < element && element < dp_mem[greater_elem])
+                dp_mem[greater_elem] = element;
+    }
+
+    auto result = 0;
+    for (std::size_t i = 0; i <= inputs.size(); i++) {
+        auto elem = dp_mem[i];
+        if (elem < INT_INFINITY)
+            result = i;
+    }
+    return result;
 }
 
 /**
@@ -82,8 +96,7 @@ R lis_dynamic_programming_bst(std::vector<T> const &input)
  * but with the geeksforgeeks interface, describer here.
 */
 
-inline int longestSubsequence(int n, int a[])
-{
+inline int longestSubsequence(int n, int a[]) {
     std::vector<int> mem(n, 1);
     for (std::size_t i = 0; i < n; i++) {
         for (std::size_t j = 0; j < i; j++) {

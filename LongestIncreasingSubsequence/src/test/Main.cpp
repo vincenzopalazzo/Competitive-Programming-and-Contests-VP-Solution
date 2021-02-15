@@ -23,26 +23,30 @@
 
 using namespace std;
 
-static void TEST_CASE_ONE_DP()
-{
-    vector<int> map = {10,9,2,5,3,7,101,18};
+static void TEST_CASE_ONE_DP() {
+    vector<int> map = {10, 9, 2, 5, 3, 7, 101, 18};
     cpstl::cp_log(LOG, map);
     auto result = lis_dynamic_programming<int, int>(map);
     cpstl::assert_equal("TEST_CASE_ONE_DP", 4, result);
 }
 
-static void TEST_CASE_ONE_DP_MEM()
-{
-    vector<int> map = {10,9,2,5,3,7,101,18};
+static void TEST_CASE_ONE_DP_MEM() {
+    vector<int> map = {10, 9, 2, 5, 3, 7, 101, 18};
     cpstl::cp_log(LOG, map);
     auto result = lis_dynamic_programming_with_mem<int, int>(map);
     cpstl::assert_equal("TEST_CASE_ONE_DP_MEM", 4, result);
 }
 
+static void TEST_CASE_ONE_BINARY_SEARCH() {
+    vector<int> map = {10, 9, 2, 5, 3, 7, 101, 18};
+    cpstl::cp_log(LOG, map);
+    auto result = lis_dynamic_programming_bst<int, int>(map);
+    cpstl::assert_equal("TEST_CASE_ONE_BINARY_SEARCH", 4, result);
+}
 
-int main()
-{
+int main() {
     TEST_CASE_ONE_DP();
     TEST_CASE_ONE_DP_MEM();
+    TEST_CASE_ONE_BINARY_SEARCH();
     return EXIT_SUCCESS;
 }
