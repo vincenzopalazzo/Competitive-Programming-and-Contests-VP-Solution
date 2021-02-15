@@ -1,15 +1,42 @@
-//
-// Created by vincent on 9/14/20.
-//
-#include "IlyaAndQueries.h"
-#include <iostream>
-#include <algorithm>
+/**
+ * Competitive-Programming-and-Contests-VP-Solution a collection of
+ * code with an engineering approach to solve the problem.
+ * https://github.com/vincenzopalazzo/Competitive-Programming-and-Contests-VP-Solution
+ *
+ * Copyright (C) 2020-2021  Vincenzo Palazzo vincenzopalazzodev@gmail.com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <map>
 #include <numeric>
 
-using namespace std;
+namespace sol {
+    template <typename T>
+    struct pair {
+        T first;
+        T second;
+    };
+}
+
 
 template<typename T>
-vector<T> find_num_successor_elem(const std::string &input, const vector<std::pair<T, T>> &queries) {
+std::vector<T> find_num_successor_elem(const std::string &input, const std::vector<std::pair<T, T>> &queries)
+{
     const char *c_string = input.data();
     std::vector<int> preprocess;
     preprocess.reserve(input.size());
@@ -26,7 +53,7 @@ vector<T> find_num_successor_elem(const std::string &input, const vector<std::pa
     std::vector<T> result;
     result.reserve(queries.size());
     int res[input.size()];
-    partial_sum(preprocess.begin(), preprocess.end(), res);
+    std::partial_sum(preprocess.begin(), preprocess.end(), res);
     for (size_t i = 0; i < queries.size(); i++) {
         auto query = queries.at(i);
         int val = res[query.second - 1] - res[query.first - 1];
@@ -50,7 +77,7 @@ T *find_num_successor_elem_native(const std::string &input, const sol::pair<T> q
     }
 
     int res[input.size()];
-    partial_sum(precompute, precompute + input.size() + 1, res);
+    std::partial_sum(precompute, precompute + input.size() + 1, res);
     int *result = new int[size_query];
     for (int i = 0; i < size_query; i++) {
         auto query = queries[i];
@@ -60,7 +87,3 @@ T *find_num_successor_elem_native(const std::string &input, const sol::pair<T> q
     }
     return result;
 }
-
-template std::vector<int> find_num_successor_elem(const std::string &input, const std::vector<std::pair<int, int>> &queries);
-template int *find_num_successor_elem_native(const std::string &input, const sol::pair<int> queries[], int size_query);
-template class sol::pair<int>;
