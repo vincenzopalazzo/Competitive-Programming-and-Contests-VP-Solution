@@ -31,7 +31,7 @@ namespace cpstl {
         Log(bool enable) : enable(enable) {}
     };
 
-    const cpstl::Log INTERNAL_LOG(false);
+  const cpstl::Log INTERNAL_LOG(true);
 
     inline void cp_log(Log log, std::string message)
     {

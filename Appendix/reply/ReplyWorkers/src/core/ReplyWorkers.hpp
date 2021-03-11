@@ -27,6 +27,12 @@
 
 const cpstl::Log LOG(true);
 
+enum Role {
+  MANAGER,
+  DEVELOPER,
+  NONE,
+};
+
 template<typename T>
 struct Developer {
   std::string company;
@@ -46,16 +52,28 @@ struct Manager {
   Manager(std::string company, T bonus): company(company), bonus(bonus) {}
 };
 
-template<typename T>
 struct OfficeFloor {
-  T width;
-  T hight;
-  // TODO: Finish this way!
-  // Mapping the free position here from the map
+  std::size_t width;
+  std::size_t height;
+  std::vector<std::vector<Role>> office;
+
+  OfficeFloor(){}
+
+  OfficeFloor(std::size_t width, std::size_t height) {
+    this->width = width;
+    this->height = height;
+    office = std::vector<std::vector<Role>>(width, std::vector<Role>(height, Role::NONE));
+  }
 };
 
 // write the solution, but before I need to set understand what it the best way to
 // to manage the data. For the moment I'm thinking to work with the followng data
 // <OfficeFloor, Manager(s), Developer(s)> but the only problem that I have node is to
 // if the OfficeFloor contains also the developer inside and we have the data about that.
-template <typename T> static void solution(std::vector<T> const &inputs) {}
+template <typename T> static
+void solution(OfficeFloor floor,
+              std::vector<Developer<T>> developers,
+              std::vector<Manager<T>> managers)
+{
+
+}

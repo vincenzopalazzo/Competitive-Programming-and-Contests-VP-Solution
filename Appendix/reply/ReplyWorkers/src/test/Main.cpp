@@ -31,20 +31,22 @@ void read_file_input(std::string &input_file);
 void TEST_CASE_ONE()
 {
 	std::string file = "resources/a_solar.txt";
-	read_file_input(file);
-	cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
+  OfficeFloor floor;
+  std::vector<Developer<long>> developers;
+  std::vector<Manager<long>> managers;
+
+  auto lines = cpstl::tokenize_input_into_strings(file);
+
+  auto line = lines[0];
+  auto tokens = cpstl::tokenize_string_by_simbol(line, ' ');
+  floor.width = std::stoi(tokens[0]);
+  floor.height = std::stoi(tokens[1]);
+
+  cpstl::assert_equal("TEST_CASE_ONE", "expected", "Actual");
 }
 
 int main()
 {
 	TEST_CASE_ONE();
 	return EXIT_SUCCESS;
-}
-
-void read_file_input(std::string &input_file)
-{
-	auto lines = cpstl::tokenize_input_into_strings(input_file);
-	for (auto line : lines) {
-		auto tokens = cpstl::tokenize_string_by_simbol(line, ' ');
-	}
 }
