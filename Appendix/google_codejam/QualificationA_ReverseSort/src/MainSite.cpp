@@ -81,7 +81,7 @@ int main() {
       }
 
       auto result = revers_sort_computation(inputs);
-      std::cout << "#" << i << " " << result << "\n";
+      std::cout << "Case #" << i << ": " << result << "\n";
     }
     return 0;
 }

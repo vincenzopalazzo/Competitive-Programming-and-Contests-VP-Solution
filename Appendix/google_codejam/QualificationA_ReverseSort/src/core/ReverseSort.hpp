@@ -29,43 +29,44 @@
 const cpstl::Log LOG(false);
 
 template <typename T>
-static std::size_t get_index_of_minimum(std::vector<T> const &inputs, std::size_t start) {
-  auto min = inputs[start];
-  auto index = start;
-  for (std::size_t i = start + 1; i < inputs.size(); i++) {
-    if (inputs[i] < min) {
-      min = inputs[i];
-      index = i;
-    }
-  }
-  return index;
+static std::size_t get_index_of_minimum(std::vector<T> const &inputs,
+					std::size_t start)
+{
+	auto min = inputs[start];
+	auto index = start;
+	for (std::size_t i = start + 1; i < inputs.size(); i++) {
+		if (inputs[i] < min) {
+			min = inputs[i];
+			index = i;
+		}
+	}
+	return index;
 }
 
 template <typename T>
-static T reverse_function(std::vector<T> &to_reverse, std::size_t start, std::size_t end)
+static T reverse_function(std::vector<T> &to_reverse, int start, int end)
 {
 
-  auto i = start;
-  auto j = end;
-  while (i < j) {
-    std::swap(to_reverse[i], to_reverse[j]);
-    i++;
-    j--;
-  }
+	auto i = start;
+	auto j = end;
+	while (i <= j) {
+		std::swap(to_reverse[i], to_reverse[j]);
+		i++;
+		j--;
+	}
 
-  auto result = (end - start) + 1;
-  cpstl::cp_log(LOG, std::to_string(result) + "");
-  return result;
+	auto result = (end - start) + 1;
+	cpstl::cp_log(LOG, std::to_string(result) + "");
+	return result;
 }
 
-template <typename T>
-static T revers_sort_computation(std::vector<T> &inputs)
+template <typename T> static T revers_sort_computation(std::vector<T> &inputs)
 {
 
-  auto computation = 0;
-  for (std::size_t i = 0; i < inputs.size() - 1; i++) {
-    auto end = get_index_of_minimum(inputs, i);
-    computation += reverse_function(inputs, i, end);
-  }
-  return computation;
+	auto computation = 0;
+	for (std::size_t i = 0; i < inputs.size() - 1; i++) {
+		auto end = get_index_of_minimum(inputs, i);
+		computation += reverse_function(inputs, i, end);
+	}
+	return computation;
 }
