@@ -21,12 +21,11 @@
  */
 
 #include <iostream>
-#include <cstdlib>
-#include "core/MaxSumContiguousSubArr.h"
+#include "core/MaxSumContiguousSubArr.hpp"
 
 int main(int argc, char* argv[]){
     std::vector<int> inputs = {1, 2, 3, -2, 5};
-    int val = sum_contiguous_sub_arr(inputs);
+    int val = kadane_algorithm_pointer(inputs);
     std::cout << val;
     return EXIT_SUCCESS;
 }
